@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
@@ -42,7 +43,7 @@ void fillVector(int n, vector<int> &vec) {
 }
 
 int main() {
-  const int elements = 100;
+  const int elements = 1000;
   vector<int> vec;
 
   fillVector(elements, vec);
@@ -50,15 +51,15 @@ int main() {
   const chrono::time_point<chrono::system_clock> start =
       chrono::system_clock::now();
 
-  idadeRep(vec);
+  idadeRep2(vec);
 
   const chrono::time_point<chrono::system_clock> end =
       chrono::system_clock::now();
 
   const chrono::duration<long double> elapsed = end - start;
 
-  cout << "Time elapsed for idadeRep: " << elapsed.count() << " seconds."
-       << endl;
+  cout << "Time elapsed for idadeRep2: " << fixed << setprecision(20)
+       << elapsed.count() << " seconds." << endl;
 
   return 0;
 }

@@ -1,39 +1,52 @@
 idadeRep
-  n = 100
-    Time elapsed for idadeRep: 0.000001371 seconds.
-    Time elapsed for idadeRep: 0.000001249 seconds.
-    Time elapsed for idadeRep: 0.00000133 seconds.
-    Time elapsed for idadeRep: 0.000001265 seconds.
-    Time elapsed for idadeRep: 0.000002202 seconds.
-  n = 1000
-    Time elapsed for idadeRep: 0.000006172 seconds.
-    Time elapsed for idadeRep: 0.000006234 seconds.
-    Time elapsed for idadeRep: 0.000006864 seconds.
-    Time elapsed for idadeRep: 0.000006229 seconds.
-    Time elapsed for idadeRep: 0.000006177 seconds.
-  n = 10000
-    Time elapsed for idadeRep: 0.002001899 seconds.
-    Time elapsed for idadeRep: 0.002035822 seconds.
-    Time elapsed for idadeRep: 0.001915397 seconds.
-    Time elapsed for idadeRep: 0.001897429 seconds.
-    Time elapsed for idadeRep: 0.001988966 seconds.
+   n=100
+      Tempo para idadeRep: 0.000001628 segundos.
+      Tempo para idadeRep: 0.000001250 segundos.
+      Tempo para idadeRep: 0.000001463 segundos.
+      Tempo para idadeRep: 0.000001301 segundos.
+      Tempo para idadeRep: 0.000001029 segundos.
+   Average: 0.000001334 seconds.
+
+   n=1000
+      Tempo para idadeRep: 0.000007928 segundos.
+      Tempo para idadeRep: 0.000006275 segundos.
+      Tempo para idadeRep: 0.000007055 segundos.
+      Tempo para idadeRep: 0.000005939 segundos.
+      Tempo para idadeRep: 0.000010483 segundos.
+   Average: 0.000007536 seconds.
+
+   n=10000
+      Tempo para idadeRep: 0.000055275 segundos.
+      Tempo para idadeRep: 0.000017053 segundos.
+      Tempo para idadeRep: 0.000017142 segundos.
+      Tempo para idadeRep: 0.000018554 segundos.
+      Tempo para idadeRep: 0.000019043 segundos.
+   Average: 0.000025413 seconds.
+
 
 idadeRep2
-  n = 100
-    Time elapsed for idadeRep2: 0.000028858 seconds.
-    Time elapsed for idadeRep2: 0.000029374 seconds.
-    Time elapsed for idadeRep2: 0.000028994 seconds.
-    Time elapsed for idadeRep2: 0.000029110 seconds.
-    Time elapsed for idadeRep2: 0.000029206 seconds.
-  n = 1000
-    Time elapsed for idadeRep2: 0.000323724 seconds.
-    Time elapsed for idadeRep2: 0.000320861 seconds.
-    Time elapsed for idadeRep2: 0.000359574 seconds.
-    Time elapsed for idadeRep2: 0.000322370 seconds.
-    Time elapsed for idadeRep2: 0.000321046 seconds.
-  n = 1000000
-    Time elapsed for idadeRep2: 0.170323179 seconds.
-    Time elapsed for idadeRep2: 0.171343107 seconds.
-    Time elapsed for idadeRep2: 0.170297465 seconds.
-    Time elapsed for idadeRep2: 0.169754164 seconds.
-    Time elapsed for idadeRep2: 0.172119842 seconds.
+   n=100
+      Tempo para idadeRep2: 0.000009842 segundos.
+      Tempo para idadeRep2: 0.000010394 segundos.
+      Tempo para idadeRep2: 0.000007900 segundos.
+      Tempo para idadeRep2: 0.000007747 segundos.
+      Tempo para idadeRep2: 0.000008032 segundos.
+   Average: 0.000008783 seconds.
+
+   n=1000
+      Tempo para idadeRep2: 0.000096939 segundos.
+      Tempo para idadeRep2: 0.000097146 segundos.
+      Tempo para idadeRep2: 0.000098644 segundos.
+      Tempo para idadeRep2: 0.000118494 segundos.
+      Tempo para idadeRep2: 0.000098964 segundos.
+   Average: 0.000102037 seconds.
+
+   n=10000
+      Tempo para idadeRep2: 0.001242883 segundos.
+      Tempo para idadeRep2: 0.001137831 segundos.
+      Tempo para idadeRep2: 0.001189677 segundos.
+      Tempo para idadeRep2: 0.001194688 segundos.
+      Tempo para idadeRep2: 0.001339156 segundos.
+   Average: 0.001220847 seconds.
+
+

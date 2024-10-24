@@ -1,18 +1,26 @@
+
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
 
 using namespace std;
 
-void printElements(vector<int> vec) {
-  for (const auto elem : vec) {
-    cout << elem << " ";
+long double get_average(vector<chrono::duration<long double>> times) {
+  chrono::duration<long double> sum = chrono::duration<long double>(0);
+
+  for (const auto &elapsed : times) {
+    sum += elapsed;
   }
-  cout << endl;
+
+  return sum.count() / times.size();
 }
+
 bool idadeRep2(vector<int> &idade) {
   sort(idade.begin(), idade.end());
   return idade[0] == idade[1];
@@ -35,23 +43,72 @@ bool idadeRep(vector<int> &idade) {
 }
 
 int main() {
-  const int elements = 1000;
   vector<int> vec;
+  size_t how_many_lists = 5;
+  ofstream output("output.txt"); // Define o arquivo de saída
 
-  // TODO: parser
+  if (!output) {
+    cerr << "Erro ao abrir o arquivo de saída." << endl;
+    return 1;
+  }
 
-  const chrono::time_point<chrono::system_clock> start =
-      chrono::system_clock::now();
+  for (const auto &algorithm : {"idadeRep", "idadeRep2"}) {
+    output << algorithm << endl;
 
-  idadeRep2(vec);
+    for (const auto &n : {100, 1000, 10000}) {
+      vector<chrono::duration<long double>> times;
 
-  const chrono::time_point<chrono::system_clock> end =
-      chrono::system_clock::now();
+      output << "   n=" << n << endl;
 
-  const chrono::duration<long double> elapsed = end - start;
+      for (size_t i = 1; i <= how_many_lists; i++) {
+        ostringstream file_name;
+        vector<int> list;
 
-  cout << "Time elapsed for idadeRep2: " << fixed << setprecision(20)
-       << elapsed.count() << " seconds." << endl;
+        // Carregando dados para a memória
+        file_name << "../inputs/n=" << n << "/list-" << i << ".txt";
+
+        ifstream file(file_name.str());
+        if (!file) {
+          cerr << "Erro ao abrir o arquivo de entrada: " << file_name.str()
+               << endl;
+          continue;
+        }
+
+        string line;
+        while (getline(file, line)) {
+          list.push_back(stoi(line));
+        }
+
+        // Análise
+        if (algorithm == string("idadeRep")) {
+          auto start = chrono::system_clock::now();
+
+          idadeRep(list);
+
+          auto end = chrono::system_clock::now();
+          chrono::duration<long double> elapsed = end - start;
+          times.push_back(elapsed);
+
+          output << "      Tempo para idadeRep: " << fixed << setprecision(9)
+                 << elapsed.count() << " segundos." << endl;
+        } else if (algorithm == string("idadeRep2")) {
+          auto start = chrono::system_clock::now();
+
+          idadeRep2(list);
+
+          auto end = chrono::system_clock::now();
+          chrono::duration<long double> elapsed = end - start;
+          times.push_back(elapsed);
+
+          output << "      Tempo para idadeRep2: " << fixed << setprecision(9)
+                 << elapsed.count() << " segundos." << endl;
+        }
+      }
+      output << "   Average: " << get_average(times) << " seconds." << endl
+             << endl;
+    }
+    output << endl;
+  }
 
   return 0;
 }

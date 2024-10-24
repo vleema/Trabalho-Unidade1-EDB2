@@ -92,6 +92,19 @@ pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   _recursive_quick_sort(arr, 0, arr.len() - 1);
 }
 
+/// Sorts an array in place using a iterative version of the Quick Sort algorithm
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// recursive_quick_sort(&mut arr);
+/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+/// ```
 pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   let n = arr.len();
   if n <= 1 {

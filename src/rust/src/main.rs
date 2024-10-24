@@ -16,6 +16,7 @@ fn main() {
     ("REC QUICK SORT", recursive_quick_sort),
     ("ITE QUICK SORT", iterative_quick_sort),
     ("REC MERGE SORT", recursive_merge_sort),
+    ("ITE MERGE SORT", iterative_merge_sort),
   ]);
 
   let title = "Performance test for sort algorthms";

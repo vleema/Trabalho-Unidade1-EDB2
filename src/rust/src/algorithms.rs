@@ -1,20 +1,20 @@
-///
+/**
+Sorts an array in place using a iterative version of the bubble sort algorithm
 
-/// Sorts an array in place using a iterative version of the bubble sort algorithm
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::iterative_bubble_sort;
-///
-/// let mut arr = [5, 3, 8, 4, 2];
-/// iterative_bubble_sort(&mut arr);
-/// assert_eq!(arr, [2, 3, 4, 5, 8]);
-/// ```
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::iterative_bubble_sort;
+
+let mut arr = [5, 3, 8, 4, 2];
+iterative_bubble_sort(&mut arr);
+assert_eq!(arr, [2, 3, 4, 5, 8]);
+```
+*/
 pub fn iterative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   for i in 0..arr.len() {
     for j in 1..arr.len() - i {
@@ -25,21 +25,23 @@ pub fn iterative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   }
 }
 
-/// Sorts an array in place using a recursive version of the bubble sort algorithm
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::recursive_bubble_sort;
-///
-/// let mut arr = [5, 3, 8, 4, 2];
-/// recursive_bubble_sort(&mut arr);
-/// assert_eq!(arr, [2, 3, 4, 5, 8]);
-/// ```
+/**
+Sorts an array in place using a recursive version of the bubble sort algorithm
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::recursive_bubble_sort;
+
+let mut arr = [5, 3, 8, 4, 2];
+recursive_bubble_sort(&mut arr);
+assert_eq!(arr, [2, 3, 4, 5, 8]);
+```
+*/
 pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   if arr.is_empty() {
     return;
@@ -49,25 +51,27 @@ pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   recursive_bubble_sort(&mut arr[..last_element_position - 1]);
 }
 
-/// Helper function for the recursive bubble sort algorithm
-///
-/// This functions moves or "bubbles" the largest element of a slice to the last_element_position
-/// in the `arr`.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
-/// * `iterator` - The position of a element in `arr`
-/// * `last_element_position` - The position that
-///
-/// # Example
-///
-/// ```rust
-/// let mut arr = [6, 9, 1, 2];
-/// let n = arr.len();
-/// bubble_sort_pass(&mut arr, 1, n);
-/// assert_eq!(arr, [6, 1, 2, 9]);
-/// ```
+/**
+Helper function for the recursive bubble sort algorithm
+
+This functions moves or "bubbles" the largest element of a slice to the last_element_position
+in the `arr`.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+* `iterator` - The position of a element in `arr`
+* `last_element_position` - The position that
+
+# Example
+
+```rust
+let mut arr = [6, 9, 1, 2];
+let n = arr.len();
+bubble_sort_pass(&mut arr, 1, n);
+assert_eq!(arr, [6, 1, 2, 9]);
+```
+*/
 #[cfg(not(doctest))]
 fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_position: usize) {
   if iterator >= last_element_position {
@@ -79,21 +83,23 @@ fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_
   bubble_sort_pass(arr, iterator + 1, last_element_position)
 }
 
-/// Wraps the Quick Sort algorithm for sorting an array in place.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::recursive_quick_sort;
-///
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// recursive_quick_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Wraps the Quick Sort algorithm for sorting an array in place.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::recursive_quick_sort;
+
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+recursive_quick_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   if arr.is_empty() {
     return;
@@ -101,21 +107,23 @@ pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   _recursive_quick_sort(arr, 0, arr.len() - 1);
 }
 
-/// Sorts an array in place using a iterative version of the Quick Sort algorithm
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::iterative_quick_sort;
-///
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// iterative_quick_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Sorts an array in place using a iterative version of the Quick Sort algorithm
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::iterative_quick_sort;
+
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+iterative_quick_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   if arr.is_empty() {
     return;
@@ -132,23 +140,25 @@ pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   }
 }
 
-/// Recursively sorts an array in place using the Quick Sort algorithm.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-/// * `lower_bound` - The starting index of the slice to be sorted.
-/// * `upper_bound` - The ending index of the slice to be sorted.
-///
-/// This function is called by `quick_sort` and should not be used directly.
-///
-/// # Example
-///
-/// ```rust
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// _recursive_quick_sort(&mut arr, 0, arr.len() - 1);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Recursively sorts an array in place using the Quick Sort algorithm.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+* `lower_bound` - The starting index of the slice to be sorted.
+* `upper_bound` - The ending index of the slice to be sorted.
+
+This function is called by `quick_sort` and should not be used directly.
+
+# Example
+
+```rust
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+_recursive_quick_sort(&mut arr, 0, arr.len() - 1);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 #[cfg(not(doctest))]
 fn _recursive_quick_sort<T: PartialOrd + Copy>(
   arr: &mut [T],
@@ -165,30 +175,32 @@ fn _recursive_quick_sort<T: PartialOrd + Copy>(
   _recursive_quick_sort(arr, pivot_index + 1, upper_bound);
 }
 
-/// Partitions the array around a pivot element for the Quick Sort algorithm.
-///
-/// This function selects the last element as the pivot and rearranges the array
-/// such that all elements less than the pivot are on the left, and all elements
-/// greater than or equal to the pivot are on the right. It then returns the index
-/// of the pivot element after partitioning.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
-/// * `lower_bound` - The starting index of the slice to be partitioned.
-/// * `upper_bound` - The ending index of the slice to be partitioned.
-///
-/// # Returns
-///
-/// The index of the pivot element after partitioning.
-///
-/// # Example
-///
-/// ```rust
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// let pivot_index = partition(&mut arr, 0, arr.len() - 1);
-/// assert_eq!(pivot_index, 4); // Example index, actual value may vary
-/// ```
+/**
+Partitions the array around a pivot element for the Quick Sort algorithm.
+
+This function selects the last element as the pivot and rearranges the array
+such that all elements less than the pivot are on the left, and all elements
+greater than or equal to the pivot are on the right. It then returns the index
+of the pivot element after partitioning.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement the `PartialOrd` and `Copy` traits.
+* `lower_bound` - The starting index of the slice to be partitioned.
+* `upper_bound` - The ending index of the slice to be partitioned.
+
+# Returns
+
+The index of the pivot element after partitioning.
+
+# Example
+
+```rust
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+let pivot_index = partition(&mut arr, 0, arr.len() - 1);
+assert_eq!(pivot_index, 4); // Example index, actual value may vary
+```
+*/
 #[cfg(not(doctest))]
 fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
   let pivot = arr[upper_bound];
@@ -204,21 +216,23 @@ fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_boun
   new_pivot
 }
 
-/// Sorts an array using a recursive Merge Sort algorithm.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::recursive_merge_sort;
-///
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// recursive_merge_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Sorts an array using a recursive Merge Sort algorithm.
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::recursive_merge_sort;
+
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+recursive_merge_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   if arr.len() <= 1 {
     return;
@@ -231,21 +245,23 @@ pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   merge(arr, &left_arr, &right_arr);
 }
 
-/// Sorts an array using a iterative Merge Sort algorithm
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
-///
-/// # Example
-///
-/// ```rust
-/// use sort_algorithms::algorithms::iterative_merge_sort;
-///
-/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// iterative_merge_sort(&mut arr);
-/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
-/// ```
+/**
+Sorts an array using a iterative Merge Sort algorithm
+
+# Arguments
+
+* `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
+
+# Example
+
+```rust
+use sort_algorithms::algorithms::iterative_merge_sort;
+
+let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+iterative_merge_sort(&mut arr);
+assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+```
+*/
 pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   if arr.len() <= 1 {
     return;
@@ -266,23 +282,25 @@ pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   }
 }
 
-/// Merges two sorted slices into a single sorted slice.
-///
-/// # Arguments
-///
-/// * `arr` - A mutable slice where the merged result will be stored.
-/// * `left_arr` - A slice containing the left half of the sorted elements.
-/// * `right_arr` - A slice containing the right half of the sorted elements.
-///
-/// # Example
-///
-/// ```rust
-/// let left_arr = [1, 3, 5];
-/// let right_arr = [2, 4, 6];
-/// let mut arr = [0; 6];
-/// merge(&mut arr, &left_arr, &right_arr);
-/// assert_eq!(arr, [1, 2, 3, 4, 5, 6]);
-/// ```
+/**
+Merges two sorted slices into a single sorted slice.
+
+# Arguments
+
+* `arr` - A mutable slice where the merged result will be stored.
+* `left_arr` - A slice containing the left half of the sorted elements.
+* `right_arr` - A slice containing the right half of the sorted elements.
+
+# Example
+
+```rust
+let left_arr = [1, 3, 5];
+let right_arr = [2, 4, 6];
+let mut arr = [0; 6];
+merge(&mut arr, &left_arr, &right_arr);
+assert_eq!(arr, [1, 2, 3, 4, 5, 6]);
+```
+*/
 #[cfg(not(doctest))]
 fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {
   let left_arr_len = left_arr.len();

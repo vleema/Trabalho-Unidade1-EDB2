@@ -1,0 +1,43 @@
+# C++ 
+*.out
+*.obj
+*.exe
+*.a
+*.so
+*.dll
+/build/
+
+# Rust
+/target/
+**/*.rs.bk
+
+# LaTeX
+./latex/output/
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.log
+*.synctex.gz
+*.toc
+*.out
+*.lof
+*.lot
+*.lol
+*.nav
+*.snm
+
+# temp files and backup
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+
+# Arquivos de configuração específicos do editor (ex: VSCode, Neovim)
+.vscode/
+.idea/
+*.nvimlog

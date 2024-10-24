@@ -2,19 +2,19 @@ mod algorithms;
 
 use algorithms::*;
 use rand::Rng;
-use std::{any::Any, io::Write, time::Instant};
+use std::{io::Write, time::Instant};
 
 const TEN: usize = 10;
+
+#[allow(dead_code)]
 const ENTRY_SIZE: usize = 1000;
 
 type SortFn<T> = fn(&mut [T]);
 
 fn main() {
   let sort_functions = Vec::from([
-    ("SELECTION SORT", selection_sort as SortFn<i32>),
-    ("BUBBLE SORT", bubble_sort),
-    ("INSERTION SORT", insertion_sort),
-    ("QUICK SORT", quick_sort),
+    ("INT BUBBLE SORT", interative_bubble_sort as SortFn<i32>),
+    ("REC QUICK SORT", recursive_quick_sort),
   ]);
 
   let title = "Performance test for sort algorthms";

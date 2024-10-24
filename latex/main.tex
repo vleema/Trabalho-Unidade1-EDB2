@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt,oneside]{book} 
+\usepackage{CS_report} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+    \captionsetup[figure]{margin=1.5cm,font=small,name={Figure},labelsep=colon}
+    \captionsetup[table]{margin=1.5cm,font=small,name={Table},labelsep=colon}
+    
+    \frontmatter
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{titlepage}      
+        \begin{center}
+            \includegraphics[width=3cm]{figures/ufrnlogo.png}\\[0.5cm]
+            {\LARGE Universidade Federal do Rio Grande do Norte\\[0.5cm]
+            Instituto Metrópole Digital}\\[2cm]
+			{\color{blue} \rule{\textwidth}{1pt}}
+            \linespread{1.2}\huge {
+                Análise de algoritmos clássicos de ordenação e busca
+            }
+            \linespread{1}~\\[2cm]
+			%{\color{blue} \rule{\textwidth}{1pt}}
+            {\Large 
+              Bianca Medeiros,
+              Gabriel Carvalho,
+              Marina Medeiros,
+              Vinicius de Lima
+            }\\[1cm] 
+            
+            {\large 
+                \emph{} Estrutura de Dados Básica II}\\[1cm] % if applicable
+            
+            \large Trabalho da Primeira Unidade
+            \vfill
+            \today 
+        \end{center}
+    \end{titlepage}
+    
+    % -------------------------------------------------------------------
+    % Contents
+    % -------------------------------------------------------------------
+    
+    \tableofcontents
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%                                                                    %%  
+    %%  Main chapters and sections of your project                        %%  
+    %%  Everything from here on needs updates in your own words and works %%
+    %%                                                                    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \mainmatter
+    % Read for preparation of document in LaTex 
+    % Lamport, L. (1986), LATEX: A Document Preparation System, Addison-Wesley.
+    
+    \input{chapters/01_introduction}
+    \input{chapters/02_literature} % https://guides.library.bloomu.edu/litreview
+    \input{chapters/03_methodology}
+    \input{chapters/04_results}
+    \input{chapters/05_discussion}
+    \input{chapters/06_conclusions}
+    \input{chapters/07_reflection}
+
+    
+    % -------------------------------------------------------------------
+    % Bibliography/References  -  Harvard Style was used in this report
+    % -------------------------------------------------------------------
+    \bibliographystyle{agsm} % Harvard Style 
+    
+    \bibliography{references}  %  Patashnik, O. (1988), BibTEXing. Documentation for general BibTEX users.
+    
+    
+\end{document}

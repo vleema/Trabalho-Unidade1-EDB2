@@ -41,3 +41,6 @@
 .vscode/
 .idea/
 *.nvimlog
+
+# One Drive
+.nosync

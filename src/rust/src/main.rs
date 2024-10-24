@@ -16,6 +16,7 @@ fn main() {
     ("ITE BUBBLE SORT", iterative_bubble_sort as SortFn<i32>),
     ("REC BUBBLE SORT", recursive_bubble_sort),
     ("REC QUICK SORT", recursive_quick_sort),
+    ("ITE QUICK SORT", iterative_quick_sort),
   ]);
 
   let title = "Performance test for sort algorthms";

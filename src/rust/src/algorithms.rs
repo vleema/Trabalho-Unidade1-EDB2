@@ -92,6 +92,23 @@ pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
   _recursive_quick_sort(arr, 0, arr.len() - 1);
 }
 
+pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  let n = arr.len();
+  if n <= 1 {
+    return;
+  }
+  let mut stack = vec![(0, n - 1)];
+  while let Some((low, high)) = stack.pop() {
+    if low < high {
+      let pivot_index = partition(arr, low, high);
+      if pivot_index > 0 {
+        stack.push((low, pivot_index - 1)); // Left side
+      }
+      stack.push((pivot_index + 1, high)); // Right side
+    }
+  }
+}
+
 /// Recursively sorts an array in place using the Quick Sort algorithm.
 ///
 /// # Arguments
@@ -223,6 +240,15 @@ mod tests {
     already_sorted_list_test(recursive_quick_sort);
     singleton_list_test(recursive_quick_sort);
     empty_list_test(recursive_quick_sort);
+  }
+
+  #[test]
+  fn test_iterative_quick_sort() {
+    reverse_list_test(iterative_quick_sort);
+    duplicates_list_test(iterative_quick_sort);
+    already_sorted_list_test(iterative_quick_sort);
+    singleton_list_test(iterative_quick_sort);
+    empty_list_test(iterative_quick_sort);
   }
 
   // #[test]

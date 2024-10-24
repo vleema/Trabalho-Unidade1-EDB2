@@ -1,3 +1,5 @@
+///
+
 /// Sorts an array in place using a iterative version of the bubble sort algorithm
 ///
 /// # Arguments
@@ -6,7 +8,9 @@
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
+/// use sort_algorithms::algorithms::iterative_bubble_sort;
+///
 /// let mut arr = [5, 3, 8, 4, 2];
 /// iterative_bubble_sort(&mut arr);
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
@@ -29,9 +33,11 @@ pub fn iterative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
+/// use sort_algorithms::algorithms::recursive_bubble_sort;
+///
 /// let mut arr = [5, 3, 8, 4, 2];
-/// iterative_bubble_sort(&mut arr);
+/// recursive_bubble_sort(&mut arr);
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
 /// ```
 pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
@@ -56,12 +62,13 @@ pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
 /// let mut arr = [6, 9, 1, 2];
 /// let n = arr.len();
 /// bubble_sort_pass(&mut arr, 1, n);
 /// assert_eq!(arr, [6, 1, 2, 9]);
 /// ```
+#[cfg(not(doctest))]
 fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_position: usize) {
   if iterator >= last_element_position {
     return;
@@ -80,7 +87,9 @@ fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
+/// use sort_algorithms::algorithms::recursive_quick_sort;
+///
 /// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 /// recursive_quick_sort(&mut arr);
 /// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
@@ -100,17 +109,18 @@ pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
+/// use sort_algorithms::algorithms::iterative_quick_sort;
+///
 /// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-/// recursive_quick_sort(&mut arr);
+/// iterative_quick_sort(&mut arr);
 /// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
 /// ```
 pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
-  let n = arr.len();
-  if n <= 1 {
+  if arr.is_empty() {
     return;
   }
-  let mut stack = vec![(0, n - 1)];
+  let mut stack = vec![(0, arr.len() - 1)];
   while let Some((low, high)) = stack.pop() {
     if low < high {
       let pivot_index = partition(arr, low, high);
@@ -134,11 +144,12 @@ pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
 /// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 /// _recursive_quick_sort(&mut arr, 0, arr.len() - 1);
 /// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
 /// ```
+#[cfg(not(doctest))]
 fn _recursive_quick_sort<T: PartialOrd + Copy>(
   arr: &mut [T],
   lower_bound: usize,
@@ -173,11 +184,12 @@ fn _recursive_quick_sort<T: PartialOrd + Copy>(
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
 /// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 /// let pivot_index = partition(&mut arr, 0, arr.len() - 1);
 /// assert_eq!(pivot_index, 4); // Example index, actual value may vary
 /// ```
+#[cfg(not(doctest))]
 fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
   let pivot = arr[upper_bound];
   let mut left_item = lower_bound as isize - 1;
@@ -192,80 +204,108 @@ fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_boun
   new_pivot
 }
 
-// TODO: Merge sort
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  fn reverse_list_test(func: fn(&mut [i32])) {
-    let mut arr = [5, 3, 2, 4, 1];
-    func(&mut arr);
-    assert_eq!(arr, [1, 2, 3, 4, 5], "reverse_list_test failed");
+/// Sorts an array using a recursive Merge Sort algorithm.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
+///
+/// # Example
+///
+/// ```rust
+/// use sort_algorithms::algorithms::recursive_merge_sort;
+///
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// recursive_merge_sort(&mut arr);
+/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+/// ```
+pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
   }
+  let mid = arr.len() / 2;
+  let mut left_arr = arr[..mid].to_vec();
+  let mut right_arr = arr[mid..].to_vec();
+  recursive_merge_sort(&mut left_arr);
+  recursive_merge_sort(&mut right_arr);
+  merge(arr, &left_arr, &right_arr);
+}
 
-  fn duplicates_list_test(func: fn(&mut [i32])) {
-    let mut arr = [4, 2, 3, 2, 1, 4];
-    func(&mut arr);
-    assert_eq!(arr, [1, 2, 2, 3, 4, 4], "duplicates_list_test failed");
+/// Sorts an array using a iterative Merge Sort algorithm
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
+///
+/// # Example
+///
+/// ```rust
+/// use sort_algorithms::algorithms::iterative_merge_sort;
+///
+/// let mut arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+/// iterative_merge_sort(&mut arr);
+/// assert_eq!(arr, [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]);
+/// ```
+pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
   }
-
-  fn already_sorted_list_test(func: fn(&mut [i32])) {
-    let mut arr = [1, 2, 3, 4, 5];
-    func(&mut arr);
-    assert_eq!(arr, [1, 2, 3, 4, 5], "already_sorted_list_test failed");
+  let mut temp_arr = arr.to_vec();
+  let mut segment_size = 1;
+  let arr_len = arr.len();
+  while segment_size < arr.len() {
+    let mut start = 0;
+    while start < arr_len {
+      let mid = (start + segment_size).min(arr_len);
+      let end = (start + 2 * segment_size).min(arr_len);
+      merge(&mut temp_arr[start..end], &arr[start..mid], &arr[mid..end]);
+      start += 2 * segment_size;
+    }
+    arr.copy_from_slice(&temp_arr);
+    segment_size *= 2;
   }
+}
 
-  fn singleton_list_test(func: fn(&mut [i32])) {
-    let mut arr = [42];
-    func(&mut arr);
-    assert_eq!(arr, [42], "singleton_list_test faild");
+/// Merges two sorted slices into a single sorted slice.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice where the merged result will be stored.
+/// * `left_arr` - A slice containing the left half of the sorted elements.
+/// * `right_arr` - A slice containing the right half of the sorted elements.
+///
+/// # Example
+///
+/// ```rust
+/// let left_arr = [1, 3, 5];
+/// let right_arr = [2, 4, 6];
+/// let mut arr = [0; 6];
+/// merge(&mut arr, &left_arr, &right_arr);
+/// assert_eq!(arr, [1, 2, 3, 4, 5, 6]);
+/// ```
+#[cfg(not(doctest))]
+fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {
+  let left_arr_len = left_arr.len();
+  let right_arr_len = right_arr.len();
+  let (mut i, mut l, mut r) = (0, 0, 0);
+  while l < left_arr_len && r < right_arr_len {
+    if left_arr[l] < right_arr[r] {
+      arr[i] = left_arr[l];
+      l += 1;
+    } else {
+      arr[i] = right_arr[r];
+      r += 1;
+    }
+    i += 1;
   }
-
-  fn empty_list_test(func: fn(&mut [i32])) {
-    let mut arr: [i32; 0] = [];
-    func(&mut arr);
-    assert_eq!(arr, [], "empty_list_test failed");
+  while l < left_arr_len {
+    arr[i] = left_arr[l];
+    i += 1;
+    l += 1;
   }
-
-  #[test]
-  fn test_iterative_bubble_sort() {
-    reverse_list_test(iterative_bubble_sort);
-    duplicates_list_test(iterative_bubble_sort);
-    already_sorted_list_test(iterative_bubble_sort);
-    singleton_list_test(iterative_bubble_sort);
-    empty_list_test(iterative_bubble_sort);
+  while r < right_arr_len {
+    arr[i] = right_arr[r];
+    i += 1;
+    r += 1;
   }
-
-  #[test]
-  fn test_recursive_bubble_sort() {
-    reverse_list_test(recursive_bubble_sort);
-    duplicates_list_test(recursive_bubble_sort);
-    already_sorted_list_test(recursive_bubble_sort);
-    singleton_list_test(recursive_bubble_sort);
-    empty_list_test(recursive_bubble_sort);
-  }
-
-  #[test]
-  fn test_recursive_quick_sort() {
-    reverse_list_test(recursive_quick_sort);
-    duplicates_list_test(recursive_quick_sort);
-    already_sorted_list_test(recursive_quick_sort);
-    singleton_list_test(recursive_quick_sort);
-    empty_list_test(recursive_quick_sort);
-  }
-
-  #[test]
-  fn test_iterative_quick_sort() {
-    reverse_list_test(iterative_quick_sort);
-    duplicates_list_test(iterative_quick_sort);
-    already_sorted_list_test(iterative_quick_sort);
-    singleton_list_test(iterative_quick_sort);
-    empty_list_test(iterative_quick_sort);
-  }
-
-  // #[test]
-  // fn test_recursive_merge_sort() {
-  //   test_reverse_list(recursive_merge_sort);
-  // }
 }

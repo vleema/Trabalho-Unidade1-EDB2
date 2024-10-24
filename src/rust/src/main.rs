@@ -1,7 +1,5 @@
-mod algorithms;
-
-use algorithms::*;
 use rand::Rng;
+use sort_algorithms::algorithms::*;
 use std::{io::Write, time::Instant};
 
 const TEN: usize = 10;
@@ -17,6 +15,7 @@ fn main() {
     ("REC BUBBLE SORT", recursive_bubble_sort),
     ("REC QUICK SORT", recursive_quick_sort),
     ("ITE QUICK SORT", iterative_quick_sort),
+    ("REC MERGE SORT", recursive_merge_sort),
   ]);
 
   let title = "Performance test for sort algorthms";

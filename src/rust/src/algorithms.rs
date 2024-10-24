@@ -12,6 +12,9 @@
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
 /// ```
 pub fn interative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
   let mut n = arr.len();
   let mut swapped = true;
   while swapped {
@@ -25,6 +28,8 @@ pub fn interative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
     n -= 1;
   }
 }
+
+// pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {}
 
 /// Wraps the Quick Sort algorithm for sorting an array in place.
 ///
@@ -125,17 +130,49 @@ mod tests {
   fn reverse_list_test(func: fn(&mut [i32])) {
     let mut arr = [5, 3, 2, 4, 1];
     func(&mut arr);
-    assert_eq!(arr, [1, 2, 3, 4, 5]);
+    assert_eq!(arr, [1, 2, 3, 4, 5], "reverse_list_test failed");
+  }
+
+  fn duplicates_list_test(func: fn(&mut [i32])) {
+    let mut arr = [4, 2, 3, 2, 1, 4];
+    func(&mut arr);
+    assert_eq!(arr, [1, 2, 2, 3, 4, 4], "duplicates_list_test failed");
+  }
+
+  fn already_sorted_list_test(func: fn(&mut [i32])) {
+    let mut arr = [1, 2, 3, 4, 5];
+    func(&mut arr);
+    assert_eq!(arr, [1, 2, 3, 4, 5], "already_sorted_list_test failed");
+  }
+
+  fn singleton_list_test(func: fn(&mut [i32])) {
+    let mut arr = [42];
+    func(&mut arr);
+    assert_eq!(arr, [42], "singleton_list_test faild");
+  }
+
+  fn empty_list_test(func: fn(&mut [i32])) {
+    let mut arr: [i32; 0] = [];
+    func(&mut arr);
+    assert_eq!(arr, [], "empty_list_test failed");
   }
 
   #[test]
   fn test_interative_bubble_sort() {
     reverse_list_test(interative_bubble_sort);
+    duplicates_list_test(interative_bubble_sort);
+    already_sorted_list_test(interative_bubble_sort);
+    singleton_list_test(interative_bubble_sort);
+    empty_list_test(interative_bubble_sort);
   }
 
   #[test]
   fn test_recursive_quick_sort() {
     reverse_list_test(recursive_quick_sort);
+    duplicates_list_test(recursive_quick_sort);
+    already_sorted_list_test(recursive_quick_sort);
+    singleton_list_test(recursive_quick_sort);
+    empty_list_test(recursive_quick_sort);
   }
 
   // #[test]

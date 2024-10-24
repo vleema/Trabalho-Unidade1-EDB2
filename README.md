@@ -145,7 +145,7 @@ def evenSummation(x):
 \end{table}
 ```
 
-### Compilação
+### Compilando
 
 Particularmente eu uso o plugin <https://github.com/lervag/vimtex> no neovim com a opção:
 
@@ -157,7 +157,7 @@ vim.g.vimtex_compiler_latexmk = {
 
 Para gerar os arquivos de compilação dentro da pasta relativa `output`. E aí enquanto escrevo e salvo o neovim já me mostra o pdf em tempo real enquanto edito o texto.
 
-Algumas alternativas seriam:
+Algumas alternativas para codar e compilar latex seriam:
 
 - **Usar o [Latex Workshop](https://github.com/James-Yu/LaTeX-Workshop) no vscode**.
 
@@ -170,7 +170,7 @@ Algumas alternativas seriam:
 - **Compilar manualmente e verificar o pdf**.
   > Para isso, deixei um `Makefile` dentro da pasta `latex`. Basta executar `make` e o resultado vai estar em `output`
 
-Se for usar o Latex Workshop no vscode, lembre de especificar o diretório que terá o resultado da compilação, se não os arquivos não vão ser barrados pelo `.gitignore`.
+Se for usar o Latex Workshop no vscode, lembre de especificar o diretório que terá o resultado da compilação (`output`), se não os arquivos não vão ser barrados pelo `.gitignore`.
 
 ## Arquivos de código
 

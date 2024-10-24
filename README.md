@@ -291,10 +291,10 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 - [ ] 1.2 lime
 - [ ] 1.3 lime
 - [ ] 2.0
-- [ ] 2.1
-  - [ ] 2.1.A
-  - [ ] 2.1.B
-  - [ ] 2.1.c
+- [ ] 2.1 oaks
+  - [ ] 2.1.A oaks
+  - [ ] 2.1.B oaks
+  - [ ] 2.1.c oaks
 - [ ] 2.2
   - [ ] 2.2.A
   - [ ] 2.2.B

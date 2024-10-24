@@ -34,19 +34,11 @@ bool idadeRep(vector<int> &idade) {
   return false;
 }
 
-void fillVector(int n, vector<int> &vec) {
-  const int intervalUntil = 100;
-
-  for (size_t i = 0; i < n; ++i) {
-    vec.push_back(rand() % (intervalUntil + 1));
-  }
-}
-
 int main() {
   const int elements = 1000;
   vector<int> vec;
 
-  fillVector(elements, vec);
+  // TODO: parser
 
   const chrono::time_point<chrono::system_clock> start =
       chrono::system_clock::now();

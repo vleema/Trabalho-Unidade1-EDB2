@@ -8,11 +8,11 @@
 /build/
 
 # Rust
-/target/
+/src/rust/target/
 **/*.rs.bk
 
 # LaTeX
-./latex/output/
+/latex/output/
 *.aux
 *.bbl
 *.blg

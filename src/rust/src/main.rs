@@ -25,6 +25,8 @@ fn main() {
     run_entry(&sort_functions, TEN.pow(n));
   }
   // run_entry(&sort_functions, ENTRY_SIZE);
+  //
+  println!("INT - stands for interative\nREC - stands for recursive");
 }
 
 fn run_entry(functions: &Vec<(&str, SortFn<i32>)>, entry_size: usize) {

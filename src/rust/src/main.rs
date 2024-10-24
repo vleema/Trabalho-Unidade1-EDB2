@@ -13,7 +13,7 @@ type SortFn<T> = fn(&mut [T]);
 
 fn main() {
   let sort_functions = Vec::from([
-    ("INT BUBBLE SORT", interative_bubble_sort as SortFn<i32>),
+    ("ITE BUBBLE SORT", iterative_bubble_sort as SortFn<i32>),
     ("REC BUBBLE SORT", recursive_bubble_sort),
     ("REC QUICK SORT", recursive_quick_sort),
   ]);
@@ -26,7 +26,7 @@ fn main() {
   }
   // run_entry(&sort_functions, ENTRY_SIZE);
   //
-  println!("INT - stands for interative\nREC - stands for recursive");
+  println!("ITE - stands for iterative\nREC - stands for recursive");
 }
 
 fn run_entry(functions: &Vec<(&str, SortFn<i32>)>, entry_size: usize) {

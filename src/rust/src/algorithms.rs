@@ -1,4 +1,4 @@
-/// Sorts an array in place using a interative version of the bubble sort algorithm
+/// Sorts an array in place using a iterative version of the bubble sort algorithm
 ///
 /// # Arguments
 ///
@@ -8,10 +8,10 @@
 ///
 /// ```
 /// let mut arr = [5, 3, 8, 4, 2];
-/// interative_bubble_sort(&mut arr);
+/// iterative_bubble_sort(&mut arr);
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
 /// ```
-pub fn interative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+pub fn iterative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
   for i in 0..arr.len() {
     for j in 1..arr.len() - i {
       if arr[j - 1] > arr[j] {
@@ -31,7 +31,7 @@ pub fn interative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
 ///
 /// ```
 /// let mut arr = [5, 3, 8, 4, 2];
-/// interative_bubble_sort(&mut arr);
+/// iterative_bubble_sort(&mut arr);
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
 /// ```
 pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
@@ -62,7 +62,6 @@ pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
 /// bubble_sort_pass(&mut arr, 1, n);
 /// assert_eq!(arr, [6, 1, 2, 9]);
 /// ```
-
 fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_position: usize) {
   if iterator >= last_element_position {
     return;
@@ -72,7 +71,6 @@ fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_
   }
   bubble_sort_pass(arr, iterator + 1, last_element_position)
 }
-// pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {}
 
 /// Wraps the Quick Sort algorithm for sorting an array in place.
 ///
@@ -201,12 +199,12 @@ mod tests {
   }
 
   #[test]
-  fn test_interative_bubble_sort() {
-    reverse_list_test(interative_bubble_sort);
-    duplicates_list_test(interative_bubble_sort);
-    already_sorted_list_test(interative_bubble_sort);
-    singleton_list_test(interative_bubble_sort);
-    empty_list_test(interative_bubble_sort);
+  fn test_iterative_bubble_sort() {
+    reverse_list_test(iterative_bubble_sort);
+    duplicates_list_test(iterative_bubble_sort);
+    already_sorted_list_test(iterative_bubble_sort);
+    singleton_list_test(iterative_bubble_sort);
+    empty_list_test(iterative_bubble_sort);
   }
 
   #[test]

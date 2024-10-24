@@ -122,7 +122,7 @@ fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_boun
 mod tests {
   use super::*;
 
-  fn test_reverse_list(func: fn(&mut [i32])) {
+  fn reverse_list_test(func: fn(&mut [i32])) {
     let mut arr = [5, 3, 2, 4, 1];
     func(&mut arr);
     assert_eq!(arr, [1, 2, 3, 4, 5]);
@@ -130,12 +130,12 @@ mod tests {
 
   #[test]
   fn test_interative_bubble_sort() {
-    test_reverse_list(interative_bubble_sort);
+    reverse_list_test(interative_bubble_sort);
   }
 
   #[test]
   fn test_recursive_quick_sort() {
-    test_reverse_list(recursive_quick_sort);
+    reverse_list_test(recursive_quick_sort);
   }
 
   // #[test]

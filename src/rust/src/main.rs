@@ -14,6 +14,7 @@ type SortFn<T> = fn(&mut [T]);
 fn main() {
   let sort_functions = Vec::from([
     ("INT BUBBLE SORT", interative_bubble_sort as SortFn<i32>),
+    ("REC BUBBLE SORT", recursive_bubble_sort),
     ("REC QUICK SORT", recursive_quick_sort),
   ]);
 

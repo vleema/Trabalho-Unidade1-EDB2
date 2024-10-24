@@ -1,4 +1,4 @@
-/// Sorts an array in place using the bubble sort algorithm
+/// Sorts an array in place using a interative version of the bubble sort algorithm
 ///
 /// # Arguments
 ///
@@ -12,23 +12,66 @@
 /// assert_eq!(arr, [2, 3, 4, 5, 8]);
 /// ```
 pub fn interative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
-  if arr.is_empty() {
-    return;
-  }
-  let mut n = arr.len();
-  let mut swapped = true;
-  while swapped {
-    swapped = false;
-    for i in 1..n {
-      if arr[i - 1] > arr[i] {
-        arr.swap(i - 1, i);
-        swapped = true;
+  for i in 0..arr.len() {
+    for j in 1..arr.len() - i {
+      if arr[j - 1] > arr[j] {
+        arr.swap(j - 1, j);
       }
     }
-    n -= 1;
   }
 }
 
+/// Sorts an array in place using a recursive version of the bubble sort algorithm
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [5, 3, 8, 4, 2];
+/// interative_bubble_sort(&mut arr);
+/// assert_eq!(arr, [2, 3, 4, 5, 8]);
+/// ```
+pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
+  let last_element_position = arr.len();
+  bubble_sort_pass(arr, 1, last_element_position);
+  recursive_bubble_sort(&mut arr[..last_element_position - 1]);
+}
+
+/// Helper function for the recursive bubble sort algorithm
+///
+/// This functions moves or "bubbles" the largest element of a slice to the last_element_position
+/// in the `arr`.
+///
+/// # Arguments
+///
+/// * `arr` - A mutable slice of elements that implement the `PartialOrd` trait
+/// * `iterator` - The position of a element in `arr`
+/// * `last_element_position` - The position that
+///
+/// # Example
+///
+/// ```
+/// let mut arr = [6, 9, 1, 2];
+/// let n = arr.len();
+/// bubble_sort_pass(&mut arr, 1, n);
+/// assert_eq!(arr, [6, 1, 2, 9]);
+/// ```
+
+fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_position: usize) {
+  if iterator >= last_element_position {
+    return;
+  }
+  if arr[iterator - 1] > arr[iterator] {
+    arr.swap(iterator - 1, iterator)
+  }
+  bubble_sort_pass(arr, iterator + 1, last_element_position)
+}
 // pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {}
 
 /// Wraps the Quick Sort algorithm for sorting an array in place.
@@ -164,6 +207,15 @@ mod tests {
     already_sorted_list_test(interative_bubble_sort);
     singleton_list_test(interative_bubble_sort);
     empty_list_test(interative_bubble_sort);
+  }
+
+  #[test]
+  fn test_recursive_bubble_sort() {
+    reverse_list_test(recursive_bubble_sort);
+    duplicates_list_test(recursive_bubble_sort);
+    already_sorted_list_test(recursive_bubble_sort);
+    singleton_list_test(recursive_bubble_sort);
+    empty_list_test(recursive_bubble_sort);
   }
 
   #[test]

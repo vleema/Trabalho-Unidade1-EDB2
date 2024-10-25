@@ -286,10 +286,12 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 
 ## 3. Formalizar no Latex
 
+> 4 pra cada?
+
 - [ ] 1.0 marina
 - [ ] 1.1 marina
 - [ ] 1.2 lime
-- [ ] 1.3 lime
+- [ ] 1.3
 - [ ] 2.0
 - [ ] 2.1 oaks
   - [ ] 2.1.A oaks

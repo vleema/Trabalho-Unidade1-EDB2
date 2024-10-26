@@ -1,40 +1,41 @@
 \section{Merge Sort}
 \label{sec:merge-sort-teo}
 
-Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o Merge Sort é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sublistas ordenadas até que exista apenas uma sublista, esta sublista é a lista original ordenada. Imagine o seguinte caso:
+Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o \textit{Merge Sort} é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sublistas ordenadas até que exista apenas uma sublista, esta sublista é a lista original ordenada. Imagine o seguinte caso:
 
-Você tem um baralho de cartas e gostaria de organizá-lo, seguindo o conceito do Merge Sort você trabalha da seguinte forma:
+Você tem um baralho de cartas e gostaria de organizá-lo, seguindo o conceito do \textit{Merge Sort} você trabalha da seguinte forma:
 \begin{itemize}
 	\item \textbf{Divisão:} Primeiro você divide o baralho em dois baralhos menores. Cada um desses baralhos é dividido novamente até que cada sub-baralho tenha uma carta.
 	\item \textbf{"Merge" (Mescla):} Nesse momento, com cada sub-baralho com uma carta, todos estão ordenados, então você começa a juntar os sub-baralhos comparando duas cartas de cada baralho e colocando-as em ordem crescente. Assim dois grupos de uma carta se tornam um baralho de duas cartas ordenadas. Em seguida, dois baralhos de duas cartas são mesclados para formar um baralho de quatro cartas, e assim por diante, até que todas as cartas estejam combinadas novamente, mas agora ordenadas.
 \end{itemize}
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[scale=0.3]{figures/merge-sort-example_0.png}
+	\includegraphics[scale=0.4]{figures/merge-sort-example_0.png}
 	\caption{Diagrama exemplo de um Merge Sort}
 	\label{fig:merge_sort_example_0}
 \end{figure}
 
+\FloatBarrier
+
+\newpage
+
 \subsection{Merge Sort Recursivo}
 
-Dito isso, agora fica mais fácil estabelecer o pseudocódigo na forma recursiva:
+Dito isso, agora fica mais fácil estabelecer o pseudocódigo na forma recursiva. O caso base será se a lista tem no máximo elemento, pois já está ordenada. No caso recursivo, pelo teorema da recursão temos acesso ao "caso anterior", ou seja a primeira metade e segunda metade da lista original ordenadas, portanto, podemos mesclá-las.
 
 \begin{algorithm}
 	\label{algo:merge_sort_pseudo}
 	\begin{algorithmic}[1]
 		\Require{$\mathbf{lista}  = x_0, x_1, \ldots, x_{N-1}$}
-		\Ensure{A lista ordenada}
-		\Statex
 		\Function{MergeSort}{$\mathbf{lista}$}
-		\If{tamanho da \textbf{lista} $\leq 1$} \Comment Uma lista com um elemento está ordenada
-		\State \Return
+		\If{tamanho da \textbf{lista} $\leq 1$} \Return
 		\EndIf
-		\State {MergeSort(primeira metade da \textbf{lista})}
-		\State {MergeSort(segunda metade da \textbf{lista})}
-		\State {Merge(\textbf{lista}, primeira metade da \textbf{lista}, segunda metade da \textbf{lista})}
+		\State \Return {Merge(MergeSort($1^a$ metade da \textbf{lista}), MergeSort($2^a$ metade da \textbf{lista})}
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
+
+\FloatBarrier
 
 \subsection{Merge Sort Iterativo}
 
@@ -90,21 +91,18 @@ Dito isso, construímos o pseudocódigo dessa função da seguinte forma:
 \begin{algorithm}
 	\label{algo:merge_aux_pseudo}
 	\begin{algorithmic}[1]
-		\Require{$\mathbf{listaResultado} = 0, 0, \ldots, 0$ $\mathbf{listaEsquerda} = x_0, x_1, \ldots, x_{N - 1}$, $\mathbf{listaDireita} = y_0, y_1, \ldots, y_{M - 1}$}
+		\Require{$\mathbf{listaEsquerda} = x_0, x_1, \ldots, x_{N - 1}$, $\mathbf{listaDireita} = y_0, y_1, \ldots, y_{M - 1}$}
 		\Ensure{A \textbf{listaResultado} ordenada com os elementos da \textbf{listaEsquerda} e \textbf{listaDireita}}
 		\Statex
-		\Function{Merge}{$\mathbf{listaResultado}$,
-			$\mathbf{listaEsquerda}$,
-			$\mathbf{listaDireita}$}
-		\State $E = 0$ \Comment Esse vai ser o indexador da lista esquerda
-		\State $D = 0$ \Comment Esse o da lista direita
-		\State $R = 0$ \Comment Esse o da lista resultado
+		\Function{Merge}{$\mathbf{listaEsquerda}$, $\mathbf{listaDireita}$}
+		\State $E, D, R = 0$ \Comment Esses serão os indexadores de cada lista
+		\State $\mathbf{listaResultado} = 0, 0,\ldots, 0$
 		\While{$E < N$ e $D < M$}
 		\If{\textbf{listaEsquerda}(E) < \textbf{listaDireita}(D)}
-		\State $\mathbf{listaResultado}(R) = \mathbf{listaDireita}(D)$
+		\State $\mathbf{listaResultado}(R).push(\mathbf{listaDireita}(D)$)
 		\State $E = E + 1$ \Comment Partimos para o próximo elemento
 		\Else
-		\State $\mathbf{listaResultado}(R) = \mathbf{listaEsquerda}(D)$
+		\State $\mathbf{listaResultado}(R).push(\mathbf{listaEsquerda}(D)$)
 		\State $D = D + 1$
 		\EndIf
 		\State $R = R + 1$

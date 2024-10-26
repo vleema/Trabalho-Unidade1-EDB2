@@ -224,7 +224,6 @@ Sorts an array using a recursive Merge Sort algorithm.
 * `arr` - A mutable slice of elements that implement `PartialOrd` and `Copy`.
 
 # Example
-
 ```rust
 use sort_algorithms::algorithms::recursive_merge_sort;
 

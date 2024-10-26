@@ -12,7 +12,6 @@
 **/*.rs.bk
 
 # LaTeX
-/latex/output/
 *.aux
 *.bbl
 *.blg

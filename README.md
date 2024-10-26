@@ -3,6 +3,7 @@
 ## Sumário
 
 <!--toc:start-->
+
 - [$\LaTeX$](#latex)
   - [Main](#main)
   - [Escrevendo](#escrevendo)
@@ -13,7 +14,7 @@
 - [Arquivos de código](#arquivos-de-código)
   - [Rust](#rust)
   - [C++](#c)
-<!--toc:end-->
+  <!--toc:end-->
 
 ## $\LaTeX$
 
@@ -108,7 +109,7 @@ def evenSummation(x):
         \Function{EvenSummation}{$\mathbf{x}$}
         \State {$EvenSum$ $\gets$ {$0$}}
         \State {$N$ $\gets$ {$length(\mathbf{x})$}}
-        \For{$i \gets 1$ to $N$}                    
+        \For{$i \gets 1$ to $N$}
         \If{$ x_i\mod 2 == 0$}  \Comment Check whether a number is even.
         \State {$EvenSum$ $\gets$ {$EvenSum + x_i$}}
         \EndIf
@@ -132,7 +133,7 @@ def evenSummation(x):
     \centering
     \caption{Example of a table in \LaTeX}
     \label{tab:_ex_tab}
-    \begin{tabular}{llr}     
+    \begin{tabular}{llr}
         \toprule
         \multicolumn{2}{c}{Bike} \\
         \cmidrule(r){1-2}
@@ -147,7 +148,6 @@ def evenSummation(x):
     \end{tabular}
 \end{table}
 ```
-
 
 ### Compilando
 
@@ -196,7 +196,7 @@ E aí ele vai exibir o tempo gasto para processar listas de 10 as 10000, entrada
 
 #### Implementando
 
-Caso no momento em que esteja lendo ainda esteja faltando algo a se implementar, tente fazer em Rust! Não é muito complicado e é relativamente simples de criar e realizar testes, além de compilar e executar o projeto (cof cof cmake). Vá no arquivo `src/rust/src/algorithms.rs` implemente alguma função que o trabalho pede e crie uma função de teste no modulo de teste no mesmo arquivo. Olha o *insertion sort* como exemplo:
+Caso no momento em que esteja lendo ainda esteja faltando algo a se implementar, tente fazer em Rust! Não é muito complicado e é relativamente simples de criar e realizar testes, além de compilar e executar o projeto (cof cof cmake). Vá no arquivo `src/rust/src/algorithms.rs` implemente alguma função que o trabalho pede e crie uma função de teste no modulo de teste no mesmo arquivo. Olha o _insertion sort_ como exemplo:
 
 **Implementação**:
 
@@ -270,7 +270,8 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 
 - [ ] 1.0 Deve ser feita a descrição das funções/procedimentos utilizados e uma explicação do funcionamento geral para o algoritmo (pseudocódigo), buscando justificar o resultado esperado em todos os casos possíveis (explicar porque o seu algoritmo funciona).
 - [ ] 1.1 Estabeleça pseudocódigos para o algoritmo de ordenação BubbleSort em versões iterativa e recursiva e analise a complexidade em relação as notações Big O, ômega e Theta. Para a versão recursiva, utilize os 4 métodos vistos.
-- [ ] 1.2 Estabeleça pseudocódigos para o algoritmo de ordenação MergeSort em versões iterativa e recursiva e analise a complexidade em relação as notações Big O, ômega e Theta. Para a versão recursiva, utilize os 4 métodos vistos.
+- [~] 1.2 Estabeleça pseudocódigos para o algoritmo de ordenação MergeSort em versões iterativa e recursiva e analise a complexidade em relação as notações Big O, ômega e Theta. Para a versão recursiva, utilize os 4 métodos vistos.
+  > Falta o pseudo it, analise de complexidade das duas versões
 - [ ] 1.3 Estabeleça pseudocódigos para o algoritmo de ordenação QuickSort em versões iterativa e recursiva e analise a complexidade em relação as notações Big O, ômega e Theta. Para a versão recursiva, utilize os 4 métodos vistos.
 
 ## 2. Fase de análise de algoritmo
@@ -294,7 +295,7 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 
 - [ ] 1.0 marina
 - [ ] 1.1 marina
-- [ ] 1.2 lime
+- [ ] 1.2 lime, oaks
 - [ ] 1.3
 - [ ] 2.0
 - [ ] 2.1 oaks
@@ -310,4 +311,5 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 - [ ] 2.5 lime
 
 ---
+
 &copy; IMD/UFRN 2024

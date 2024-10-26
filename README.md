@@ -61,6 +61,9 @@ Latex é uma linguagem relativamente simples e possui muita documentação sobre
 
 Nesse trabalho vai ser necessário escrever **código**, **pseudocódigo** e listar os resultados de performance obtidos numa tabela por exemplo, para isso, podemos seguir esses exemplinhos.
 
+> [!CAUTION]
+> As vezes a inserção figuras, tabelas, blocos de códigos pode ocorrer em cantos que você não necessariamente espera. Para evitar ou corrigir isso, use a função `\FloatBarrier` após a inserção de algum elemento gráfico.
+
 #### Codeblock
 
 ##### Documento
@@ -144,6 +147,7 @@ def evenSummation(x):
     \end{tabular}
 \end{table}
 ```
+
 
 ### Compilando
 

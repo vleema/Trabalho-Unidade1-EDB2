@@ -7,7 +7,11 @@ compile:
 	pdflatex -output-directory=$(OUTPUT_DIR) $(MAIN).tex
 
 bibtex:
-	bibtex $(OUTPUT_DIR)/$(MAIN)
+	@if grep -q '\\citation' $(OUTPUT_DIR)/$(MAIN).aux; then \
+		bibtex $(OUTPUT_DIR)/$(MAIN); \
+	else \
+		echo "No citations found in the document."; \
+	fi
 
 twice:
 	pdflatex -output-directory=$(OUTPUT_DIR) $(MAIN).tex

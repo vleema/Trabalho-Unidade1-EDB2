@@ -1,0 +1,347 @@
+\section{Implementação dos algoritmos de ordenação}
+\label{sec:impl-algo-ord}
+
+Os algoritmos de ordenação \textbf{Merge Sort}, \textbf{Quick Sort} e \textbf{Bubble Sort} foram implementados em suas versões iterativas e recursivas na linguagem de programação Rust. Além disso, com a exceção do \textbf{Bubble sort}, todas as funções esperam um slice mutável de tipo \texttt{T} que implementa uma ordem parcial e pode ser copiado, estes são os traits \texttt{PartialOrd} e \texttt{Copy}, respectivamente. Todas as funções alteram esse slice diretamente e não retornam nada.
+
+\subsection{Bubble Sort}
+
+\subsubsection{Iterativo}
+
+\begin{lstlisting}[language=Rust]
+pub fn iterative_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+  for i in 0..arr.len() {
+    for j in 1..arr.len() - i {
+      if arr[j - 1] > arr[j] {
+        arr.swap(j - 1, j);
+      }
+    }
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Recursivo}
+
+Na versão recursiva, foi utilizada a função auxiliar \texttt{bubble\_sort\_pass}
+
+\begin{lstlisting}[language=Rust]
+pub fn recursive_bubble_sort<T: PartialOrd>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
+  let last_element_position = arr.len();
+  bubble_sort_pass(arr, 1, last_element_position);
+  recursive_bubble_sort(&mut arr[..last_element_position - 1]);
+}
+\end{lstlisting}
+
+\subsubsection{Função auxiliar}
+
+Essa função move o maior elemento de um slice para a posição \texttt{last\_element\_position} no \texttt{arr}. O \texttt{iterator} é usado para percorrer o slice do inicio ao fim.
+
+\begin{lstlisting}[language=Rust]
+fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_position: usize) {
+  if iterator >= last_element_position {
+    return;
+  }
+  if arr[iterator - 1] > arr[iterator] {
+    arr.swap(iterator - 1, iterator)
+  }
+  bubble_sort_pass(arr, iterator + 1, last_element_position)
+}
+\end{lstlisting}
+\FloatBarrier
+
+\subsection{Quick Sort}
+
+\subsubsection{Iterativo}
+
+Como o \textit{quick sort} naturalmente é um algoritmo recursivo, precisamos de algo que simulasse a pilha de execução do computador, esta simulação se deu a partir do uso da variável \texttt{stack} que armazena as posições das sub-listas que precisam ser ordenadas, permitindo a progressão iterativa da divisão da lógica de divisão e conquista.
+
+\begin{lstlisting}[language=Rust]
+pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
+  let mut stack = vec![(0, arr.len() - 1)];
+  while let Some((low, high)) = stack.pop() {
+    if low < high {
+      let pivot_index = partition(arr, low, high);
+      if pivot_index > 0 {
+        stack.push((low, pivot_index - 1)); // Left side
+      }
+      stack.push((pivot_index + 1, high)); // Right side
+    }
+  }
+}
+\end{lstlisting}
+\FloatBarrier
+
+\subsubsection{Recursivo}
+
+Para manter o único parâmetro \texttt{arr}, a \texttt{recursive\_quick\_sort} só encapsula a versão de fato recursiva.
+
+\begin{lstlisting}[language=Rust]
+pub fn recursive_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.is_empty() {
+    return;
+  }
+  _recursive_quick_sort(arr, 0, arr.len() - 1);
+}
+\end{lstlisting}
+\FloatBarrier
+
+\newpage
+
+\begin{lstlisting}[language=Rust, caption={Versão correta}]
+fn _recursive_quick_sort<T: PartialOrd + Copy>(
+  arr: &mut [T],
+  lower_bound: usize,
+  upper_bound: usize,
+) {
+  if lower_bound >= upper_bound {
+    return;
+  }
+  let pivot_index = partition(arr, lower_bound, upper_bound);
+  if pivot_index > 0 {
+    _recursive_quick_sort(arr, lower_bound, pivot_index - 1);
+  }
+  _recursive_quick_sort(arr, pivot_index + 1, upper_bound);
+}
+\end{lstlisting}
+\FloatBarrier
+
+\subsubsection{Função auxiliar}
+
+Note que ambas as versões do \textit{quick sort} utilizam a função auxiliar \texttt{partition}. Essa função seleciona o último elemento como pivô e rearranja a lista, de modo que todos os elementos menores que o pivó estejam na esquerda e os maiores ou iguais ao pivô na direita. Ao final, ela retorna o índice do pivô após a partição.
+Os parâmetros \texttt{lower\_bound}, \texttt{upper\_bound} são os índices do elemento inicial e final do slice a ser particionado.
+
+\begin{lstlisting}[language=Rust]
+fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
+  let pivot = arr[upper_bound];
+  let mut left_item = lower_bound as isize - 1;
+  for right_item in lower_bound..upper_bound {
+    if arr[right_item] < pivot {
+      left_item += 1;
+      arr.swap(left_item as usize, right_item);
+    }
+  }
+  let new_pivot = (left_item + 1) as usize;
+  arr.swap(new_pivot, upper_bound);
+  new_pivot
+}
+\end{lstlisting}
+\FloatBarrier
+
+\subsection{Merge Sort}
+
+\subsubsection{Iterativo}
+
+Novamente, como o \textit{merge sort} naturalmente é um algoritmo recursivo, foi necessário simular a pilha de execução do computador. Primeiro, começamos com pequenos segmentos da lista (de tamanho 1) e iterativamente dobramos o tamanho dos segmentos a cada passo, mesclando-os.
+
+\begin{lstlisting}[language=Rust]
+pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
+  }
+  let mut temp_arr = arr.to_vec();
+  let mut segment_size = 1;
+  let arr_len = arr.len();
+  while segment_size < arr.len() {
+    let mut start = 0;
+    while start < arr_len {
+      let mid = (start + segment_size).min(arr_len);
+      let end = (start + 2 * segment_size).min(arr_len);
+      merge(&mut temp_arr[start..end], &arr[start..mid], &arr[mid..end]);
+      start += 2 * segment_size;
+    }
+    arr.copy_from_slice(&temp_arr);
+    segment_size *= 2;
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Recursivo}
+
+A principal diferença em relação \href{algo:merge_sort_pseudo}{pseudo código}, é que a agora a função edita diretamente a lista, em vez de retorna-la como resultado.
+
+\begin{lstlisting}[language=Rust]
+pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
+  if arr.len() <= 1 {
+    return;
+  }
+  let mid = arr.len() / 2;
+  let mut left_arr = arr[..mid].to_vec();
+  let mut right_arr = arr[mid..].to_vec();
+  recursive_merge_sort(&mut left_arr);
+  recursive_merge_sort(&mut right_arr);
+  merge(arr, &left_arr, &right_arr);
+}
+\end{lstlisting}
+\FloatBarrier
+
+\subsubsection{Função auxiliar}
+
+E a \textit{merge} também foi alterada de forma parecida, de forma que receba como argumento a lista resultado (\texttt{arr}).
+
+\begin{lstlisting}[language=Rust]
+fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {
+  let left_arr_len = left_arr.len();
+  let right_arr_len = right_arr.len();
+  let (mut i, mut l, mut r) = (0, 0, 0);
+  while l < left_arr_len && r < right_arr_len {
+    if left_arr[l] < right_arr[r] {
+      arr[i] = left_arr[l];
+      l += 1;
+    } else {
+      arr[i] = right_arr[r];
+      r += 1;
+    }
+    i += 1;
+  }
+  while l < left_arr_len {
+    arr[i] = left_arr[l];
+    i += 1;
+    l += 1;
+  }
+  while r < right_arr_len {
+    arr[i] = right_arr[r];
+    i += 1;
+    r += 1;
+  }
+}
+\end{lstlisting}
+
+\subsection{Organização do projeto e corretude do algoritmo}
+
+Para testar os algoritmos o projeto foi subdivido em duas partes, a que testa a performance e a que estipula a corretude, para tal foi usado a separação padrão do \texttt{cargo} entre o módulo principal e o módulo de testes. A organização dos arquivos ocorreu da seguinte forma:
+\vspace{1em}
+\dirtree{%
+	.1 /.
+	.2 out/.
+	.3 entries.txt.
+	.3 output.txt.
+	.2 src/.
+	.3 algorithms.rs.
+	.3 lib.rs.
+	.3 main.rs.
+	.2 tests/.
+	.3 test\_sorts.rs.
+	.2 Cargo.lock.
+	.2 Cargo.toml.
+	.2 rustfmt.toml.
+}
+\FloatBarrier
+\vspace{1em}
+\noindent
+No \texttt{Cargo.toml} A unica depêndencia usada foi \href{https://docs.rs/rand/latest/rand/}{rand}, para poder gerar números aleatórios de 0 a 100000
+\begin{lstlisting}[caption={Trecho do \texttt{Cargo.toml}}]
+  [dependencies]
+  rand = "0.8.5"
+\end{lstlisting}
+\FloatBarrier
+\noindent
+Quando executado com \texttt{cargo test}, o \texttt{cargo} executa as funções de teste definidas em \texttt{test\_sorts.rs} para estipular a corretude de cada algoritmo. Os testes definidos foram:
+
+\begin{lstlisting}[language=Rust, caption={Trecho de \texttt{test\_sorts.rs}}]
+fn reverse_list_test(func: fn(&mut [i32])) {
+  let mut arr = [5, 3, 2, 4, 1];
+  func(&mut arr);
+  assert_eq!(arr, [1, 2, 3, 4, 5], "reverse_list_test failed");
+}
+
+fn duplicates_list_test(func: fn(&mut [i32])) {
+  let mut arr = [4, 2, 3, 2, 1, 4];
+  func(&mut arr);
+  assert_eq!(arr, [1, 2, 2, 3, 4, 4], "duplicates_list_test failed");
+}
+
+fn already_sorted_list_test(func: fn(&mut [i32])) {
+  let mut arr = [1, 2, 3, 4, 5];
+  func(&mut arr);
+  assert_eq!(arr, [1, 2, 3, 4, 5], "already_sorted_list_test failed");
+}
+
+fn singleton_list_test(func: fn(&mut [i32])) {
+  let mut arr = [42];
+  func(&mut arr);
+  assert_eq!(arr, [42], "singleton_list_test faild");
+}
+
+fn empty_list_test(func: fn(&mut [i32])) {
+  let mut arr: [i32; 0] = [];
+  func(&mut arr);
+  assert_eq!(arr, [], "empty_list_test failed");
+}
+\end{lstlisting}
+\FloatBarrier
+\noindent
+Todos os testes unitários foram definidos como esse:
+
+\begin{lstlisting}[language=Rust, caption={Trecho de \texttt{test\_sorts.rs}}]
+#[test]
+fn test_recursive_quick_sort() {
+  reverse_list_test(recursive_quick_sort);
+  duplicates_list_test(recursive_quick_sort);
+  already_sorted_list_test(recursive_quick_sort);
+  singleton_list_test(recursive_quick_sort);
+  empty_list_test(recursive_quick_sort);
+}
+\end{lstlisting}
+\FloatBarrier
+\noindent
+Executando o comando \texttt{cargo test}, podemos ver que todos os testes foram bem sucedidos:
+
+\begin{lstlisting}
+running 6 tests
+test test_iterative_bubble_sort ... ok
+test test_iterative_merge_sort ... ok
+test test_recursive_bubble_sort ... ok
+test test_iterative_quick_sort ... ok
+test test_recursive_merge_sort ... ok
+test test_recursive_quick_sort ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+\end{lstlisting}
+\FloatBarrier
+\noindent
+Os testes de performance foram implementados em \texttt{main.rs}, onde criam e escrevem os arquivos \texttt{entries.txt} e \texttt{output.txt} com as listas geradas e os resultados de performance, respectivamente.
+
+\begin{lstlisting}[language=Rust, caption={Trecho de \texttt{main.rs}}]
+type SortFn<T> = fn(&mut [T]);
+
+fn main() -> io::Result<()> {
+  let sort_functions = Vec::from([
+    ("ITE BUBBLE SORT", iterative_bubble_sort as SortFn<i32>),
+    ("REC BUBBLE SORT", recursive_bubble_sort),
+    ("REC QUICK SORT", recursive_quick_sort),
+    ("ITE QUICK SORT", iterative_quick_sort),
+    ("REC MERGE SORT", recursive_merge_sort),
+    ("ITE MERGE SORT", iterative_merge_sort),
+  ]);
+
+  fs::create_dir_all("out")?;
+  let mut entries_file = File::create(ENTRIES_FILENAME)?;
+  let mut output_file = File::create(OUTPUT_FILENAME)?;
+
+  let title = "Performance test for sort algorithms";
+  writeln!(output_file, "{}\n{}\n", title, "=".repeat(title.len()))?;
+  writeln!(
+    output_file,
+    "ITE - stands for iterative\nREC - stands for recursive\n"
+  )?;
+
+  for n in 1..=4 {
+    writeln!(entries_file, "List with {} entries:\n", TEN.pow(n))?;
+    run_entry(
+      &sort_functions,
+      TEN.pow(n),
+      &mut entries_file,
+      &mut output_file,
+    )?;
+    writeln!(entries_file)?;
+  }
+
+  Ok(())
+}
+\end{lstlisting}
+\FloatBarrier

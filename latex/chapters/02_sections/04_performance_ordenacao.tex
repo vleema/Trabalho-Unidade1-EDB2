@@ -1,0 +1,28 @@
+\section{Análise de performance dos algoritmos de ordenação}
+\label{sec:anal_perf_algo_ord}
+
+Uma vez estabelecidas as implementações dos algoritmos de ordenação, em conjunto com testes que estipulavam sua corretude. Executamos o programa principal com todas as otimizações do compilador (\texttt{cargo run ---release}) e obtivemos os seguintes resultados:
+
+\begin{table}[h!]
+	\centering
+	\caption{Tabela de resultados}
+	\label{tab:perf_result}
+	\begin{tabular}{lrrrr}
+		\toprule
+		Algoritmo               & 10 entradas & 100 entradas    & 1000 entradas     & 10000 entradas    \\
+		\midrule
+		Bubble Sort (Iterativo) & 281 ns      & 6.723 \textmu s & 314.678 \textmu s & 31.196169 ms      \\
+		Bubble Sort (Recursivo) & 221 ns      & 7.374 \textmu s & 411.449 \textmu s & 43.688736 ms      \\
+		Quick Sort  (Recursivo) & 320 ns      & 2.554 \textmu s & 31.329 \textmu s  & 388.807 \textmu s \\
+		Quick Sort  (Iterativo) & 581 ns      & 2.775 \textmu s & 33.122 \textmu s  & 403.624 \textmu s \\
+		Merge Sort  (Recursivo) & 882 ns      & 5.69 \textmu s  & 62.497 \textmu s  & 744.751 \textmu s \\
+		Merge Sort  (Iterativo) & 531 ns      & 2.976 \textmu s & 36.809 \textmu s  & 467.994 \textmu s \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Começando pelo \textbf{Bubble Sort}, é possível notar que, apesar de uma performance inicial superior da versão recursiva, a implementação iterativa é mais eficiente conforme o tamanho da lista aumenta. Acredita-se que o overhead causado pelas chamadas recursivas e pelo contexto adicional na pilha de execução (função auxiliar recursiva) resultou em uma performance pior em comparação com a iterativa.
+
+Em seguida, no \textbf{Quick Sort}, tivemos um cenário diferente, em que a versão recursiva se saiu como a mais eficiente em todas as entradas em relação à iterativa. Isso pode ter ocorrido pela instanciação da estrutura de dados pilha como um \texttt{Vec<(usize, usize)>}, que fica armazenado na heap, e um overhead de operações \texttt{push} e \texttt{pop}, enquanto as chamadas recursivas não lidam com essas operações e ficam diretamente na pilha do sistema, que é mais rápida.
+
+Por último, no \textbf{Merge Sort}, que, apesar de naturalmente ser um algoritmo recursivo, ficou muito atrás de sua versão iterativa, a qual foi até duas vezes mais rápida na maioria dos casos. Entretanto, é fácil entender a origem dessa diferença, considerando que, na implementação recursiva, são instanciados dois \texttt{Vec<T>} em cada chamada recursiva, enquanto na versão iterativa é instanciado um único \texttt{Vec<T>} durante toda a execução.

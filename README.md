@@ -306,9 +306,9 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
   - [ ] 2.2.A
   - [ ] 2.2.B
   - [ ] 2.2.C
-- [ ] 2.3 lime
-- [ ] 2.4 lime
-- [ ] 2.5 lime
+- [x] 2.3 lime
+- [x] 2.4 lime
+- [x] 2.5 lime
 
 ---
 

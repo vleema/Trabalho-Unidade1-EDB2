@@ -295,7 +295,7 @@ Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tóp
 
 - [ ] 1.0 marina
 - [ ] 1.1 marina
-- [ ] 1.2 lime, oaks
+- [~] 1.2 lime, oaks
 - [ ] 1.3
 - [ ] 2.0
 - [ ] 2.1 oaks

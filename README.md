@@ -260,9 +260,8 @@ fn main() {
 
 ### C++
 
-Por enquanto (2024-10-23 22:46), só existe a `main.cpp` com as funções `idadeRep`, então basta seguir o procedimento de compilar padrão com o `gcc` ou `clang` e executar o binário.
+Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas, e dentro dela, seguir o exemplo feito em `idadeReps/main.cpp` e compilar.
 
-Se houver a necessidade de criação de um `cmake`, vou atualizar aqui esse tópico.
 
 # To-do
 

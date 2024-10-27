@@ -1,0 +1,10 @@
+marinex seguinte
+
+esse generate_report já faz tudo que a gente precisa em termos de gerar o relatório.
+se vc olhar no idadeReps/main.cpp tem um exemplo de como functiona.
+oq tá faltando é basicamente é um gerador seguro de chaves(pra garantir que a chave de busca exista) e as funções em sí.
+vc só vai ter q ajeitar as variáveis que eu defini provisóriamente na generate_report.cpp(linhas 74-75 e 86-88).
+ah, e quando vc criar a sua main dentro da binSearch compile da src/cpp, e não de dentro da binSeach(preguiça de debugar esse seg fault)
+daí depois vc move o output.txt pra binSearch
+
+só isso mesmo ;D

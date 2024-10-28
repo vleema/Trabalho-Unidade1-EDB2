@@ -292,19 +292,19 @@ Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas
 
 > 4 pra cada?
 
-- [ ] 1.0 marina
-- [ ] 1.1 marina
+- [ ] 1.0 marina @
+- [ ] 1.1 marina @
 - [~] 1.2 lime, oaks
-- [ ] 1.3 
-- [ ] 2.0
+- [ ] 1.3 marina @
+- [ ] 2.0 bianca
 - [ ] 2.1 oaks
   - [ ] 2.1.A oaks
   - [ ] 2.1.B oaks
   - [ ] 2.1.c oaks
 - [ ] 2.2
-  - [ ] 2.2.A marina
-  - [ ] 2.2.B marina
-  - [ ] 2.2.C 
+  - [ ] 2.2.A marina @
+  - [ ] 2.2.B bianca
+  - [ ] 2.2.C bianca
 - [x] 2.3 lime
 - [x] 2.4 lime
 - [x] 2.5 lime

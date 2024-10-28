@@ -8,3 +8,5 @@ ah, e quando vc criar a sua main dentro da binSearch compile da src/cpp, e não 
 daí depois vc move o output.txt pra binSearch
 
 só isso mesmo ;D
+
+got it! - Bee 

@@ -7,6 +7,10 @@
 #include "./parser.cpp"
 
 using namespace std;
+int random_index(int listSize){
+  std::srand(std::time(0)); // Inicializa a semente para números aleatórios
+  return std::rand() % listSize;
+}
 
 string format_time(long double time) {
   vector<string> prefixes{"m", "µ", "n", "p"}; // 10 ^ -3,-6,-9,-12
@@ -63,8 +67,8 @@ void generate_report(ofstream &output, vector<int> ns, string function_name,
         end = chrono::system_clock::now();
       } else if constexpr (sizeof...(Args) == 3) {
         // buscaBinaria(A,n,x)
-        int n; // A.size
-        int x; // key
+        int n = list.size(); // A.size
+        int x = list[random_index(n)]; // key
 
         start = chrono::system_clock::now();
 
@@ -74,10 +78,9 @@ void generate_report(ofstream &output, vector<int> ns, string function_name,
       } else if constexpr (sizeof...(Args) == 4) {
         // bBinRec(A,esq,dir,x)
 
-        // TODO: safe key generator for bin and recBin searches
-        int esq;
-        int dir;
-        int x; // key
+        int esq = 0;
+        int dir = list.size();
+        int x = list[random_index(n)]; // key
 
         start = chrono::system_clock::now();
 

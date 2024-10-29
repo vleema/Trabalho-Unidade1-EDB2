@@ -1,0 +1,52 @@
+buscaBinaria
+   n=100
+      List-1 done in 50.448ns.
+      List-2 done in 25.364ns.
+      List-3 done in 41.215ns.
+      List-4 done in 36.77ns.
+      List-5 done in 7.054ns.
+   Average: 32.1702ns.
+
+   n=1000
+      List-1 done in 8.941ns.
+      List-2 done in 7.962ns.
+      List-3 done in 9.51ns.
+      List-4 done in 8.066ns.
+      List-5 done in 9.053ns.
+   Average: 8.7064ns.
+
+   n=10000
+      List-1 done in 17.307ns.
+      List-2 done in 11.416ns.
+      List-3 done in 8.992ns.
+      List-4 done in 8.755ns.
+      List-5 done in 9.52ns.
+   Average: 11.198ns.
+
+
+bBinRec
+   n=100
+      List-1 done in 226ps.
+      List-2 done in 198ps.
+      List-3 done in 173ps.
+      List-4 done in 172ps.
+      List-5 done in 168ps.
+   Average: 187.4ps.
+
+   n=1000
+      List-1 done in 195ps.
+      List-2 done in 160ps.
+      List-3 done in 246ps.
+      List-4 done in 188ps.
+      List-5 done in 175ps.
+   Average: 192.8ps.
+
+   n=10000
+      List-1 done in 404ps.
+      List-2 done in 258ps.
+      List-3 done in 222ps.
+      List-4 done in 180ps.
+      List-5 done in 203ps.
+   Average: 253.4ps.
+
+

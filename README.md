@@ -297,12 +297,12 @@ Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas
 - [~] 1.2 lime, oaks
 - [ ] 1.3 marina @
 - [ ] 2.0 bianca
-- [ ] 2.1 oaks
+- [ ] 2.1 
   - [ ] 2.1.A oaks
   - [ ] 2.1.B oaks
   - [ ] 2.1.c oaks
 - [ ] 2.2
-  - [ ] 2.2.A marina @
+  - [ ] 2.2.A bianca
   - [ ] 2.2.B bianca
   - [ ] 2.2.C bianca
 - [x] 2.3 lime

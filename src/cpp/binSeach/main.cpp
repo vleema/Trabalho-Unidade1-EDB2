@@ -1,33 +1,30 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
 using namespace std;
 #include "../generate_report.cpp"
 
 int buscaBinaria(vector<int> &lista, int tamanho, int x) {
-    sort(lista.begin(), lista.end());
     int esq = 0; 
     int dir = tamanho - 1;
+    //std::cout << x << std::endl;
 
-    while (esq < dir) {
+    while (esq <= dir) {
         int m = (esq + dir) / 2;
-        if (x > lista[m]) {
+        //std::cout << lista[m] << std::endl;
+        
+        if (lista[m] == x) {
+            //std::cout << " " << std::endl; 
+            return m;
+        } else if (x > lista[m]) {
             esq = m + 1;
         } else {
-            dir = m;
+            dir = m - 1; 
         }
     }
-
-
-    if (lista[esq] == x) {
-        return esq;
-    }
-
-    return -1;
+    return -1; 
 }
 
 int bBinRec(vector<int> &lista,int esq, int dir, int x ){
-    sort(lista.begin(), lista.end());
     if (esq>dir) {
         return -1;
     }
@@ -46,7 +43,7 @@ int bBinRec(vector<int> &lista,int esq, int dir, int x ){
 }
 
 int main(int argc, char *argv[]){
-    ofstream file("output.txt");
+    ofstream file("output1.txt");
 
   if (!file) {
     cerr << "Error on output file." << endl;

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "./parser.cpp"
 
@@ -55,8 +56,8 @@ void generate_report(ofstream &output, vector<int> ns, string function_name,
       vector<int> list = parse_file(n, i);
 
       // Just initializing
-      chrono::time_point start = chrono::system_clock::now();
-      chrono::time_point end = chrono::system_clock::now();
+      chrono::time_point<std::chrono::system_clock>  start = chrono::system_clock::now();
+      chrono::time_point<std::chrono::system_clock>  end = chrono::system_clock::now();
 
       // Analysis
       if constexpr (sizeof...(Args) == 1) {
@@ -70,6 +71,8 @@ void generate_report(ofstream &output, vector<int> ns, string function_name,
         int n = list.size(); // A.size
         int x = list[random_index(n)]; // key
 
+        sort(list.begin(), list.end());
+
         start = chrono::system_clock::now();
 
         func(list, n, x);
@@ -80,8 +83,9 @@ void generate_report(ofstream &output, vector<int> ns, string function_name,
 
         int esq = 0;
         int dir = list.size();
-        int x = list[random_index(n)]; // key
+        int x = list[random_index(dir)]; // key
 
+        sort(list.begin(), list.end());
         start = chrono::system_clock::now();
 
         func(list, esq, dir, x);

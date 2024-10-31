@@ -204,14 +204,14 @@ assert_eq!(pivot_index, 4); // Example index, actual value may vary
 #[cfg(not(doctest))]
 fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_bound: usize) -> usize {
   let pivot = arr[upper_bound];
-  let mut left_item = lower_bound as isize - 1;
+  let mut left_item = lower_bound;
   for right_item in lower_bound..upper_bound {
     if arr[right_item] < pivot {
+      arr.swap(left_item, right_item);
       left_item += 1;
-      arr.swap(left_item as usize, right_item);
     }
   }
-  let new_pivot = (left_item + 1) as usize;
+  let new_pivot = left_item;
   arr.swap(new_pivot, upper_bound);
   new_pivot
 }

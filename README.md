@@ -149,6 +149,16 @@ def evenSummation(x):
 \end{table}
 ```
 
+#### Diagramas
+
+##### Documento
+
+![diagram-example](./assets/diagrama.png)
+
+##### Código
+
+Use o [quiver](https://q.uiver.app/), lá tem a opção de pegar o código fonte.
+
 ### Compilando
 
 Particularmente eu uso o plugin <https://github.com/lervag/vimtex> no neovim com a opção:
@@ -186,82 +196,17 @@ Antes que me julguem por colocar Rust no meio, o código no estado atual (2024-1
 
 #### Rodando
 
-Pra rodar basta executar dentro da pasta `rust`:
+Pra rodar basta executar dentro da pasta `src/rust`:
 
 ```terminal
 cargo run
 ```
 
-E aí ele vai exibir o tempo gasto para processar listas de 10 as 10000, entradas.
-
-#### Implementando
-
-Caso no momento em que esteja lendo ainda esteja faltando algo a se implementar, tente fazer em Rust! Não é muito complicado e é relativamente simples de criar e realizar testes, além de compilar e executar o projeto (cof cof cmake). Vá no arquivo `src/rust/src/algorithms.rs` implemente alguma função que o trabalho pede e crie uma função de teste no modulo de teste no mesmo arquivo. Olha o _insertion sort_ como exemplo:
-
-**Implementação**:
-
-```rust
-pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
-  for i in 1..arr.len() {
-    let mut j = i;
-    while j > 0 && arr[j] < arr[j - 1] {
-      arr.swap(j, j - 1);
-      j -= 1;
-    }
-  }
-}
-```
-
-> Esse `PartialOrd` é para exigir que o tipo genérico `T` implemente o `<` e `≤`.
-
-**Testes**:
-
-```rust
-#[cfg(test)]
-mod tests {
-  #[test]
-  fn test_insertion_sort() {
-    let mut arr = [5, 3, 2, 4, 1];
-    insertion_sort(&mut arr);
-    assert_eq!(arr, [1, 2, 3, 4, 5]);
-  }
-}
-```
-
-Uma vez feito isso, basta executar:
-
-```terminal
-cargo test
-```
-
-E todos os testes que você definiu vão ser executados! E aí para testar a performance do teu sort, basta ir na `main` em `main.rs` e adicionar a função nessa listinha:
-
-```rust
-
-fn main() {
-  let sort_functions = Vec::from([
-    ("SELECTION SORT", selection_sort as SortFn<i32>),
-    ("BUBBLE SORT", bubble_sort),
-    ("INSERTION SORT", insertion_sort), // <- Aqui tua função!
-    ("QUICK SORT", quick_sort),
-  ]);
-
-  let title = "Performance test for sort algorthms";
-  println!("{}\n{}\n", title, "=".repeat(title.len()));
-
-  for n in 1..=4 {
-    run_entry(&sort_functions, TEN.pow(n));
-  }
-  // run_entry(&sort_functions, ENTRY_SIZE);
-}
-```
-
-> Com `cargo run` tu consegue ver a esse programa executando.
+E aí ele vai exibir criar o arquivo `src/rust/src/out/entries.txt` e `src/rust/src/out/output.txt`, com as lisas que ele usou e o resultado de performance respectivamente.
 
 ### C++
 
 Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas, e dentro dela, seguir o exemplo feito em `idadeReps/main.cpp` e compilar.
-
 
 # To-do
 
@@ -297,7 +242,7 @@ Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas
 - [~] 1.2 lime, oaks
 - [ ] 1.3 marina @
 - [ ] 2.0 bianca
-- [ ] 2.1 
+- [ ] 2.1
   - [ ] 2.1.A oaks
   - [ ] 2.1.B oaks
   - [ ] 2.1.c oaks

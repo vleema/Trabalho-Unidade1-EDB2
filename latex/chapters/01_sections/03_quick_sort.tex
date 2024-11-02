@@ -144,6 +144,8 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
     = cn + T(n-1) \quad \text{(considere \( c \) uma constante)}
     \]
 
+    Observe que, neste caso, o algoritmo se comportará da mesma forma que o BubbleSort, que já foi analisado neste trabalho.
+
 \item \textbf{Melhor caso:} Ocorre quando o pivô é o elemento médio do vetor a ser ordenado em cada chamada do algoritmo de partição. Nessa situação, o processo de partição será balanceado e o tamanho de cada vetor gerado pela partição será, aproximadamente, \( n/2 \).
     
     Para calcular a complexidade do Quick Sort nesse caso, substituímos \( k = n/2 \) na recorrência encontrada:
@@ -153,6 +155,8 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
     \[
     \approx cn + 2T(n/2)
     \]
+    
+        Agora, note que o Quick Sort, em seu melhor caso, se comportal da mesma forma do Merge Sort, o qual já foi analisado neste trabalho.
 
     \end{itemize}
 
@@ -160,6 +164,11 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
 
 \begin{enumerate}
     \item \textbf{Análise do melhor caso:}
+
+
+
+        DESCARTAMOS O RESTO?
+        
         \begin{enumerate}
             \item \textbf{Substituição:}
             Aqui, mostraremos, por indução, que T(n) = cn + 2T(n/2) é limitada por f(n) = n², para todo n >= 2.
@@ -183,11 +192,45 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
               
             \end{itemize}
             
-
+TERMINAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             
             \item \textbf{Iteração:}
+            Aqui, expandiremos a recorrência até o caso base.
+            \[
+            T(n) = cn + 2T\left(\frac{n}{2}\right) =
+            \]
+            \[
+            cn + 2\left[c\frac{n}{2} + 2T\left(\frac{n}{4}\right)\right] =
+            \]
+            \[
+            cn + cn + 4T\left(\frac{n}{4}\right) =
+            \]
+            \[
+            cn + cn + 4\left[c\frac{n}{4} + 2T\left(\frac{n}{8}\right)\right] =
+            \]
+            \[
+            cn + cn + cn + 8T\left(\frac{n}{8}\right) =
+            \]
+            \[
+            \vdots
+            \]
+            \[
+            i \cdot cn + 2^i T\left(\frac{n}{2^i}\right)
+            \]
             
+            A expansão ocorrerá até que \( \frac{n}{2^i} = 1 \).
+            Com isso, temos:
+            \[
+            \frac{n}{2^i} = 1 \implies n = 2^i \implies i = \log_2 n
+            \]
             
+            Assim, teremos:
+            \[
+            T(n) = \log_2 n \cdot cn + 2^{\log_2 n} T\left(\frac{n}{2^{\log_2 n}}\right)
+            = \log_2 n \cdot cn + 2T(1)
+            = O(n \log n)
+            \]
+
             
             \item \textbf{Método Mestre:}
               Esse método permite resolver recorrências da forma 

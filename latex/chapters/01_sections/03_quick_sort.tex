@@ -11,60 +11,6 @@ Assim como o Merge Sort, o Quick Sort é um algoritmo baseado na técnica de div
 	\item \textbf{Combinar}: Esta etapa não exige nenhum processamento adicional, pois, ao longo do processo recursivo, os elementos vão sendo ordenados no próprio vetor.
 \end{enumerate}
 
-\subsection{Quick Sort Iterativo}
-
-\begin{algorithm}
-	\caption{Iterative Quick Sort}
-	\label{algo:iterative_quick_sort}
-	\begin{algorithmic}[1]
-		\Require{Lista $A$}
-		\Ensure{Lista $A$ ordenada}
-		\Statex
-
-		\Function{particao}{$A, p, r$}
-		\State declare $pivo, i, j$ como numérico
-		\State $pivo \gets A[(p + r) / 2]$
-		\State $i \gets p - 1$
-		\State $j \gets r + 1$
-		\While{$i < j$}
-		\Repeat
-		\State $j \gets j - 1$
-		\Until{$A[j] \leq pivo$}
-		\Repeat
-		\State $i \gets i + 1$
-		\Until{$A[i] \geq pivo$}
-		\If{$i < j$}
-		\State troca($A, i, j$)
-		\EndIf
-		\EndWhile
-		\State \Return $j$
-		\EndFunction
-		\Statex
-
-		\Function{IterativeQuickSort}{$A$}
-		\If{$A$ estiver vazio}
-		\State \Return
-		\EndIf
-		\State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
-
-		\While{a pilha não estiver vazia}
-		\State Remova $(\text{low}, \text{high})$ do topo da pilha
-
-		\If{$\text{low} < \text{high}$}
-		\State $\text{pivot\_index} \gets$ \Call{Particao}{$A, \text{low}, \text{high}$}
-
-		\If{$\text{pivot\_index} > 0$}
-		\State Adicione $(\text{low}, \text{pivot\_index} - 1)$ na pilha \Comment{Lado esquerdo}
-		\EndIf
-		\State Adicione $(\text{pivot\_index} + 1, \text{high})$ na pilha \Comment{Lado direito}
-		\EndIf
-		\EndWhile
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-\FloatBarrier
-
-
 \subsection{Quick Sort Recursivo}
 
 \begin{algorithm}
@@ -81,27 +27,6 @@ Assim como o Merge Sort, o Quick Sort é um algoritmo baseado na técnica de div
 		\State $A[j] \gets aux$
 		\EndFunction
 		\Statex
-
-		\Function{particao}{$A, p, r$}
-		\State declare $pivo, i, j$ como numérico
-		\State $pivo \gets A[(p + r) / 2]$
-		\State $i \gets p - 1$
-		\State $j \gets r + 1$
-		\While{$i < j$}
-		\Repeat
-		\State $j \gets j - 1$
-		\Until{$A[j] \leq pivo$}
-		\Repeat
-		\State $i \gets i + 1$
-		\Until{$A[i] \geq pivo$}
-		\If{$i < j$}
-		\State troca($A, i, j$)
-		\EndIf
-		\EndWhile
-		\State \Return $j$
-		\EndFunction
-		\Statex
-
 		\Function{quickSort}{$A, p, r$}
 		\State declare $q$ como numérico
 		\If{$p < r$}
@@ -116,8 +41,75 @@ Assim como o Merge Sort, o Quick Sort é um algoritmo baseado na técnica de div
 \FloatBarrier
 
 \newpage
+\subsection{Quick Sort Iterativo}
 
-\subsubsection{Análise do Quick Sort Recursivo}
+\begin{algorithm}
+	\caption{Quick Sort iterativo}
+	\label{algo:iterative_quick_sort}
+	\begin{algorithmic}[1]
+		\Require{Lista $A$}
+		\Ensure{Lista $A$ ordenada}
+		\Statex
+
+		\Function{QuickSortIterativo}{$A$}
+		\If{$A$ estiver vazio}
+		\State \Return
+		\EndIf
+		\State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
+
+		\While{a pilha não estiver vazia}
+		\State Remova $(\text{limiteEsquerdo}, \text{limiteDireito})$ do topo da pilha
+
+		\If{$\text{limiteEsquerdo} < \text{limiteDireito}$}
+		\State $\text{pivotIndex} \gets$ \Call{Particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
+
+		\If{$\text{pivotIndex} > 0$}
+		\State Adicione $(\text{limiteEsquerdo}, \text{pivotIndex} - 1)$ na pilha \Comment{Lado esquerdo}
+		\EndIf
+		\State Adicione $(\text{pivotIndex} + 1, \text{limiteDireito})$ na pilha \Comment{Lado direito}
+		\EndIf
+		\EndWhile
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\newpage
+\subsection{Função auxiliar Partição}
+
+\begin{algorithm}
+	\caption{Partição}
+	\label{algo:particao}
+	\begin{algorithmic}[1]
+		\Require{A = $a_1, a_2, a_3, \ldots, a_n$, limiteEsquerdo, limiteDireito}
+		\Ensure{O índice do pivô}
+		\Function{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
+		\State declare $pivot, i, j$ como numérico
+		\State $pivot \gets A[(\text{limiteEsquerdo} + r) / 2]$
+		\State $i \gets \text{limiteEsquerdo}- 1$
+		\State $j \gets \text{limiteDireito} + 1$
+		\While{$i < j$}
+		\Repeat
+		\State $j \gets j - 1$
+		\Until{$A[j] \leq pivot$}
+		\Repeat
+		\State $i \gets i + 1$
+		\Until{$A[i] \geq pivot$}
+		\If{$i < j$}
+		\State troca($A, i, j$)
+		\EndIf
+		\EndWhile
+		\State \Return $j$
+		\EndFunction
+		\Statex
+	\end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\subsection{Análise de Complexidade}
+
+\subsubsection{Análise da versão recursiva}
+
 Primeiro, devemos definir a relação de recorrência do algoritmo.
 
 No procedimento de partição, o tempo de execução é limitado pelo tamanho \( n \) do vetor. Isso ocorre porque ele compara todos os elementos do vetor com o pivô enquanto os índices atenderem a condição \( i < j \). Logo, o procedimento de partição realizará \( O(n) \) comparações.
@@ -158,5 +150,40 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
 
 	      Agora, note que o Quick Sort, em seu melhor caso, se comportal da mesma forma do Merge Sort, o qual já foi analisado neste trabalho.
 
+\end{itemize}
+
+\subsubsection{Análise da versão iterativa}
+
+Para determinar a complexidade da versão iterativa, precisamos estimar o tamanho da estrutura de dados "pilha" que simula as chamadas recursivas da outra versão. De forma que seja compreendido quando o loop "while" vai parar. Para tal, teremos dois casos:
+
+\begin{itemize}
+	\item \textbf{Melhor caso}: Vamos supor que a função "partição" sempre particiona a lista em duas sublistas iguais, ou seja, o pivô escolhido é sempre a média da lista maior, de forma que:
+	      \begin{adjustwidth}{-1.8em}{}
+		      \begin{tikzcd}[sep=small]
+			      &&&& n &&&&& cn \\
+			      \\
+			      &&& {n/2} && {n/2} &&&& {2 \cdot cn/2 =cn} \\
+			      \\
+			      & {n/4} && {n/4} && {n/4} && {n/4} && {4 \cdot cn/4 = cn} \\
+			      \\
+			      {n/8} & {n/8} & {n/8} & {n/8} && {n/8} & {n/8} & {n/8} & {n/8} & {8 \cdot cn/8 = cn} \\
+			      \vdots & \vdots & \vdots & \vdots && \vdots & \vdots & \vdots & \vdots \\
+			      1 & 1 & 1 & 1 && 1 & 1 & 1 & 1 & {n \cdot c = cn}
+			      \arrow[from=1-5, to=3-4]
+			      \arrow[from=1-5, to=3-6]
+			      \arrow[from=3-4, to=5-2]
+			      \arrow[from=3-4, to=5-4]
+			      \arrow[from=3-6, to=5-6]
+			      \arrow[from=3-6, to=5-8]
+			      \arrow[from=5-2, to=7-1]
+			      \arrow[from=5-2, to=7-2]
+			      \arrow[from=5-4, to=7-3]
+			      \arrow[from=5-4, to=7-4]
+			      \arrow[from=5-6, to=7-6]
+			      \arrow[from=5-6, to=7-7]
+			      \arrow[from=5-8, to=7-8]
+			      \arrow[from=5-8, to=7-9]
+		      \end{tikzcd}
+	      \end{adjustwidth}
 \end{itemize}
 

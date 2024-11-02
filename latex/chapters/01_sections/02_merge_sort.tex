@@ -148,7 +148,31 @@ Para analisar qual é a complexidade de tempo da \textbf{Merge sort}, nas suas d
 
 \subsubsection{Análise da versão iterativa}
 
-\textbf{TODO}
+Observando a estrutura do \href{algo:merge_sort_it_pseudo}{pseudocódigo} dessa versão é possível perceber que ela é estritamente dependente do aninhamento de loops, e nada mais. E simplificando o algoritmo podemos observá-lo da seguinte maneira:
+
+\begin{algorithm}
+	\begin{algorithmic}[0]
+    \For{$i$ \gets $1$ ; $i <= n - 1$ ; $i=i*2$}
+
+    \For{$j$ \gets $0$ ; $j < n - 1$ ; $j+=i*2$}
+
+    \State {$Merge()$}
+    \EndFor
+    \EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+Sendo assim, note que se trata de um aninhamento \textbf{dependente} por conta do segundo For, pois ele faz referência à variável de controle do loop externo. Entretanto, perceba que o cálculo da complexidade mantém da mesma lógica : Calcular a complexidade individual considerando uma multiplicação na mais externa, ou seja:
+
+\begin{align*}
+	\label{recc:rec_merge_sort}
+	T(n) =
+	\begin{cases}
+		O(1),                   & \text{se $n \leq 1$}  \\
+		2T(\frac{n}{2}) + O(n), & \text{caso contrário}
+	\end{cases}
+\end{align*}
+
 
 \subsubsection{Análise da versão recursiva}
 

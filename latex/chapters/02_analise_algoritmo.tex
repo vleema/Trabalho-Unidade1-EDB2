@@ -1,6 +1,36 @@
 \chapter{Análise de Algoritmo}
 \label{ch:anal_de_alg} %Label of the chapter lit rev. The key ``ch:lit_rev'' can be used with command \ref{ch:anal_de_alg} to refer this Chapter.
 
+\section{Ambiente computacional}
+
+Todos os testes de performance nessa seção foram realizados no seguinte sistema:
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{llll}
+		\toprule
+		\multirow{5}{3cm}{Software}
+		 & Sistema Operacional    & Arch Linux x86\_64              & \\
+		 & Kernel                 & Linux 6.11.5-arch1-1            & \\
+		 & Gerenciador de Janelas & Hyprland (Wayland)              & \\
+		 & Terminal               & Alacritty 0.14.0                & \\
+		 & Compilador de C++      & clang 18.1.8                    & \\
+		 & Compilador de Rust     & rustc 1.82.0                    & \\
+		 & Versão do Cargo        & cargo 1.82.0                    & \\
+		 &                        &                                 & \\
+		\multirow{4}{3cm}{Hardware}
+		 & CPU                    & AMD Ryzen 5 5500                & \\
+		 & GPU                    & GeForce RTX 4060 Ti             & \\
+		 & Driver da GPU          & nvidia (proprietário) 565.57.01 & \\
+		 & Memória RAM            & 31.24 GiB                       & \\
+		 & Armazenamento          & SSD NVMe 2TB                    & \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\noindent
+O sistema estava configurado no modo de alto desempenho, com nenhuma outra aplicação rodando além dos testes descritos, e todas as otimizações disponíveis no compilador foram ativadas para garantir uma análise de performance precisa.
+
 \section{Função iterativa}
 
 \section{Função recursiva}

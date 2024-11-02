@@ -1,52 +1,52 @@
 idadeRep
    n=100
-      List-1 done in 1.76ns.
-      List-2 done in 1.174ns.
-      List-3 done in 1.464ns.
-      List-4 done in 1.331ns.
-      List-5 done in 908ps.
-   Average: 1.3274ns.
+      List-1 done in 250ps.
+      List-2 done in 100ps.
+      List-3 done in 80ps.
+      List-4 done in 60ps.
+      List-5 done in 41ps.
+   Average: 106.2ps.
 
    n=1000
-      List-1 done in 7.752ns.
-      List-2 done in 6.227ns.
-      List-3 done in 7.083ns.
-      List-4 done in 5.934ns.
-      List-5 done in 6.292ns.
-   Average: 6.6576ns.
+      List-1 done in 251ps.
+      List-2 done in 170ps.
+      List-3 done in 190ps.
+      List-4 done in 151ps.
+      List-5 done in 160ps.
+   Average: 184.4ps.
 
    n=10000
-      List-1 done in 54.991ns.
-      List-2 done in 55.167ns.
-      List-3 done in 55.351ns.
-      List-4 done in 54.416ns.
-      List-5 done in 42.618ns.
-   Average: 52.5086ns.
+      List-1 done in 1.202ns.
+      List-2 done in 1.192ns.
+      List-3 done in 1.212ns.
+      List-4 done in 1.162ns.
+      List-5 done in 1.213ns.
+   Average: 1.1962ns.
 
 
 idadeRep2
    n=100
-      List-1 done in 22.824ns.
-      List-2 done in 22.399ns.
-      List-3 done in 20.897ns.
-      List-4 done in 19.828ns.
-      List-5 done in 21.331ns.
-   Average: 21.4558ns.
+      List-1 done in 2.174ns.
+      List-2 done in 2.174ns.
+      List-3 done in 2.274ns.
+      List-4 done in 2.104ns.
+      List-5 done in 2.154ns.
+   Average: 2.176ns.
 
    n=1000
-      List-1 done in 266.745ns.
-      List-2 done in 273.303ns.
-      List-3 done in 267.434ns.
-      List-4 done in 267.993ns.
-      List-5 done in 394.047ns.
-   Average: 293.904ns.
+      List-1 done in 24.737ns.
+      List-2 done in 23.655ns.
+      List-3 done in 24.235ns.
+      List-4 done in 22.903ns.
+      List-5 done in 22.823ns.
+   Average: 23.6706ns.
 
    n=10000
-      List-1 done in 2.26717µs.
-      List-2 done in 1.61007µs.
-      List-3 done in 1.28857µs.
-      List-4 done in 1.29333µs.
-      List-5 done in 1.49103µs.
-   Average: 1.59004µs.
+      List-1 done in 239.979ns.
+      List-2 done in 221.434ns.
+      List-3 done in 226.103ns.
+      List-4 done in 214.121ns.
+      List-5 done in 225.401ns.
+   Average: 225.408ns.
 
 

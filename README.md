@@ -206,7 +206,7 @@ E aí ele vai exibir criar o arquivo `src/rust/src/out/entries.txt` e `src/rust/
 
 ### C++
 
-Estando em `src/cpp`, basta criar uma pasta para as funções a serem comparadas, e dentro dela, seguir o exemplo feito em `idadeReps/main.cpp` e compilar.
+Estando em `src/cpp`, compile e execute `<algoritmo>/main.cpp`. A saída estará na mesma pasta que foi executado.
 
 # To-do
 

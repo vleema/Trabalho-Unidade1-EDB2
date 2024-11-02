@@ -1,119 +1,119 @@
 \section{Quick Sort}
 \label{sec:quick-sort-teo}
-\section{Quick Sort}
-\label{sec:quick-sort-teo}
 
 Assim como o Merge Sort, o Quick Sort é um algoritmo baseado na técnica de divisão e conquista. A operação ocorre da seguinte forma:
 
 \begin{enumerate}
-    \item \textbf{Dividir}: O vetor \( A[p..r] \) é dividido em dois subvetores não vazios \( A[p..q] \) e \( A[q+1..r] \). O índice \( q \) é escolhido a partir do elemento localizado na metade do vetor original, denominado pivô. Os elementos do vetor são rearranjados de modo que os elementos à esquerda de \( q \) sejam menores ou iguais ao pivô, e os elementos à direita sejam maiores ou iguais ao pivô.
-    
-    \item \textbf{Conquistar}: Os dois subvetores \( A[p..q] \) e \( A[q+1..r] \) são ordenados através de chamadas recursivas ao Quick Sort.
-    
-    \item \textbf{Combinar}: Esta etapa não exige nenhum processamento adicional, pois, ao longo do processo recursivo, os elementos vão sendo ordenados no próprio vetor.
+	\item \textbf{Dividir}: O vetor \( A[p..r] \) é dividido em dois subvetores não vazios \( A[p..q] \) e \( A[q+1..r] \). O índice \( q \) é escolhido a partir do elemento localizado na metade do vetor original, denominado pivô. Os elementos do vetor são rearranjados de modo que os elementos à esquerda de \( q \) sejam menores ou iguais ao pivô, e os elementos à direita sejam maiores ou iguais ao pivô.
+
+	\item \textbf{Conquistar}: Os dois subvetores \( A[p..q] \) e \( A[q+1..r] \) são ordenados através de chamadas recursivas ao Quick Sort.
+
+	\item \textbf{Combinar}: Esta etapa não exige nenhum processamento adicional, pois, ao longo do processo recursivo, os elementos vão sendo ordenados no próprio vetor.
 \end{enumerate}
 
 \subsection{Quick Sort Iterativo}
 
 \begin{algorithm}
-    \caption{Iterative Quick Sort}
-    \label{algo:iterative_quick_sort}
-    \begin{algorithmic}[1]
-        \Require{Lista $A$}
-        \Ensure{Lista $A$ ordenada}
-        \Statex
+	\caption{Iterative Quick Sort}
+	\label{algo:iterative_quick_sort}
+	\begin{algorithmic}[1]
+		\Require{Lista $A$}
+		\Ensure{Lista $A$ ordenada}
+		\Statex
 
-        \Function{particao}{$A, p, r$}
-            \State declare $pivo, i, j$ como numérico
-            \State $pivo \gets A[(p + r) / 2]$
-            \State $i \gets p - 1$
-            \State $j \gets r + 1$
-            \While{$i < j$} 
-                \Repeat
-                    \State $j \gets j - 1$
-                \Until{$A[j] \leq pivo$}
-                \Repeat
-                    \State $i \gets i + 1$
-                \Until{$A[i] \geq pivo$}
-                \If{$i < j$}
-                    \State troca($A, i, j$)
-                \EndIf
-            \EndWhile
-            \State \Return $j$
-        \EndFunction
-        \Statex
-        
-        \Function{IterativeQuickSort}{$A$}
-            \If{$A$ estiver vazio}
-                \State \Return
-            \EndIf
-            \State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
-            
-            \While{a pilha não estiver vazia}
-                \State Remova $(\text{low}, \text{high})$ do topo da pilha
-                
-                \If{$\text{low} < \text{high}$}
-                    \State $\text{pivot\_index} \gets$ \Call{Particao}{$A, \text{low}, \text{high}$}
-                    
-                    \If{$\text{pivot\_index} > 0$}
-                        \State Adicione $(\text{low}, \text{pivot\_index} - 1)$ na pilha \Comment{Lado esquerdo}
-                    \EndIf
-                    \State Adicione $(\text{pivot\_index} + 1, \text{high})$ na pilha \Comment{Lado direito}
-                \EndIf
-            \EndWhile
-        \EndFunction
-    \end{algorithmic}
+		\Function{particao}{$A, p, r$}
+		\State declare $pivo, i, j$ como numérico
+		\State $pivo \gets A[(p + r) / 2]$
+		\State $i \gets p - 1$
+		\State $j \gets r + 1$
+		\While{$i < j$}
+		\Repeat
+		\State $j \gets j - 1$
+		\Until{$A[j] \leq pivo$}
+		\Repeat
+		\State $i \gets i + 1$
+		\Until{$A[i] \geq pivo$}
+		\If{$i < j$}
+		\State troca($A, i, j$)
+		\EndIf
+		\EndWhile
+		\State \Return $j$
+		\EndFunction
+		\Statex
+
+		\Function{IterativeQuickSort}{$A$}
+		\If{$A$ estiver vazio}
+		\State \Return
+		\EndIf
+		\State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
+
+		\While{a pilha não estiver vazia}
+		\State Remova $(\text{low}, \text{high})$ do topo da pilha
+
+		\If{$\text{low} < \text{high}$}
+		\State $\text{pivot\_index} \gets$ \Call{Particao}{$A, \text{low}, \text{high}$}
+
+		\If{$\text{pivot\_index} > 0$}
+		\State Adicione $(\text{low}, \text{pivot\_index} - 1)$ na pilha \Comment{Lado esquerdo}
+		\EndIf
+		\State Adicione $(\text{pivot\_index} + 1, \text{high})$ na pilha \Comment{Lado direito}
+		\EndIf
+		\EndWhile
+		\EndFunction
+	\end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
 
 \subsection{Quick Sort Recursivo}
 
 \begin{algorithm}
-    \caption{Quick Sort}
-    \label{algo:bubble_sort}
-    \begin{algorithmic}[1]
-        \Require{Lista $A = A_1, A_2, \ldots, A_n$}
-        \Ensure{Lista $A$ ordenada}
-        \Statex
-        \Function{troca}{$A, i, j$}
-            \State declare $aux$ como numérico
-            \State $aux \gets A[i]$
-            \State $A[i] \gets A[j]$
-            \State $A[j] \gets aux$
-        \EndFunction
-        \Statex
-        
-        \Function{particao}{$A, p, r$}
-            \State declare $pivo, i, j$ como numérico
-            \State $pivo \gets A[(p + r) / 2]$
-            \State $i \gets p - 1$
-            \State $j \gets r + 1$
-            \While{$i < j$} 
-                \Repeat
-                    \State $j \gets j - 1$
-                \Until{$A[j] \leq pivo$}
-                \Repeat
-                    \State $i \gets i + 1$
-                \Until{$A[i] \geq pivo$}
-                \If{$i < j$}
-                    \State troca($A, i, j$)
-                \EndIf
-            \EndWhile
-            \State \Return $j$
-        \EndFunction
-        \Statex
-        
-        \Function{quickSort}{$A, p, r$}
-            \State declare $q$ como numérico
-            \If{$p < r$} 
-                \State $q \gets$ \Call{particao}{$A, p, r$}
-                \State \Call{quickSort}{$A, p, q$}
-                \State \Call{quickSort}{$A, q+1, r$}
-            \EndIf
-        \EndFunction
-            
-    \end{algorithmic}
+	\caption{Quick Sort}
+	\label{algo:bubble_sort}
+	\begin{algorithmic}[1]
+		\Require{Lista $A = A_1, A_2, \ldots, A_n$}
+		\Ensure{Lista $A$ ordenada}
+		\Statex
+		\Function{troca}{$A, i, j$}
+		\State declare $aux$ como numérico
+		\State $aux \gets A[i]$
+		\State $A[i] \gets A[j]$
+		\State $A[j] \gets aux$
+		\EndFunction
+		\Statex
+
+		\Function{particao}{$A, p, r$}
+		\State declare $pivo, i, j$ como numérico
+		\State $pivo \gets A[(p + r) / 2]$
+		\State $i \gets p - 1$
+		\State $j \gets r + 1$
+		\While{$i < j$}
+		\Repeat
+		\State $j \gets j - 1$
+		\Until{$A[j] \leq pivo$}
+		\Repeat
+		\State $i \gets i + 1$
+		\Until{$A[i] \geq pivo$}
+		\If{$i < j$}
+		\State troca($A, i, j$)
+		\EndIf
+		\EndWhile
+		\State \Return $j$
+		\EndFunction
+		\Statex
+
+		\Function{quickSort}{$A, p, r$}
+		\State declare $q$ como numérico
+		\If{$p < r$}
+		\State $q \gets$ \Call{particao}{$A, p, r$}
+		\State \Call{quickSort}{$A, p, q$}
+		\State \Call{quickSort}{$A, q+1, r$}
+		\EndIf
+		\EndFunction
+
+	\end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
 \newpage
 
@@ -128,128 +128,35 @@ Logo, a complexidade do passo recursivo será a soma das recorrências da ordena
 
 Somando a parte recursiva do algoritmo com o procedimento de partição, teremos:
 \[
-T(n) = O(n) + T(k) + T(n - k - 1)
+	T(n) = O(n) + T(k) + T(n - k - 1)
 \]
 
 O tempo de execução do Quick Sort depende se o particionamento é ou não balanceado. Se for balanceado, o algoritmo executa tão rapidamente quanto o Merge Sort; caso contrário, ele executará tão lentamente quanto o Insertion Sort. Assim, temos dois casos:
 
-    \begin{itemize}
-        \item \textbf{Pior caso:} Ocorre quando o pivô é o maior ou o menor elemento do vetor. Aqui, um vetor terá \( n-1 \) elementos e o outro vetor será vazio (não se esqueça do pivô).
-    
-    Para calcular a complexidade do Quick Sort no pior caso, substituímos \( k = n - 1 \) na recorrência encontrada:
-    \[
-    T(n) = O(n) + T(n-1) + T(n - n + 1 - 1)
-    \]
-    \[
-    = cn + T(n-1) \quad \text{(considere \( c \) uma constante)}
-    \]
+\begin{itemize}
+	\item \textbf{Pior caso:} Ocorre quando o pivô é o maior ou o menor elemento do vetor. Aqui, um vetor terá \( n-1 \) elementos e o outro vetor será vazio (não se esqueça do pivô).
 
-    Observe que, neste caso, o algoritmo se comportará da mesma forma que o BubbleSort, que já foi analisado neste trabalho.
+	      Para calcular a complexidade do Quick Sort no pior caso, substituímos \( k = n - 1 \) na recorrência encontrada:
+	      \[
+		      T(n) = O(n) + T(n-1) + T(n - n + 1 - 1)
+	      \]
+	      \[
+		      = cn + T(n-1) \quad \text{(considere \( c \) uma constante)}
+	      \]
 
-\item \textbf{Melhor caso:} Ocorre quando o pivô é o elemento médio do vetor a ser ordenado em cada chamada do algoritmo de partição. Nessa situação, o processo de partição será balanceado e o tamanho de cada vetor gerado pela partição será, aproximadamente, \( n/2 \).
-    
-    Para calcular a complexidade do Quick Sort nesse caso, substituímos \( k = n/2 \) na recorrência encontrada:
-    \[
-    T(n) = O(n) + T(n/2) + T(n - n/2 - 1)
-    \]
-    \[
-    \approx cn + 2T(n/2)
-    \]
-    
-        Agora, note que o Quick Sort, em seu melhor caso, se comportal da mesma forma do Merge Sort, o qual já foi analisado neste trabalho.
+	      Observe que, neste caso, o algoritmo se comportará da mesma forma que o BubbleSort, que já foi analisado neste trabalho.
 
-    \end{itemize}
+	\item \textbf{Melhor caso:} Ocorre quando o pivô é o elemento médio do vetor a ser ordenado em cada chamada do algoritmo de partição. Nessa situação, o processo de partição será balanceado e o tamanho de cada vetor gerado pela partição será, aproximadamente, \( n/2 \).
 
+	      Para calcular a complexidade do Quick Sort nesse caso, substituímos \( k = n/2 \) na recorrência encontrada:
+	      \[
+		      T(n) = O(n) + T(n/2) + T(n - n/2 - 1)
+	      \]
+	      \[
+		      \approx cn + 2T(n/2)
+	      \]
 
+	      Agora, note que o Quick Sort, em seu melhor caso, se comportal da mesma forma do Merge Sort, o qual já foi analisado neste trabalho.
 
-\begin{enumerate}
-    \item \textbf{Análise do melhor caso:}
+\end{itemize}
 
-
-
-        DESCARTAMOS O RESTO?
-        
-        \begin{enumerate}
-            \item \textbf{Substituição:}
-            Aqui, mostraremos, por indução, que T(n) = cn + 2T(n/2) é limitada por f(n) = n², para todo n >= 2.
-            \begin{itemize}
-            \item \textbf{Caso base:} \( n = 2 \).
-            
-            Sabemos que \( T(2) = 2c + 2T(1) = 4 \) e \( f(2) = 4 \).
-            
-            Logo, \( T(2) \leq f(2) \).
-            
-            Portanto, a base da indução é válida.
-            
-            \item \textbf{Hipótese de Indução:} Suponha que \( T(k) \leq k^2 \) para todo \( 2 < k \leq n \).
-            
-            \item \textbf{Passo indutivo:} Queremos provar que \( T(k+1) \leq (k+1)^2 \).
-            
-            Observe que:
-              \[
-              T(n+1) = cn + 2T\left(\frac{n+1}{2}\right)
-              \]
-              
-            \end{itemize}
-            
-TERMINAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
-            \item \textbf{Iteração:}
-            Aqui, expandiremos a recorrência até o caso base.
-            \[
-            T(n) = cn + 2T\left(\frac{n}{2}\right) =
-            \]
-            \[
-            cn + 2\left[c\frac{n}{2} + 2T\left(\frac{n}{4}\right)\right] =
-            \]
-            \[
-            cn + cn + 4T\left(\frac{n}{4}\right) =
-            \]
-            \[
-            cn + cn + 4\left[c\frac{n}{4} + 2T\left(\frac{n}{8}\right)\right] =
-            \]
-            \[
-            cn + cn + cn + 8T\left(\frac{n}{8}\right) =
-            \]
-            \[
-            \vdots
-            \]
-            \[
-            i \cdot cn + 2^i T\left(\frac{n}{2^i}\right)
-            \]
-            
-            A expansão ocorrerá até que \( \frac{n}{2^i} = 1 \).
-            Com isso, temos:
-            \[
-            \frac{n}{2^i} = 1 \implies n = 2^i \implies i = \log_2 n
-            \]
-            
-            Assim, teremos:
-            \[
-            T(n) = \log_2 n \cdot cn + 2^{\log_2 n} T\left(\frac{n}{2^{\log_2 n}}\right)
-            = \log_2 n \cdot cn + 2T(1)
-            = O(n \log n)
-            \]
-
-            
-            \item \textbf{Método Mestre:}
-              Esse método permite resolver recorrências da forma 
-              \[
-              T(n) = a \, T\left(\frac{n}{b}\right) + \Theta(n^k)
-              \]
-              com \( a \geq 1 \), \( b > 1 \), e \( k \geq 0 \), onde \( a \), \( b \), e \( k \) são constantes.
-        
-              Para a recorrência \( T(n) = cn + 2T\left(\frac{n}{2}\right) \), temos que \( a = 2 \), \( b = 2 \) e \( f(n) = n \).
-        
-              Além disso, sabemos que \( \log_b a = \log_2 2 = 1 \).
-        
-              Como \( f(n) = n = O(n^{\log_2 2}) = O(n) \), então \( T(n) = \Theta(n \log n) \).
-
-            
-            
-            \item \textbf{Árvore Binária:}
-            
-        
-        \end{enumerate}    
-
-\end{enumerate}

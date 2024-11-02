@@ -39,31 +39,31 @@ Dito isso, agora fica mais fácil estabelecer o pseudocódigo na forma recursiva
 
 \subsection{Merge Sort Iterativo}
 
-  E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada" seja reconstruída de forma ordenada, conforme o pseudocódigo abaixo.
+E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada" seja reconstruída de forma ordenada, conforme o pseudocódigo abaixo.
 
 \begin{algorithm}
 	\label{algo:merge_sort_it_pseudo}
 	\begin{algorithmic}[1]
 		\Require{$\mathbf{lista}  = x_0, x_1, \ldots, x_{N-1}$}
 		\Function{MergeSortIt}{$\mathbf{lista}$}
-    \State {tamanhoListas $\gets$ {$1$}}
-    \Comment tamanho atual das sub-listas(variando de 1 até n/2)
-    \State {índiceEsq $\gets$ {$1$}}
-    \Comment index inicial da sub-lista à esquerda
+		\State {tamanhoListas $\gets$ {$1$}}
+		\Comment tamanho atual das sub-listas(variando de 1 até n/2)
+		\State {índiceEsq $\gets$ {$1$}}
+		\Comment index inicial da sub-lista à esquerda
 
-    \Comment loop responsável por partir as sub-listas, de maneira em que as divida pela metade
+		\Comment loop responsável por partir as sub-listas, de maneira em que as divida pela metade
 
-    \For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $*$ tamanhoListas}
+		\For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $*$ tamanhoListas}
 
-    \Comment responsável por saber o índice inicial de cada sub-lista dado seu tamanho atual
-    \For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $*= 2$ $*$ tamanhoListas}
-    \State {meio $\gets$ índiceEsquerda $+$ tamanhoListas $-$ $1$}
-    \State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $*$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
-    \State {$merge$(lista, índiceEsq, meio, fimDireita)}
-    \EndFor
-    \EndFor
+		\Comment responsável por saber o índice inicial de cada sub-lista dado seu tamanho atual
+		\For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $*= 2$ $*$ tamanhoListas}
+		\State {meio $\gets$ índiceEsquerda $+$ tamanhoListas $-$ $1$}
+		\State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $*$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
+		\State {$merge$(lista, índiceEsq, meio, fimDireita)}
+		\EndFor
+		\EndFor
 		\EndFunction
-  \end{algorithmic}
+	\end{algorithmic}
 \end{algorithm}
 
 \subsection{Função auxiliar Merge}
@@ -144,7 +144,7 @@ Dito isso, construímos o pseudocódigo dessa função da seguinte forma:
 
 \subsection{Análise de complexidade}
 
-Para analisar qual é a complexidade de tempo da \textbf{Merge sort}, nas suas duas versões, vamos estabelecer primeiro qual é a complexidade da função \textbf{Merge}. A partir do \href{algo:merge_aux_pseudo}{pseudocódigo} da função, é facil de ver que durante sua execução ela sempre vai percorrer o tamanho máximo entre a \textbf{listaEsquerda} e \textbf{listaDireita}, portanto, sua complexidade na notação de complexidade assintótica é $O(n)$, $\Theta(n)$ e $\Omega(n)$.
+Para analisar qual é a complexidade de tempo da \textbf{Merge sort}, nas suas duas versões, vamos estabelecer primeiro qual é a complexidade da função \textbf{Merge}. A partir do \href{algo:merge_aux_pseudo}{pseudocódigo} da função, é facil de ver que durante sua execução ela sempre vai percorrer o tamanho máximo entre a \textbf{listaEsquerda} e \textbf{listaDireita}, portanto, sua complexidade na notação de complexidade assintótica é $O(n)$, $\Theta(n)$ e $\Omega(n)$ para um tamanho de lista $n$.
 
 \subsubsection{Análise da versão iterativa}
 

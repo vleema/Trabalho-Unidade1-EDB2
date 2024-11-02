@@ -26,13 +26,11 @@ O algoritmo executa dois laços principais:
 	\caption{Diagrama exemplo de um Bubble Sort}
 	\label{fig:bubble_sort_example}
 \end{figure}
-
-
 \FloatBarrier
 
-\newpage
-
 \subsection{Bubble Sort Iterativo}
+
+Dessa forma, estabelecemos o pseudocódigo de sua versão iterativa como:
 
 \begin{algorithm}
 	\caption{Bubble Sort}
@@ -54,26 +52,11 @@ O algoritmo executa dois laços principais:
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
-
-\subsubsection{Análise}
-Nesse algoritmo, o fator relevante que determina o seu tempo de execução é o número de comparações realizadas. Considerando que o algoritmo foi implementado para um vetor com \( n \) posições, o número de iterações do primeiro laço é \( n \).
-
-O segundo laço possui \( n-1 \) iterações, mas como ele está interno ao primeiro, ele será executado \( n(n-1) = n^2 - n \) vezes. Portanto, podemos dizer que o tempo de execução do algoritmo Bubble Sort, em sua forma iterativa, será \( O(n^2) \), pois:
-
-\[
-	\lim_{n \rightarrow \infty} \frac{n^2 - n}{n^2} =
-	\lim_{n \rightarrow \infty} \frac{n - 1}{n} =
-	\lim_{n \rightarrow \infty} 1-\frac{1}{n} =
-	1 \in \mathbb{R}^*_+.
-\]
-
-De forma análoga, podemos dizer que o Bubble Sort será \( \Omega(n^2) \) e \( \Theta(n^2) \).
-
-Nesse algoritmo, não há situações melhores ou piores. O comportamento do algoritmo não mudará, independentemente do valor de entrada. Ele realizará todas as comparações, mesmo que desnecessárias.
-
-\newpage
+\FloatBarrier
 
 \subsection{Bubble Sort Recursivo}
+
+Quando uma lista tem no máximo $1$ elemento, ela com certeza está ordenada, então esse será o caso base. Para a etapa recursiva, pelo teorema da recursão podemos assumir que a função já "borbulhou" todos os $n - 1$ maiores elementos da lista para o final. Então, basta colocar o primeiro elemento em sua posição:
 
 \begin{algorithm}
 	\caption{Bubble Sort Recursivo}
@@ -83,7 +66,7 @@ Nesse algoritmo, não há situações melhores ou piores. O comportamento do alg
 		\Ensure{Lista $A$ ordenada}
 		\Statex
 		\Function{BubbleSortRecursivo}{$A, n$}
-		\If{$n == 1$}
+		\If{$n \leq 1$}
 		\Return{}
 		\EndIf
 		\For{$j \gets 0$ to $n - 1$}
@@ -97,48 +80,91 @@ Nesse algoritmo, não há situações melhores ou piores. O comportamento do alg
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
-\subsubsection{Análise}
-Agora, faremos a análise da complexidade da versão recursiva do algoritmo Bubble Sort, utilizando os quatro métodos estudados na disciplina:
+\subsection{Análise de complexidade}
+
+\subsubsection{Análise da versão iterativa}
+
+
+No Bubble Sort, o fator relevante que determina o seu tempo de execução é o número de comparações realizadas. Considerando que o algoritmo foi implementado para um vetor com \( n \) posições, o número de iterações do primeiro laço é \( n \).
+
+O segundo laço possui \( n-1 \) iterações, mas como ele está interno ao primeiro, ele será executado \( n(n-1) = n^2 - n \) vezes. Portanto, podemos dizer que o tempo de execução do algoritmo Bubble Sort, em sua forma iterativa, será \( O(n^2) \), pois:
+\[
+	\lim_{n \rightarrow \infty} \frac{n^2 - n}{n^2} =
+	\lim_{n \rightarrow \infty} \frac{n - 1}{n} =
+	\lim_{n \rightarrow \infty} 1-\frac{1}{n} =
+	1 \in \mathbb{R}^*_+.
+\]
+\indent De forma análoga, podemos dizer que o Bubble Sort será \( \Omega(n^2) \) e \( \Theta(n^2) \). Nesse algoritmo, não há situações melhores ou piores. O comportamento do algoritmo não mudará, independentemente do valor de entrada. Ele realizará todas as comparações, mesmo que desnecessárias.
+
+
+\subsubsection{Análise da versão recursiva}
+Note que assim como na versão iterativa do \textit{bubble sort}, a função percorre a lista a ser ordenada $n$ vezes e logo é chamada novamente para o tamanho $n - 1$. Como haverá $n - 1$ chamadas até que chegue no caso base, em que $n \leq 1$, estabelecemos a relação de recorrência do \textit{bubble sort} como:
+$$
+	T(n) = T(n - 1) + n
+$$
+
+\indent Dada a relação de recorrência desse algoritmo, vamos analisar sua complexidade com o 4 métodos de análise estudados: \textbf{Substuição, Iteração, Árvore de Recurso e Teorema Mestre}.
 
 \begin{enumerate}
-	\item \textbf{Substituição:}
+	\item \textbf{Subsituição}:
 
-	      Com esse método, mostraremos, por indução, que \( T(n) = T(n-1) + n \) é limitada por \( f(n) = n^2 \).
-
+	      \vspace{0.4em}
+	      Nesse método, mostraremos, por indução, que \( T(n) = T(n-1) + n \) é limitada por \( f(n) = n^2 \), ou seja $T(n) \leq n^2$. Portanto:
 	      \begin{itemize}
 		      \item \textbf{Caso base:} \( n = 1 \).
+		            \begin{adjustwidth}{1em}{}
+			            Sabemos que \( T(1) = 1 \) e \( f(1) = 1 \). Logo, \( T(1) \leq f(1) \). \\
+			            Portanto, a base da indução é válida.
+		            \end{adjustwidth}
 
-		            Sabemos que \( T(1) = 1 \) e \( f(1) = 1 \).
-
-		            Logo, \( T(1) \leq f(1) \).
-
-		            Portanto, a base da indução é válida.
-
-		      \item \textbf{Hipótese de Indução:} Suponha que \( T(k) \leq k^2 \) para todo \( 1 < k \leq n \).
-
-		      \item \textbf{Passo indutivo:} Queremos provar que \( T(n+1) \leq (n+1)^2 \).
-
-		            Observe que:
-		            \begin{align*}
-			             & T(n) \leq n^2                                  &  & \text{(pela hipótese de indução)} \\
-			             & \Longrightarrow T(n) + n \leq n^2 + 2n         &  & \text{(pois \( n \leq 2n \))}     \\
-			             & \Longrightarrow T(n) + n \leq n^2 + 2n         &  & \text{(pois \( n \leq 2n \))}     \\
-			             & \Longrightarrow T(n) + n + 1 \leq n^2 + 2n + 1                                        \\
-			             & \Longrightarrow T(n+1) \leq (n+1)^2
-		            \end{align*}
+		      \item \textbf{Passo Indutivo:}
+		            \begin{adjustwidth}{1em}{}
+			            Suponha que \( T(k) \leq k^2 \) para todo \( 1 < k \leq n \) (hipótese de indução). \\
+			            Queremos provar que \( T(n+1) \leq (n+1)^2 \). Logo, observe que:
+			            \begin{align*}
+				             & T(n) \leq n^2                                  &  & \text{(pela hipótese de indução)} \\
+				             & \Longrightarrow T(n) + n \leq n^2 + 2n         &  & \text{(pois \( n \leq 2n \))}     \\
+				             & \Longrightarrow T(n) + n \leq n^2 + 2n         &  & \text{(pois \( n \leq 2n \))}     \\
+				             & \Longrightarrow T(n) + n + 1 \leq n^2 + 2n + 1                                        \\
+				             & \Longrightarrow T(n+1) \leq (n+1)^2
+			            \end{align*}
+		            \end{adjustwidth}
 	      \end{itemize}
-
 	      Portanto, para todo \( k \) tal que \( 1 < k \leq n \), \( T(n) \leq f(n) = n^2 \).
 
 	      Assim, \( T(n) \) é \( O(n^2) \).
+	\item \textbf{Iteração}:
 
+	      \vspace{0.4em}
+	      Aqui, procuramos expandir a recorrência até que um padrão seja identificado:
+	      \begin{align*}
+		      T(n) & = T(n-1) + n                                               \\
+		           & = T(n-2) + (n - 1) + n                                     \\
+		           & = T(n-3) + (n - 2) + (n - 1) + n                           \\
+		           & \vdots                                                     \\
+		           & = T(n-i) + (n - i + 1) + (n - i + 2) + \dots + (n - 1) + n
+	      \end{align*}
+	      Uma vez identificado o padrão, observa-se que o caso base ocorrerá quando \( i = n - 1 \). Nesse momento, teremos:
+	      \[
+		      T(n) = T(1) + 2 + 3 + \dots + (n - 1) + n
+	      \]
+	      A soma \( 2 + 3 + \dots + n \) é uma progressão aritmética, e pode ser calculada por:
+	      \[
+		      T(n) = T(1) + \frac{(2 + n)(n - 1)}{2}
+	      \]
+	      Assim, substituindo \( T(1) \) por uma constante \( c \), obtemos:
+	      \[
+		      T(n) = c + \frac{n^2 + n - 2}{2}
+	      \]
+	      Como \( c \) é uma constante, podemos ignorá-la na análise assintótica e dizer que:
+	      \[
+		      T(n) = O(n^2)
+	      \]
 	\item \textbf{Método Mestre:}
 
-	      Esse método permite resolver recorrências da forma \( T(n) = a \, T\left(\frac{n}{b}\right) + \Theta(n^k) \), com \( a \geq 1 \), \( b > 1 \), e \( k \geq 0 \), onde \( a \), \( b \), e \( k \) são constantes.
-
-	      Como não é possível escrever \( T(n) = T(n-1) + n \) nesse formato, sem que \( b \) seja uma função de \( n \), não podemos aplicar o Método Mestre a essa recorrência.
-
+	      Esse método permite resolver recorrências da forma \( T(n) = a \, T\left(\frac{n}{b}\right) + \Theta(n^k) \), com \( a \geq 1 \), \( b > 1 \), e \( k \geq 0 \), onde \( a \), \( b \), e \( k \) são constantes. Como não é possível escrever \( T(n) = T(n-1) + n \) nesse formato, sem que \( b \) seja uma função de \( n \), não podemos aplicar o Método Mestre a essa recorrência.
 
 	\item \textbf{Árvore Recursiva:}
 
@@ -147,7 +173,6 @@ Agora, faremos a análise da complexidade da versão recursiva do algoritmo Bubb
 		      \sum_{i=0}^{\text{niveis}} (\text{tempo por nó}) \cdot (\text{quantidade de nós})
 	      \]
 	      Precisamos saber a quantidade de níveis, ou seja, o valor que corresponde à altura da árvore recursiva. Nesse caso, temos a seguinte árvore recursiva:
-
 	      \[\begin{tikzcd}
 			      {T(n)} \\
 			      {T(n-1)} \\
@@ -159,9 +184,7 @@ Agora, faremos a análise da complexidade da versão recursiva do algoritmo Bubb
 			      \arrow[from=3-1, to=4-1]
 			      \arrow[from=4-1, to=5-1]
 		      \end{tikzcd}\]
-
 	      A partir da árvore de recorrência, podemos formar a seguinte tabela:
-
 	      \begin{table}[h!]
 		      \centering
 		      \begin{tabular}{lrrr}
@@ -177,60 +200,14 @@ Agora, faremos a análise da complexidade da versão recursiva do algoritmo Bubb
 			      \bottomrule
 		      \end{tabular}
 	      \end{table}
-
 	      \FloatBarrier
-
 	      Com isso, podemos concluir que a soma de todos os passos executados por todos os níveis é dada por:
 	      \[
 		      T(n) = 1 + 2 + 3 + \ldots + (n - 2) + (n - 1) + n = \frac{(n + 1) n}{2} = \frac{n^2 + n}{2}
 	      \]
-
 	      Portanto, temos:
 	      \[
 		      T(n) = O(n^2)
 	      \]
-
-	\item \textbf{Iteração:}
-
-	      Aqui, expandiremos a recorrência até o caso base.
-	      \begin{align*}
-		      T(n) & = T(n-1) + n                                               \\
-		           & = T(n-2) + (n - 1) + n                                     \\
-		           & = T(n-3) + (n - 2) + (n - 1) + n                           \\
-		           & \vdots                                                     \\
-		           & = T(n-i) + (n - i + 1) + (n - i + 2) + \dots + (n - 1) + n
-	      \end{align*}
-
-	      O caso base ocorrerá quando \( i = n - 1 \). Nesse momento, teremos:
-
-	      \[
-		      T(n) = T(1) + 2 + 3 + \dots + (n - 1) + n
-	      \]
-
-	      A soma \( 2 + 3 + \dots + n \) é uma progressão aritmética, e pode ser calculada por:
-
-	      \[
-		      T(n) = T(1) + \frac{(2 + n)(n - 1)}{2}
-	      \]
-
-	      Assim, substituindo \( T(1) \) por uma constante \( c \), obtemos:
-
-	      \[
-		      T(n) = c + \frac{n^2 + n - 2}{2}
-	      \]
-
-	      Como \( c \) é uma constante, podemos ignorá-la na análise assintótica e dizer que:
-
-	      \[
-		      T(n) = O(n^2)
-	      \]
-
-
 \end{enumerate}
-
-
-
-
-
-
 

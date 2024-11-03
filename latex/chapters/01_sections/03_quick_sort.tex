@@ -23,17 +23,19 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 
 \subsection{Quick Sort Recursivo}
 
+Portanto, o caso base da Quick sort recursiva será o intervalo a ser ordenado for tiver 1 elemento ou for vazio. E a etapa recursiva será a chamada da função para a primeira metade até o pivô e segunda metade até o fim da lista.
+
 \begin{algorithm}
 	\caption{Quick Sort Recursivo}
 	\label{algo:rec_quick_sort}
 	\begin{algorithmic}[1]
 		\Function{QuickSortRecursivo}{A, limiteEsquerdo, limiteDireito}
-		\State declare $q$ como numérico
-		\If{$\text{limiteEsquerdo} < r$}
+		\If{$\text{limiteEsquerdo} \geq \text{limiteDireito}$}
+		\Return
+		\EndIf
 		\State $\text{indicePivot} \gets$ \Call{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
 		\State \Call{quickSort}{$A, \text{limiteEsquerdo}, \text{indicePivot}$}
 		\State \Call{quickSort}{$A, q+1, r$}
-		\EndIf
 		\Statex
 		\EndFunction
 	\end{algorithmic}
@@ -41,6 +43,8 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 \FloatBarrier
 
 \subsection{Quick Sort Iterativo}
+
+Dado que o Quick Sort é um algoritmo naturalmente recursivo, vamos emular a pilha de execução do computador usando a estrutura de dados pilha, cada chamada recursiva vai ser uma inserção na pilha, e cada etapa de execução será uma remoção na pilha. Com essas considerações, podemos copiar e colar o resto da implementação recursiva.
 
 \begin{algorithm}
 	\caption{Iterative Quick Sort}
@@ -59,14 +63,11 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 		\While{a pilha não estiver vazia}
 		\State Remova $(\text{limiteEsquerdo}, \text{limiteDireito})$ do topo da pilha
 
-		\If{$\text{limiteEsquerdo} < \text{limiteDireito}$}
-		\State $\text{indicePivot} \gets$ \Call{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
-
-		\If{$\text{indicePivot} > 0$}
+		\If{$\text{limiteEsquerdo} \geq \text{limiteDireito}$}
+		\State \textbf{continue}
+		\EndIf
 		\State Adicione $(\text{limiteEsquerdo}, \text{indicePivot} - 1)$ na pilha \Comment{Lado esquerdo}
-		\EndIf
 		\State Adicione $(\text{indicePivot} + 1, \text{limiteDireito})$ na pilha \Comment{Lado direito}
-		\EndIf
 		\EndWhile
 		\EndFunction
 	\end{algorithmic}
@@ -76,6 +77,8 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 
 \subsection{Função auxiliar Partição}
 
+A função partição é responsável pela maior parte do trabalho braçal do Quick Sort, ela é quem organiza uma lista em relação a dterminado pivô
+
 \begin{algorithm}
 	\caption{Partição}
 	\label{algo:particao}
@@ -83,22 +86,16 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 		\Require{A = $a_1, a_2, a_3, \ldots, a_n$, limiteEsquerdo, limiteDireito}
 		\Ensure{O índice do pivô}
 		\Function{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
-		\State declare $pivot, i, j$ como numérico
-		\State $pivot \gets A[(\text{limiteEsquerdo} + \text{limiteDireito}) / 2]$
-		\State $i \gets \text{limiteEsquerdo}- 1$
-		\State $j \gets \text{limiteDireito} + 1$
-		\While{$i < j$}
-		\Repeat
-		\State $j \gets j - 1$
-		\Until{$A[j] \leq pivot$}
-		\Repeat
-		\State $i \gets i + 1$
-		\Until{$A[i] \geq pivot$}
-		\If{$i < j$}
-		\State troca($A, i, j$)
+		\State pivô $\gets A[\text{limiteDireito}]$
+		\State itemEsquerdo $\gets \text{limiteEsquerdo}$
+		\For{itemDireito $\gets$ limiteEsquerdo to limiteDireito}
+		\If{$A[\text{itemDireito}] <$ pivô}
+		\State \textbf{troque} itemDireito por itemDireito em $A$
+		\State itemEsquerdo $\gets$ itemEsquerdo $+ 1$
 		\EndIf
-		\EndWhile
-		\State \Return $j$
+		\EndFor
+		\State \textbf{troque} itemEsquerdo por limiteDireito em A \Comment O pivô é colocado no meio
+		\State \Return itemEsquerdo
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
@@ -146,7 +143,7 @@ O tempo de execução do Quick Sort depende se o particionamento é ou não bala
 		      \approx cn + 2T(n/2)
 	      \]
 
-	      Agora, note que o Quick Sort, em seu melhor caso, se comportal da mesma forma do Merge Sort, o qual já foi analisado neste trabalho.
+	      Agora, note que o Quick Sort, em seu melhor caso, se comporta da mesma forma do Merge Sort (\ref{sec:merge-sort-teo}), dessa forma sua complexidade no melhor caso é $\Omega(n \cdot \log_2 n)$.
 
 \end{itemize}
 
@@ -195,12 +192,12 @@ Para determinar a complexidade da versão iterativa, precisamos estimar o tamanh
 	      Assim, podemos dizer que o tempo de execução do algoritmo Quick Sort, em sua forma iterativa no melhor caso, será \( O(n \log n) \), pois:
 
 	      \[
-		      \lim_{n \rightarrow \infty} \frac{nlogn}{nlogn} =
+		      \lim_{n \rightarrow \infty} \frac{n \cdot \log_2 n}{n \cdot \log_2 n} =
 		      \lim_{n \rightarrow \infty} 1 =
 		      1 \in \mathbb{R}^*_+.
 	      \]
 
-	      De forma análoga, podemos dizer que este algoritmo será \( \Omega(nlogn) \) e \( \Theta(nlogn) \).
+	      De forma análoga, podemos dizer que este algoritmo será \( \Omega(n \cdot \log_2 n) \) e \( \Theta(n \cdot \log_2 n) \).
 
 
 	\item \textbf{Pior caso}: Como dito anteiormente, nesse caso, a função partição sempre divide a lista de forma desequilibrada, com o pivô sendo o maior ou o menor elemento do vetor. Nesse cenário, uma das sublistas contém apenas um elemento enquanto a outra contém quase todos os demais. Dessa forma, o particionamento acontece com divisões cada vez menores, resultando em uma árvore de recursão linear, como segue:
@@ -208,13 +205,9 @@ Para determinar a complexidade da versão iterativa, precisamos estimar o tamanh
 	      \[
 		      \begin{tikzcd}[sep=small]
 			      &&&& n &&&& cn \\
-			      \\
 			      &&&& {n - 1} &&&& {c(n - 1)} \\
-			      \\
 			      &&&& {n - 2} &&&& {c(n - 2)} \\
-			      \\
 			      &&&& \vdots \\
-			      \\
 			      &&&& 1 &&&& c
 		      \end{tikzcd}
 	      \]

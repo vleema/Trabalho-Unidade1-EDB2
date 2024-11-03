@@ -43,9 +43,7 @@ Dessa forma, estabelecemos o pseudocódigo de sua versão iterativa como:
 		\For{$j \gets 1$ to $n - 1$}
 		\For{$i \gets 0$ to $n - 2$}
 		\If{$A[i] > A[i + 1]$}
-		\State $aux \gets A[i]$
-		\State $A[i] \gets A[i + 1]$
-		\State $A[i + 1] \gets aux$
+		\State \textbf{troque} $i$ por $j$ em $A$
 		\EndIf
 		\EndFor
 		\EndFor
@@ -71,9 +69,7 @@ Quando uma lista tem no máximo $1$ elemento, ela com certeza está ordenada, en
 		\EndIf
 		\For{$j \gets 0$ to $n - 1$}
 		\If{$A[j] > A[j + 1]$}
-		\State $aux \gets A[j]$
-		\State $A[j] \gets A[j + 1]$
-		\State $A[j + 1] \gets aux$
+		\State \textbf{troque} $i$ por $j$ em $A$
 		\EndIf
 		\EndFor
 		\State \Call{BubbleSortRecursivo}{$A, n - 1$}

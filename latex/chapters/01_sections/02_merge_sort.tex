@@ -39,7 +39,7 @@ Dito isso, agora fica mais fácil estabelecer o pseudocódigo na forma recursiva
 
 \subsection{Merge Sort Iterativo}
 
-E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada" seja reconstruída de forma ordenada, conforme o pseudocódigo abaixo.
+E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada"\text{ }seja reconstruída de forma ordenada, conforme o pseudocódigo abaixo.
 
 \begin{algorithm}
 	\label{algo:merge_sort_it_pseudo}
@@ -143,6 +143,7 @@ Dito isso, construímos o pseudocódigo dessa função da seguinte forma:
 \end{algorithm}
 
 \subsection{Análise de complexidade}
+\label{anal:merge_sort}
 
 Para analisar qual é a complexidade de tempo da \textbf{Merge sort}, nas suas duas versões, vamos estabelecer primeiro qual é a complexidade da função \textbf{Merge}. A partir do \href{algo:merge_aux_pseudo}{pseudocódigo} da função, é facil de ver que durante sua execução ela sempre vai percorrer o tamanho máximo entre a \textbf{listaEsquerda} e \textbf{listaDireita}, portanto, sua complexidade na notação de complexidade assintótica é $O(n)$, $\Theta(n)$ e $\Omega(n)$ para um tamanho de lista $n$.
 
@@ -275,5 +276,3 @@ Para algum $a \geq 1$, $b \geq 1$, e $k \geq 0$. Vale que:
 
 A partir da \href{recc:rec_merge_sort}{relação de recorrência estabelecida}, tome $a = 2$, $b = 2$ e $k = 1$. Como $b^k = 2 = a$, logo, $T(n) = \Theta(n \cdot \log_2 n)$. Como foi estabelecido que o pior caso, o melhor e caso médio iam ter a mesma complexidade, logo, a \textit{Merge sort} também tem as complexidades $O(n \cdot \log_2 n)$ e $\Omega(n \cdot \log_2 n)$.
 
-%  TODO:
-% - Análise de complexidade

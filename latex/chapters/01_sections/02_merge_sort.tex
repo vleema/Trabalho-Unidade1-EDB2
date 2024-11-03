@@ -1,4 +1,4 @@
-\section{Merge Sort}
+% \section{Merge Sort}
 \label{sec:merge-sort-teo}
 
 Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o \textit{Merge Sort} é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sublistas ordenadas até que exista apenas uma sublista, esta sublista é a lista original ordenada. Imagine o seguinte caso:
@@ -39,7 +39,7 @@ Dito isso, agora fica mais fácil estabelecer o pseudocódigo na forma recursiva
 
 \subsection{Merge Sort Iterativo}
 
-E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada"\text{ }seja reconstruída de forma ordenada, conforme o pseudocódigo abaixo.
+E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se aproveita de estruturas de repetição aninhadas para que tenha acesso a índices específicos. E tais índices quando usados como argumento na função merge fazem com que a lista "quebrada" seja reconstruída de forma ordenada. De forma que o loop mais externo controle a quebra da lista em sub-listas com a metade do tamanho anterior e o loop mais interno controla o índice inicial de cada sub-lista, conforme o pseudocódigo abaixo.
 
 \begin{algorithm}
 	\label{algo:merge_sort_it_pseudo}
@@ -51,11 +51,8 @@ E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se apro
 		\State {índiceEsq $\gets$ {$1$}}
 		\Comment index inicial da sub-lista à esquerda
 
-		\Comment loop responsável por partir as sub-listas, de maneira em que as divida pela metade
-
 		\For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $*$ tamanhoListas}
 
-		\Comment responsável por saber o índice inicial de cada sub-lista dado seu tamanho atual
 		\For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $*= 2$ $*$ tamanhoListas}
 		\State {meio $\gets$ índiceEsquerda $+$ tamanhoListas $-$ $1$}
 		\State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $*$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
@@ -163,17 +160,28 @@ Observando a estrutura do \href{algo:merge_sort_it_pseudo}{pseudocódigo} dessa 
 	\end{algorithmic}
 \end{algorithm}
 
-Sendo assim, note que se trata de um aninhamento \textbf{dependente} por conta do segundo For, pois ele faz referência à variável de controle do loop externo. Entretanto, perceba que o cálculo da complexidade mantém da mesma lógica : Calcular a complexidade individual considerando uma multiplicação na mais externa, ou seja:
+Além disso, a versão iterativa usa uma abordagem inversa em relação à recursiva, isso pois a manipulação de índices faz com que a lista já comece "quebrada", faltando apenas ordenar as pequenas sub-listas entre si e mesclá-las. Sendo assim, apesar dos processos ocorrerem simultaneamente, podemos separar análise de complexidade da versão iterativa em duas partes: Reconstrução em sub-listas maiores e mesclagem ordenada das sub-listas.\\
+
+Uma vez a lista começando completamente "quebrada", ou seja, com \textbf{n} sub-listas unitárias, o primeiro passo é transformá-las em \textbf{$\frac{n}{2}$} pares, e em seguida em \textbf{$\frac{n}{4}$} quartetos, até virarem uma única lista de tamanho \textbf{n}.
 
 \begin{align*}
-	\label{recc:rec_merge_sort}
-	T(n) =
-	\begin{cases}
-		O(1),                   & \text{se $n \leq 1$}  \\
-		2T(\frac{n}{2}) + O(n), & \text{caso contrário}
-	\end{cases}
+  T(n) = O(\log_2{n})
 \end{align*}
 
+Quebradas as sub-listas, como no primeiro loop as listas são unitárias, a ordenação acontece apenas em relação ao seu vizinho, formando pares. No segundo loop, a formação de quartetos implica na função merge ter que percorrer dois pares vizinhos a fim de achar o menor elemento, depois o par e a lista unitária a fim de achar o segundo menor, e é repetindo esse processo que a lista é mesclada em uma ordenada.
+
+\begin{align*}
+  T(n) = O(n)
+\end{align*}
+
+Analisadas as complexidades dos dois processos, como a mescla vai acontecer de acordo com quantas reconstruções da lista forem necessárias. Batas multiplicar as complexidades individuais para obter a complexidade total do algoritmo.
+
+\begin{align*}
+  T(n) & = O(n) * O(\log_2{n})\\ 
+       & = O(n*\log_2{n})
+\end{align*}
+
+Analisado da perspectiva do pior caso, perceba que mesmo se tratando de uma lista já ordenada ainda sim será necessário quebrá-la e reconstruí-la tal qual uma desordenada. Sendo assim temos que a complexidade entre os cenários terá mesma ordem independente do quão perto ele seja o resultado final, ou seja, $O(\log_2{n})$, $\Omega(\log_2{n})$, $\Theta(\log_2{n})$.
 
 \subsubsection{Análise da versão recursiva}
 

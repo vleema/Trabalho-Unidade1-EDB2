@@ -19,6 +19,60 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 	\caption{Disponível em: ASCÊNCIO, Ana Fernanda Gomes; ARAÚJO, Graziela Santos. Estruturas de Dados: Algoritmos, Análise da Complexidade e Implementações em Java e C/C++.  Pearson; 1ª edição (30 setembro 2015)}
 	\label{fig:quick_sort_example}
 \end{figure}
+\FloatBarrier
+
+\subsection{Quick Sort Recursivo}
+
+\begin{algorithm}
+	\caption{Quick Sort Recursivo}
+	\label{algo:rec_quick_sort}
+	\begin{algorithmic}[1]
+		\Function{QuickSortRecursivo}{A, limiteEsquerdo, limiteDireito}
+		\State declare $q$ como numérico
+		\If{$\text{limiteEsquerdo} < r$}
+		\State $\text{indicePivot} \gets$ \Call{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
+		\State \Call{quickSort}{$A, \text{limiteEsquerdo}, \text{indicePivot}$}
+		\State \Call{quickSort}{$A, q+1, r$}
+		\EndIf
+		\Statex
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+
+\subsection{Quick Sort Iterativo}
+
+\begin{algorithm}
+	\caption{Iterative Quick Sort}
+	\label{algo:iterative_quick_sort}
+	\begin{algorithmic}[1]
+		\Require{Lista $A$}
+		\Ensure{Lista $A$ ordenada}
+		\Statex
+
+		\Function{IterativeQuickSort}{$A$}
+		\If{$A$ estiver vazio}
+		\State \Return
+		\EndIf
+		\State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
+
+		\While{a pilha não estiver vazia}
+		\State Remova $(\text{limiteEsquerdo}, \text{limiteDireito})$ do topo da pilha
+
+		\If{$\text{limiteEsquerdo} < \text{limiteDireito}$}
+		\State $\text{indicePivot} \gets$ \Call{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
+
+		\If{$\text{indicePivot} > 0$}
+		\State Adicione $(\text{limiteEsquerdo}, \text{indicePivot} - 1)$ na pilha \Comment{Lado esquerdo}
+		\EndIf
+		\State Adicione $(\text{indicePivot} + 1, \text{limiteDireito})$ na pilha \Comment{Lado direito}
+		\EndIf
+		\EndWhile
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\FloatBarrier
+\newpage
 
 \subsection{Função auxiliar Partição}
 
@@ -30,7 +84,7 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 		\Ensure{O índice do pivô}
 		\Function{particao}{$A, \text{limiteEsquerdo}, \text{limiteDireito}$}
 		\State declare $pivot, i, j$ como numérico
-		\State $pivot \gets A[(\text{limiteEsquerdo} + r) / 2]$
+		\State $pivot \gets A[(\text{limiteEsquerdo} + \text{limiteDireito}) / 2]$
 		\State $i \gets \text{limiteEsquerdo}- 1$
 		\State $j \gets \text{limiteDireito} + 1$
 		\While{$i < j$}
@@ -46,115 +100,8 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 		\EndWhile
 		\State \Return $j$
 		\EndFunction
-		\Statex
 	\end{algorithmic}
 \end{algorithm}
-
-\subsection{Quick Sort Iterativo}
-
-\begin{algorithm}
-	\caption{Iterative Quick Sort}
-	\label{algo:iterative_quick_sort}
-	\begin{algorithmic}[1]
-		\Require{Lista $A$}
-		\Ensure{Lista $A$ ordenada}
-		\Statex
-
-		\Function{particao}{$A, p, r$}
-		\State declare $pivo, i, j$ como numérico
-		\State $pivo \gets A[(p + r) / 2]$
-		\State $i \gets p - 1$
-		\State $j \gets r + 1$
-		\While{$i < j$}
-		\Repeat
-		\State $j \gets j - 1$
-		\Until{$A[j] \leq pivo$}
-		\Repeat
-		\State $i \gets i + 1$
-		\Until{$A[i] \geq pivo$}
-		\If{$i < j$}
-		\State troca($A, i, j$)
-		\EndIf
-		\EndWhile
-		\State \Return $j$
-		\EndFunction
-		\Statex
-
-		\Function{IterativeQuickSort}{$A$}
-		\If{$A$ estiver vazio}
-		\State \Return
-		\EndIf
-		\State Crie uma pilha com o par $(0, \text{tamanho de } A - 1)$
-
-		\While{a pilha não estiver vazia}
-		\State Remova $(\text{low}, \text{high})$ do topo da pilha
-
-		\If{$\text{low} < \text{high}$}
-		\State $\text{pivo\_index} \gets$ \Call{particao}{$A, \text{low}, \text{high}$}
-
-		\If{$\text{pivo\_index} > 0$}
-		\State Adicione $(\text{low}, \text{pivo\_index} - 1)$ na pilha \Comment{Lado esquerdo}
-		\EndIf
-		\State Adicione $(\text{pivo\_index} + 1, \text{high})$ na pilha \Comment{Lado direito}
-		\EndIf
-		\EndWhile
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-\FloatBarrier
-
-\subsection{Quick Sort Recursivo}
-
-\begin{algorithm}
-	\caption{Recursive Quick Sort}
-	\label{algo:bubble_sort}
-	\begin{algorithmic}[1]
-		\Require{Lista $A = A_1, A_2, \ldots, A_n$}
-		\Ensure{Lista $A$ ordenada}
-		\Statex
-		\Function{troca}{$A, i, j$}
-		\State declare $aux$ como numérico
-		\State $aux \gets A[i]$
-		\State $A[i] \gets A[j]$
-		\State $A[j] \gets aux$
-		\EndFunction
-		\Statex
-
-		\Function{particao}{$A, p, r$}
-		\State declare $pivo, i, j$ como numérico
-		\State $pivo \gets A[(p + r) / 2]$
-		\State $i \gets p - 1$
-		\State $j \gets r + 1$
-		\While{$i < j$}
-		\Repeat
-		\State $j \gets j - 1$
-		\Until{$A[j] \leq pivo$}
-		\Repeat
-		\State $i \gets i + 1$
-		\Until{$A[i] \geq pivo$}
-		\If{$i < j$}
-		\State troca($A, i, j$)
-		\EndIf
-		\EndWhile
-		\State \Return $j$
-		\EndFunction
-		\Statex
-
-		\Function{quickSort}{$A, p, r$}
-		\State declare $q$ como numérico
-		\If{$p < r$}
-		\State $q \gets$ \Call{particao}{$A, p, r$}
-		\State \Call{quickSort}{$A, p, q$}
-		\State \Call{quickSort}{$A, q+1, r$}
-		\EndIf
-		\EndFunction
-
-	\end{algorithmic}
-\end{algorithm}
-\FloatBarrier
-
-\newpage
-
 \FloatBarrier
 
 \subsection{Análise de Complexidade}

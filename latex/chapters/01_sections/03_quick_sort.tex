@@ -15,7 +15,7 @@ Para um melhor entendimento, segue uma esquema do primeiro laço de repetição 
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[scale=0.34]{latex/figures/quick/q1.png}
+	\includegraphics[scale=0.34]{figures/quick/q1.png}
 	\caption{Disponível em: ASCÊNCIO, Ana Fernanda Gomes; ARAÚJO, Graziela Santos. Estruturas de Dados: Algoritmos, Análise da Complexidade e Implementações em Java e C/C++.  Pearson; 1ª edição (30 setembro 2015)}
 	\label{fig:quick_sort_example}
 \end{figure}
@@ -237,57 +237,57 @@ Para determinar a complexidade da versão iterativa, precisamos estimar o tamanh
 		      \end{tikzcd}
 	      \end{adjustwidth}
 
-    Assim, a recorrência continuará até que \( \frac{n}{2^i} = 1 \), com \( i \) representando o nível da árvore representada acima. Com isso, teremos:
+	      Assim, a recorrência continuará até que \( \frac{n}{2^i} = 1 \), com \( i \) representando o nível da árvore representada acima. Com isso, teremos:
 
-\[
-n = 2^i \implies i = \log_2 n
-\]
+	      \[
+		      n = 2^i \implies i = \log_2 n
+	      \]
 
-Ou seja, a árvore terá \( \log_2 n \) níveis, e cada nível da árvore de recursão realiza um trabalho proporcional a \( n \), devido ao processo de particionamento. Portanto, a complexidade nesse caso será dada por \( T(n) = n \log_2 n \).
+	      Ou seja, a árvore terá \( \log_2 n \) níveis, e cada nível da árvore de recursão realiza um trabalho proporcional a \( n \), devido ao processo de particionamento. Portanto, a complexidade nesse caso será dada por \( T(n) = n \log_2 n \).
 
-Assim, podemos dizer que o tempo de execução do algoritmo Quick Sort, em sua forma iterativa no melhor caso, será \( O(n \log n) \), pois:
+	      Assim, podemos dizer que o tempo de execução do algoritmo Quick Sort, em sua forma iterativa no melhor caso, será \( O(n \log n) \), pois:
 
-\[
-	\lim_{n \rightarrow \infty} \frac{nlogn}{nlogn} =
-	\lim_{n \rightarrow \infty} 1 =
-	1 \in \mathbb{R}^*_+.
-\]
+	      \[
+		      \lim_{n \rightarrow \infty} \frac{nlogn}{nlogn} =
+		      \lim_{n \rightarrow \infty} 1 =
+		      1 \in \mathbb{R}^*_+.
+	      \]
 
-    De forma análoga, podemos dizer que este algoritmo será \( \Omega(nlogn) \) e \( \Theta(nlogn) \).
+	      De forma análoga, podemos dizer que este algoritmo será \( \Omega(nlogn) \) e \( \Theta(nlogn) \).
 
 
-\item \textbf{Pior caso}: Como dito anteiormente, nesse caso, a função partição sempre divide a lista de forma desequilibrada, com o pivô sendo o maior ou o menor elemento do vetor. Nesse cenário, uma das sublistas contém apenas um elemento enquanto a outra contém quase todos os demais. Dessa forma, o particionamento acontece com divisões cada vez menores, resultando em uma árvore de recursão linear, como segue:
+	\item \textbf{Pior caso}: Como dito anteiormente, nesse caso, a função partição sempre divide a lista de forma desequilibrada, com o pivô sendo o maior ou o menor elemento do vetor. Nesse cenário, uma das sublistas contém apenas um elemento enquanto a outra contém quase todos os demais. Dessa forma, o particionamento acontece com divisões cada vez menores, resultando em uma árvore de recursão linear, como segue:
 
-\[
-\begin{tikzcd}[sep=small]
-	&&&& n &&&& cn \\
-	\\
-	&&&& {n - 1} &&&& {c(n - 1)} \\
-	\\
-	&&&& {n - 2} &&&& {c(n - 2)} \\
-	\\
-	&&&& \vdots \\
-	\\
-	&&&& 1 &&&& c
-\end{tikzcd}
-\]
+	      \[
+		      \begin{tikzcd}[sep=small]
+			      &&&& n &&&& cn \\
+			      \\
+			      &&&& {n - 1} &&&& {c(n - 1)} \\
+			      \\
+			      &&&& {n - 2} &&&& {c(n - 2)} \\
+			      \\
+			      &&&& \vdots \\
+			      \\
+			      &&&& 1 &&&& c
+		      \end{tikzcd}
+	      \]
 
-Neste caso, a altura da árvore de recursão é \( n \), já que em cada nível apenas um elemento é fixado na posição correta, e as sublistas vão sendo reduzidas em apenas um elemento a cada iteração.
+	      Neste caso, a altura da árvore de recursão é \( n \), já que em cada nível apenas um elemento é fixado na posição correta, e as sublistas vão sendo reduzidas em apenas um elemento a cada iteração.
 
-Assim, o trabalho total realizado por nível é proporcional ao tamanho da lista em cada iteração, somando-se ao longo da altura da árvore. Portanto, a complexidade total é a soma dos primeiros \( n \) números, ou seja:
+	      Assim, o trabalho total realizado por nível é proporcional ao tamanho da lista em cada iteração, somando-se ao longo da altura da árvore. Portanto, a complexidade total é a soma dos primeiros \( n \) números, ou seja:
 
-\[
-T(n) = n + (n - 1) + (n - 2) + \dots + 1 = \frac{n(n + 1)}{2} = \frac{n^2 + n}{2} \approx \frac{n^2}{2}
-\]
+	      \[
+		      T(n) = n + (n - 1) + (n - 2) + \dots + 1 = \frac{n(n + 1)}{2} = \frac{n^2 + n}{2} \approx \frac{n^2}{2}
+	      \]
 
-Agora, observe que:
-\[
-	\lim_{n \rightarrow \infty} \frac{\frac{n^2}{2}}{n^2} =
-	\lim_{n \rightarrow \infty} \frac{1}{2} =
-	\frac{1}{2} \in \mathbb{R}^*_+.
-\]
+	      Agora, observe que:
+	      \[
+		      \lim_{n \rightarrow \infty} \frac{\frac{n^2}{2}}{n^2} =
+		      \lim_{n \rightarrow \infty} \frac{1}{2} =
+		      \frac{1}{2} \in \mathbb{R}^*_+.
+	      \]
 
-Assim, podemos afirmar que o tempo de execução do Quick Sort, em sua forma iterativa no pior caso, é \( O(n^2) \), \( \Omega(n^2) \) e \( \Theta(n^2) \)
+	      Assim, podemos afirmar que o tempo de execução do Quick Sort, em sua forma iterativa no pior caso, é \( O(n^2) \), \( \Omega(n^2) \) e \( \Theta(n^2) \)
 
-       
+
 \end{itemize}

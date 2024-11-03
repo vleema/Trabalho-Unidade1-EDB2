@@ -15,14 +15,14 @@ bool idadeRep2(vector<int> &idade) {
 
 bool idadeRep(vector<int> &idade) {
   int tam = idade.size();
-  int menor = 200;
-  for (int i = 0; i < tam; i++) {
-    if (idade[i] < menor) {
-      menor = idade[i];
+  int indexMenor = 0;
+  for (int i = 1; i < tam; i++) {
+    if (idade[i] < idade[indexMenor]) {
+      indexMenor = i;
     }
   }
   for (int i = 0; i < tam; i++) {
-    if (idade[i] == idade[menor] && i != menor) {
+    if (idade[i] == idade[indexMenor] && i != indexMenor) {
       return true;
     }
   }

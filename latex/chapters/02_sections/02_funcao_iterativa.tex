@@ -1,0 +1,31 @@
+\section{Função iterativa}
+\label{sec:func-it}
+
+Ainda na proposta de comparar diferentes implementações de um algoritmo com um mesmo fim, o exemplo em questão se trata de um que tem como objetivo verificar se um determinado valor de idade se repetia ao longo de uma lista de idades. Nessa lista foram usadas apenas idades de 1 a 100 e foram usadas instâncias da lista com tamanhos 100, 1000 e 10000, sendo esses algoritmos em específico implementados em C++.
+
+\subsection{Análise de complexidade}
+
+Façamos a análise das diferentes implementações do mesmo algoritmo do ponto de vista do pior, melhor e caso médio.
+
+\subsection{idadeRep}
+
+\begin{lstlisting}[language=C++]
+bool idadeRep(vector<int> &idade) {
+  int tam = idade.size();
+  int indexMenor = 0;
+  for (int i = 1; i < tam; i++) {
+    if (idade[i] < idade[indexMenor]) {
+      indexMenor = i;
+    }
+  }
+  for (int i = 0; i < tam; i++) {
+    if (idade[i] == idade[indexMenor] && i != indexMenor) {
+      return true;
+    }
+  }
+  return false;
+}
+\end{lstlisting}
+
+
+\subsection{Resultados dos testes}

@@ -22,7 +22,7 @@ bool idadeRep(vector<int> &idade) {
     }
   }
   for (int i = 0; i < tam; i++) {
-    if (idade[i] == menor) {
+    if (idade[i] == idade[menor] && i != menor) {
       return true;
     }
   }

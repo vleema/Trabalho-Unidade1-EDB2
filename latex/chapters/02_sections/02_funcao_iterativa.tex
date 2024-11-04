@@ -1,13 +1,12 @@
 \section{Função iterativa}
 \label{sec:func-it}
 
-Ainda na proposta de comparar diferentes implementações de um algoritmo com um mesmo fim, o exemplo em questão se trata de um que tem como objetivo verificar se um determinado valor de idade se repetia ao longo de uma lista de idades. Nessa lista foram usadas apenas idades de 1 a 100 e foram usadas instâncias da lista com tamanhos 100, 1000 e 10000, sendo esses algoritmos em específico implementados em C++.
-
-\subsection{Análise de complexidade}
-
+Ainda na proposta de comparar dois algoritmos que tem a mesma finalidade, o caso em questão diz respeito à duas funções que verificam se o menor elemento dela se repete. Ambas são testadas em listas de tamanho igual a 100, 1000 e 10000. E a única restrição de entrada é que os elementos da lista sejam números entre 1 e 100. Para isso, foram implementados em C++ dois algoritmos que realizam o procedimento descrito, e para cada tamanho de lista foram realizados testes com cinco listas diferentes. \\
 Façamos a análise das diferentes implementações do mesmo algoritmo do ponto de vista do pior, melhor e caso médio.
 
-\subsection{idadeRep}
+\subsection{Algoritmo idadeRep}
+
+O algoritmo \textbf{idadeRep} foi implementado da seguinte forma
 
 \begin{lstlisting}[language=C++]
 bool idadeRep(vector<int> &idade) {
@@ -27,5 +26,38 @@ bool idadeRep(vector<int> &idade) {
 }
 \end{lstlisting}
 
+\subsection{Análise}
+
+Note que o primeiro loop é inevitável independente do quão favorável seja a caso, e percorrerá a lista por inteira. Apenas no segundo loop que operações podem ser evitadas a depender da lista, pois o retorno de um valor encerra o programa. Além disso, perceba que a implementação acima pode ser visualizada da seguinte forma
+
+\begin{align*}
+  T(n) & = n + n\\ 
+       & = 2n \\
+       & = O(n)
+\end{align*}
+
+Sendo assim, temos que $O(n)$, $\Omega(n)$ e $\Theta(n)$.
 
 \subsection{Resultados dos testes}
+
+
+\begin{table}[h!]
+	\centering
+	\caption{Tabela de resultados de idadeRep}
+	\label{tab:perf_result}
+	\begin{tabular}{lrrrr}
+		\toprule
+		Lista   & n = 100   & n = 1000  & n = 10000 \\
+		\midrule
+		L1      & 431 ps    & 611 ps    & 3.837 ns  \\
+		L2      & 200 ps    & 521 ps    & 3.236 ns  \\
+		L3      & 251 ps    & 500 ps    & 3.186 ns  \\
+		L4      & 160 ps    & 491 ps    & 3.086 ns  \\
+		L5      & 130 ps    & 531 ps    & 3.346 ns  \\
+		\midrule
+		Médias  & 234.4 ps  & 530.8 ps  & 3.3382 ns \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+

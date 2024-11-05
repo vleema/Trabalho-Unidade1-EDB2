@@ -6,14 +6,31 @@ using namespace std;
 int buscaBinaria(vector<int> &lista, int tamanho, int x) {
     int esq = 0; 
     int dir = tamanho - 1;
-    //std::cout << x << std::endl;
+
+    while (esq < dir) {
+        int m = (esq + dir) / 2; 
+        if (x > lista[m]) {
+            esq = m + 1;
+        } else {
+            dir = m;
+        }
+    }
+
+    if (lista[esq] == x) {
+        return esq; 
+    }
+
+    return -1;
+}
+
+/*int buscaBinaria(vector<int> &lista, int tamanho, int x) {
+    int esq = 0; 
+    int dir = tamanho - 1;
 
     while (esq <= dir) {
         int m = (esq + dir) / 2;
-        //std::cout << lista[m] << std::endl;
         
         if (lista[m] == x) {
-            //std::cout << " " << std::endl; 
             return m;
         } else if (x > lista[m]) {
             esq = m + 1;
@@ -22,7 +39,7 @@ int buscaBinaria(vector<int> &lista, int tamanho, int x) {
         }
     }
     return -1; 
-}
+}*/
 
 int bBinRec(vector<int> &lista,int esq, int dir, int x ){
     if (esq>dir) {

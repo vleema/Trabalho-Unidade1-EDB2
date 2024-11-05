@@ -1,2 +1,121 @@
-\section{Função recursiva}
+\section{Função Recursiva}
 \label{sec:func-rec}
+
+Novamente, iremos comparar dois algoritmos que tem a mesmo objetivo, nesse caso, as duas funções buscam um elemento X em uma lista. Ambas são testadas em listas de tamanho igual a 100, 1000 e 10000, sendo submetidas a cinco testes em cada uma. Para isso, foram implementados em C++ dois algoritmos que realizam o procedimento descrito. Sendo assim, façamos a análise das diferentes implementações do mesmo algoritmo do ponto de vista do pior, melhor e caso médio.
+
+\subsection{Algoritmo buscaBinaria}
+
+O algoritmo \textbf{buscaBinaria} foi implementado da seguinte forma
+
+\begin{lstlisting}[language=C++]
+int buscaBinaria(vector<int> &lista, int tamanho, int x) {
+    int esq = 0; 
+    int dir = tamanho - 1;
+
+    while (esq < dir) {
+        int m = (esq + dir) / 2; 
+        if (x > lista[m]) {
+            esq = m + 1;
+        } else {
+            dir = m;
+        }
+    }
+
+    if (lista[esq] == x) {
+        return esq; 
+    }
+
+    return -1;
+}
+\end{lstlisting}
+
+\subsection{Análise do buscaBinaria}
+
+Note que o loop tem a condição de parada (esq < dir), o que significa que ele só irá terminar quando sobrar somente um valor possível na lista. Portanto, independente do quão favorável seja o caso, ele não irá verificar se lista[m] é o valor que está tentando encontrar, assim executado o loop aproximadamente log₂(tamanho) vezes em todos os casos. Perceba que o algoritmo necessita de melhorias para funcionar de forma que a posição do número buscado seja influente na complexidade do código. Portanto, o loop se comportará da seguinte maneira:
+
+\begin{align*}
+        n/2^k = 1 
+       => n = 2^k
+       => k = log₂ n
+\end{align*}
+
+Em suma teremos o seguinte
+
+\begin{itemize}
+	\item \textbf{Casos:} Dado que o loop inevitávelmente rodará log₂(tamanho) vezes independente do cenário da lista, todos os casos terão a mesma complexidade.
+ 
+\end{itemize}
+
+Sendo assim, temos que $O(n)$ = $\Omega(n)$ = $\Theta(n)$.
+
+\subsection{Resultados do buscaBinaria}
+
+Portanto, o algoritmo \textbf{buscaBinaria} teve a seguinte performace nos testes
+
+\begin{table}[h!]
+	\centering
+	\caption{Tabela de resultados de buscaBinaria}
+	\label{tab:busc_bin_result}
+	\begin{tabular}{lrrrr}
+		\toprule
+		Lista   & n = 100   & n = 1000  & n = 10000 \\
+		\midrule
+		L1      & x ps    & x ps    & x ns  \\
+		L2      & x ps    & x ps    & x ns  \\
+		L3      & x ps    & x ps    & x ns  \\
+		L4      & x ps    & x ps    & x ns  \\
+		L5      & x ps    & x ps    & x ns  \\
+		\midrule
+		Médias  & x ps  & x ps  & x ns \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Algoritmo bBinRec}
+
+Já o algoritmo \textbf{bBinRec} foi implementado da seguinte maneira 
+
+\begin{lstlisting}[language=C++]
+int bBinRec(vector<int> &lista,int esq, int dir, int x ){
+    if (esq>dir) {
+        return -1;
+    }
+    int m = (esq + dir) / 2;
+    if (lista[m] == x) {
+        return m;
+    }
+    if (lista[m] > x){
+        return bBinRec(lista, esq, m - 1, x);
+    }else{
+        return bBinRec(lista, m + 1, dir, x);
+    }
+}
+\end{lstlisting}
+
+\subsection{Análise do bBinRec}
+
+É possível reparar que a função é diferente da \textbf{bBinRec} pois chama a si mesma em cada passo. Cada chamada reduz o intervalo de busca, mas em vez de usar um loop, ela continua chamando a função com novos valores de esq e dir até encontrar o elemento ou esgotar as possibilidades.
+
+\subsection{Resultados do bBinRec}
+
+A versão recursiva é mais rápida na prática, pois pode interromper o processo assim que encontra o elemento, sem precisar fazer verificações adicionais no intervalo.
+
+\begin{table}[h!]
+	\centering
+	\caption{Tabela de resultados de bBinRec}
+	\label{tab:bBin_rec_result}
+	\begin{tabular}{lrrrr}
+		\toprule
+		Lista   & n = 100   & n = 1000  & n = 10000 \\
+		\midrule
+		L1      & x ps    & x ps    & x ns  \\
+		L2      & x ps    & x ps    & x ns  \\
+		L3      & x ps    & x ps    & x ns  \\
+		L4      & x ps    & x ps    & x ns  \\
+		L5      & x ps    & x ps    & x ns  \\
+		\midrule
+		Médias  & x ps  & x ps  & x ns \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+\newpage

@@ -60,16 +60,18 @@ Portanto, o algoritmo \textbf{buscaBinaria} teve a seguinte performace nos teste
 		\toprule
 		Lista   & n = 100   & n = 1000  & n = 10000 \\
 		\midrule
-		L1      & x ps    & x ps    & x ns  \\
-		L2      & x ps    & x ps    & x ns  \\
-		L3      & x ps    & x ps    & x ns  \\
-		L4      & x ps    & x ps    & x ns  \\
-		L5      & x ps    & x ps    & x ns  \\
+		L1      & 190 ps    & 51 ps    & 141 ps  \\
+		L2      & 80 ps    & 70 ps    & 110 ps  \\
+		L3      & 80 ps    & 70 ps    & 101 ps  \\
+		L4      & 50 ps    & 80 ps    & 100 ps  \\
+		L5      & 50 ps    & 60 ps    & 100 ps  \\
 		\midrule
-		Médias  & x ps  & x ps  & x ns \\
+		Médias  & 90 ps  & 66.2 ps  & 110.4 ps \\
 		\bottomrule
 	\end{tabular}
 \end{table}
+
+É perceptivel que a Lista 1 com 100 números foi um outlier em nossa tabela, alterando o valor da média drasticamente tornando-a atípica. Entretanto podemos ver como nos outros casos o tempo é crescente levando em conta o tamanho da lista.
 
 \subsection{Algoritmo bBinRec}
 
@@ -94,11 +96,19 @@ int bBinRec(vector<int> &lista,int esq, int dir, int x ){
 
 \subsection{Análise do bBinRec}
 
-É possível reparar que a função é diferente da \textbf{bBinRec} pois chama a si mesma em cada passo. Cada chamada reduz o intervalo de busca, mas em vez de usar um loop, ela continua chamando a função com novos valores de esq e dir até encontrar o elemento ou esgotar as possibilidades.
+É possível reparar que a função é diferente da \textbf{buscaBinaria} pois chama a si mesma em cada passo. Cada chamada reduz o intervalo de busca, mas em vez de usar um loop, ela continua chamando a função com novos valores. Outra diferença é que a função \textbf{bBinRec} verifica lista[m] == x em cada chamada, permitindo que a função retorne imediatamente se o elemento for encontrado. Portanto, isso mudará a complexidade, tendo casos destintos, diferente do algoritmo anterior.
+Em suma teremos o seguinte:
+
+\begin{itemize}
+	\item \textbf{Melhor Caso:} $O(1)$ — o elemento está no meio na primeira chamada.
+	\item \textbf{Caso Médio:} $O(log n)$ — o elemento está em uma posição aleatória e requer, em média, log⁡2(n)log2​(n) divisões.
+	\item \textbf{Pior Caso:} $O(logn)$ — o elemento não está presente ou está no final da lista, e o algoritmo precisa dividir o intervalo até se esgotar.
+\end{itemize}
 
 \subsection{Resultados do bBinRec}
 
-A versão recursiva é mais rápida na prática, pois pode interromper o processo assim que encontra o elemento, sem precisar fazer verificações adicionais no intervalo.
+A versão recursiva é ligeiramente mais rápida na prática, pois pode interromper o processo assim que encontra o elemento, sem precisar fazer verificações adicionais no intervalo.
+Portanto, o algoritmo \textbf{bBinRec} teve a seguinte performace nos testes:
 
 \begin{table}[h!]
 	\centering
@@ -108,14 +118,30 @@ A versão recursiva é mais rápida na prática, pois pode interromper o process
 		\toprule
 		Lista   & n = 100   & n = 1000  & n = 10000 \\
 		\midrule
-		L1      & x ps    & x ps    & x ns  \\
-		L2      & x ps    & x ps    & x ns  \\
-		L3      & x ps    & x ps    & x ns  \\
-		L4      & x ps    & x ps    & x ns  \\
-		L5      & x ps    & x ps    & x ns  \\
+		L1      & 80 ps    & 60 ps    & 70 ps  \\
+		L2      & 40 ps    & 51 ps    & 71 ps  \\
+		L3      & 60 ps    & 50 ps    & 50 ps  \\
+		L4      & 50 ps    & 50 ps    & 60 ps  \\
+		L5      & 50 ps    & 50 ps    & 60 ps  \\
 		\midrule
-		Médias  & x ps  & x ps  & x ns \\
+		Médias  & 56 ps  & 52.2 ps  & 62.2 ps \\
 		\bottomrule
 	\end{tabular}
 \end{table}
+
+Novamente, perceptivel que a Lista 1 com 100 números foi um outlier em nossa tabela, alterando o valor da média drasticamente tornando-a atípica. Entretanto podemos ver como nos outros casos o tempo é crescente levando em conta o tamanho da lista.
+
+\subsection{Comparação dos algoritmos}
+
+É possível perceber que o \textbf{bBinRec} performa melhor em todos os testes. De forma mais específica
+
+\begin{itemize}
+  \item \textbf{n = 100:} A média de \textbf{buscaBinaria} é de 90 ps, enquanto a de \textbf{bBinRec} é de 56 ps.
+
+  \item \textbf{n = 10000:} Já nesse, caso \textbf{buscaBinaria} apresenta média de 66,2 ps, enquanto \textbf{bBinRec} apresenta 52,2 ps.
+
+  \item \textbf{n = 100000:} Por fim, \textbf{buscaBinaria} tem 110.4 ps de média. Já \textbf{bBinRec}, 62,2 ps.
+\end{itemize}
+
+Portanto, ao colocar os resultados dos algoritmos lado a lado fica evidente que a implementação de \textbf{bBinRec} se sobressai.
 \newpage

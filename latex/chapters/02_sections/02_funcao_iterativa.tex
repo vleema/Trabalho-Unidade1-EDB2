@@ -26,7 +26,7 @@ bool idadeRep(vector<int> &idade) {
 }
 \end{lstlisting}
 
-\subsection{Análise}
+\subsection{Análise do idadeRep}
 
 Note que o primeiro loop é inevitável independente do quão favorável seja a caso, e percorrerá a lista por inteira. Apenas no segundo loop que operações podem ser evitadas a depender da lista, pois o retorno de um valor encerra o programa. Além disso, perceba que a implementação acima pode ser visualizada da seguinte forma
 
@@ -38,13 +38,52 @@ Note que o primeiro loop é inevitável independente do quão favorável seja a 
 
 Sendo assim, temos que $O(n)$, $\Omega(n)$ e $\Theta(n)$.
 
-\subsection{Resultados dos testes}
+\subsection{Resultados do idadeRep}
 
+Portanto, o algoritmo \textbf{idadeRep} se saiu da seguinte forma nos testes
 
 \begin{table}[h!]
 	\centering
 	\caption{Tabela de resultados de idadeRep}
-	\label{tab:perf_result}
+	\label{tab:idade_rep_result}
+	\begin{tabular}{lrrrr}
+		\toprule
+		Lista   & n = 100   & n = 1000  & n = 10000 \\
+		\midrule
+		L1      & 431 ps    & 611 ps    & 3.837 ns  \\
+		L2      & 200 ps    & 521 ps    & 3.236 ns  \\
+		L3      & 251 ps    & 500 ps    & 3.186 ns  \\
+		L4      & 160 ps    & 491 ps    & 3.086 ns  \\
+		L5      & 130 ps    & 531 ps    & 3.346 ns  \\
+		\midrule
+		Médias  & 234.4 ps  & 530.8 ps  & 3.3382 ns \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Algoritmo idadeRep2}
+
+Já o algoritmo \textbf{idadeRep2} foi implementado da seguinte maneira 
+
+\begin{lstlisting}[language=C++]
+bool idadeRep2(vector<int> &idade) {
+  sort(idade.begin(), idade.end());
+  return idade[0] == idade[1];
+}
+\end{lstlisting}
+
+\subsection{Análise do idadeRep2}
+
+É possível reparar que a função é relativamente mais enxuta em relação à \textbf{idadeRep2}, isso pois sua estratégia para o mesmo fim é diferente. A \textbf{idadeRep2} usa uma abordagem que, em um primeiro momento, ordena a lista, e, com ela ordenada, verifica se os dois primeiros elementos são iguais. E de fato, se o objetivo é verificar se o menor elemento da lista se repete, esta se mostra resolutiva para o problema. \\
+Agora note que, em termos de complexidade, o algoritmo se apoia totalmente na função \textbf{sort} da biblioteca std do C++.
+
+%TODO: citar a documentação
+\subsection{Resultados do idadeRep2}
+
+\begin{table}[h!]
+	\centering
+	\caption{Tabela de resultados de idadeRep}
+	\label{tab:idade_rep_result}
 	\begin{tabular}{lrrrr}
 		\toprule
 		Lista   & n = 100   & n = 1000  & n = 10000 \\

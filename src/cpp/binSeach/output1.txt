@@ -1,52 +1,52 @@
 buscaBinaria
    n=100
-      List-1 done in 1.417ns.
-      List-2 done in 1.094ns.
-      List-3 done in 1.134ns.
-      List-4 done in 927ps.
-      List-5 done in 993ps.
-   Average: 1.113ns.
+      List-1 done in 190ps.
+      List-2 done in 80ps.
+      List-3 done in 80ps.
+      List-4 done in 50ps.
+      List-5 done in 50ps.
+   Average: 90ps.
 
    n=1000
-      List-1 done in 1.317ns.
-      List-2 done in 1.442ns.
-      List-3 done in 1.302ns.
-      List-4 done in 1.162ns.
-      List-5 done in 1.118ns.
-   Average: 1.2682ns.
+      List-1 done in 51ps.
+      List-2 done in 70ps.
+      List-3 done in 70ps.
+      List-4 done in 80ps.
+      List-5 done in 60ps.
+   Average: 66.2ps.
 
    n=10000
-      List-1 done in 1.225ns.
-      List-2 done in 541ps.
-      List-3 done in 828ps.
-      List-4 done in 400ps.
-      List-5 done in 811ps.
-   Average: 761ps.
+      List-1 done in 141ps.
+      List-2 done in 110ps.
+      List-3 done in 101ps.
+      List-4 done in 100ps.
+      List-5 done in 100ps.
+   Average: 110.4ps.
 
 
 bBinRec
    n=100
-      List-1 done in 175ps.
-      List-2 done in 179ps.
-      List-3 done in 166ps.
-      List-4 done in 211ps.
-      List-5 done in 218ps.
-   Average: 189.8ps.
+      List-1 done in 80ps.
+      List-2 done in 40ps.
+      List-3 done in 60ps.
+      List-4 done in 50ps.
+      List-5 done in 50ps.
+   Average: 56ps.
 
    n=1000
-      List-1 done in 196ps.
-      List-2 done in 167ps.
-      List-3 done in 205ps.
-      List-4 done in 215ps.
-      List-5 done in 232ps.
-   Average: 203ps.
+      List-1 done in 60ps.
+      List-2 done in 51ps.
+      List-3 done in 50ps.
+      List-4 done in 50ps.
+      List-5 done in 50ps.
+   Average: 52.2ps.
 
    n=10000
-      List-1 done in 191ps.
-      List-2 done in 203ps.
-      List-3 done in 210ps.
-      List-4 done in 250ps.
-      List-5 done in 211ps.
-   Average: 213ps.
+      List-1 done in 70ps.
+      List-2 done in 71ps.
+      List-3 done in 50ps.
+      List-4 done in 60ps.
+      List-5 done in 60ps.
+   Average: 62.2ps.
 
 

@@ -220,15 +220,15 @@ Estando em `src/cpp`, compile e execute `<algoritmo>/main.cpp`. A saída estará
 
 ## 2. Fase de análise de algoritmo
 
-- [ ] 2.0 Descreva o ambiente computacional utilizado (Software e Hardware).
+- [x] 2.0 Descreva o ambiente computacional utilizado (Software e Hardware).**(Bibs)**
 - [x] 2.1 Função iterativa
   - [x] 2.1.A Implemente os códigos idadeRep e idadeRep2, vistos em sala de aula. **(Oaks)**
   - [x] 2.1.B Crie instâncias aleatórias com idades (inteiros) variando entre 0 e 100, com tamanhos n=100, n=1.000, n=10.000. **(Oaks)**
   - [x] 2.1.C Compute os tempos de processamento e compare com os resultados da análise assintótica vista em sala. **(Oaks)**
 - [x] 2.2 Função recursiva
-  - [x] 2.2.A Implemente os códigos buscaBinaria e bBinRec, vistos em sala de aula.
-  - [x] 2.2.B Crie instâncias aleatórias com idades (inteiros) variando entre 0 e 100, com tamanhos n=100, n=1.000, n=10.000.
-  - [x] 2.2.C Compute os tempos de processamento e compare com os resultados da análise assintótica vista em sala.
+  - [x] 2.2.A Implemente os códigos buscaBinaria e bBinRec, vistos em sala de aula. **(Bibs)**
+  - [x] 2.2.B Crie instâncias aleatórias com idades (inteiros) variando entre 0 e 100, com tamanhos n=100, n=1.000, n=10.000 **(Bibs)**
+  - [x] 2.2.C Compute os tempos de processamento e compare com os resultados da análise assintótica vista em sala.**(Bibs)**
 - [x] 2.3 Implemente os algoritmos de ordenação baseados nos pseudocódigos que você sugeriu nos itens 1.A, 1.B e 1.C, em suas versões iterativa e recursiva. **(Lims)**
 - [x] 2.4 Crie listas aleatórias, com inteiros variando entre 0 e 1000, de tamanho 1.000, 10.000 e 100.000(salve as listas em arquivo txt). **(Lims)**
 - [x] 2.5 Execute os algoritmos de ordenação (BubbleSort, MergeSort e QuickSort, iterativo e recursivo) nas listas, salve o resultado da lista ordenada em um arquivo txt, e compute o tempo de processamento para cada caso. Faça o tabelamento dos resultados, e realize uma análise detalhada. Esta análise deve constar no arquivo PDF enviado. **(Lims)**
@@ -241,15 +241,15 @@ Estando em `src/cpp`, compile e execute `<algoritmo>/main.cpp`. A saída estará
 - [x] 1.1 marina @
 - [x] 1.2 lime, oaks
 - [x] 1.3 marina @
-- [ ] 2.0 bianca
-- [ ] 2.1
-  - [ ] 2.1.A oaks
-  - [ ] 2.1.B oaks
-  - [ ] 2.1.c oaks
-- [ ] 2.2
-  - [ ] 2.2.A bianca
-  - [ ] 2.2.B bianca
-  - [ ] 2.2.C bianca
+- [x] 2.0 bianca
+- [x] 2.1
+  - [x] 2.1.A oaks
+  - [x] 2.1.B oaks
+  - [x] 2.1.c oaks
+- [x] 2.2
+  - [x] 2.2.A bianca
+  - [x] 2.2.B bianca
+  - [x] 2.2.C bianca
 - [x] 2.3 lime
 - [x] 2.4 lime
 - [x] 2.5 lime

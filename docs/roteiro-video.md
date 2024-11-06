@@ -1,0 +1,10 @@
+- Os integrantes
+- IDE: Neovim né papai
+- Sobre o repositório
+  - latex
+    - Como compilar o documento
+  - c++
+  - rust
+  - README - Lista de atividades
+- BinSearch e IdadeRep
+- Implementação dos sorts

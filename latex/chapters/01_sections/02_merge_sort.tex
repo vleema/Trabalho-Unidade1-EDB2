@@ -1,4 +1,4 @@
-% \section{Merge Sort}
+\section{Merge Sort}
 \label{sec:merge-sort-teo}
 
 Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o \textit{Merge Sort} é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sublistas ordenadas até que exista apenas uma sublista, esta sublista é a lista original ordenada. Imagine o seguinte caso:
@@ -51,11 +51,11 @@ E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se apro
 		\State {índiceEsq $\gets$ {$1$}}
 		\Comment index inicial da sub-lista à esquerda
 
-		\For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $*$ tamanhoListas}
+		\For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $\cdot$ tamanhoListas}
 
-		\For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $*= 2$ $*$ tamanhoListas}
+		\For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $\cdot= 2$ $\cdot$ tamanhoListas}
 		\State {meio $\gets$ índiceEsquerda $+$ tamanhoListas $-$ $1$}
-		\State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $*$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
+		\State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $\cdot$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
 		\State {$merge$(lista, índiceEsq, meio, fimDireita)}
 		\EndFor
 		\EndFor
@@ -117,17 +117,17 @@ Dito isso, construímos o pseudocódigo dessa função da seguinte forma:
 		\Ensure{A \textbf{listaResultado} ordenada com os elementos da \textbf{listaEsquerda} e \textbf{listaDireita}}
 		\Statex
 		\Function{Merge}{$\mathbf{listaEsquerda}$, $\mathbf{listaDireita}$}
-		\State $E, D, R = 0$ \Comment Esses serão os indexadores de cada lista
+		\State $E, D, R \gets 0$ \Comment Esses serão os indexadores de cada lista
 		\State $\mathbf{listaResultado} = 0, 0,\ldots, 0$
 		\While{$E < N$ e $D < M$}
 		\If{\textbf{listaEsquerda}(E) < \textbf{listaDireita}(D)}
 		\State $\mathbf{listaResultado}(R).push(\mathbf{listaDireita}(D)$)
-		\State $E = E + 1$ \Comment Partimos para o próximo elemento
+		\State $E \gets E + 1$ \Comment Partimos para o próximo elemento
 		\Else
 		\State $\mathbf{listaResultado}(R).push(\mathbf{listaEsquerda}(D)$)
-		\State $D = D + 1$
+		\State $D \gets D + 1$
 		\EndIf
-		\State $R = R + 1$
+		\State $R \gets R + 1$
 		\EndWhile
 		\State $\rhd \text{ Como uma das listas vai esgotar primeiro que a outra, copiamos os elementos}$
 		\State $\text{restantes para a }\mathbf{listaResultado}$
@@ -150,9 +150,8 @@ Observando a estrutura do \href{algo:merge_sort_it_pseudo}{pseudocódigo} dessa 
 
 \begin{algorithm}
 	\begin{algorithmic}[0]
-		\For{$i \gets 1 ; i <= n - 1 ; i=i*2$}
-
-		\For{$j \gets 0 ; j < n - 1 ; j+=i*2$}
+		\For{$i \gets 1 ; i \leq n - 1 ; i = i \cdot 2$}
+		\For{$j \gets 0 ; j < n - 1 ; j += i \cdot 2$}
 
 		\State {$Merge()$}
 		\EndFor
@@ -161,7 +160,6 @@ Observando a estrutura do \href{algo:merge_sort_it_pseudo}{pseudocódigo} dessa 
 \end{algorithm}
 
 Além disso, a versão iterativa usa uma abordagem inversa em relação à recursiva, isso pois a manipulação de índices faz com que a lista já comece "quebrada", faltando apenas ordenar as pequenas sub-listas entre si e mesclá-las. Sendo assim, apesar dos processos ocorrerem simultaneamente, podemos separar análise de complexidade da versão iterativa em duas partes: Reconstrução em sub-listas maiores e mesclagem ordenada das sub-listas.\\
-
 Uma vez a lista começando completamente "quebrada", ou seja, com \textbf{n} sub-listas unitárias, o primeiro passo é transformá-las em \textbf{$\frac{n}{2}$} pares, e em seguida em \textbf{$\frac{n}{4}$} quartetos, até virarem uma única lista de tamanho \textbf{n}.
 
 \begin{align*}
@@ -177,11 +175,11 @@ Quebradas as sub-listas, como no primeiro loop as listas são unitárias, a orde
 Analisadas as complexidades dos dois processos, como a mescla vai acontecer de acordo com quantas reconstruções da lista forem necessárias. Batas multiplicar as complexidades individuais para obter a complexidade total do algoritmo.
 
 \begin{align*}
-  T(n) & = O(n) * O(\log_2{n})\\ 
-       & = O(n*\log_2{n})
+  T(n) & = O(n) \cdot O(\log_2{n})\\ 
+       & = O(n \cdot \log_2{n})
 \end{align*}
 
-Analisado da perspectiva do pior caso, perceba que mesmo se tratando de uma lista já ordenada ainda sim será necessário quebrá-la e reconstruí-la tal qual uma desordenada. Sendo assim temos que a complexidade entre os cenários terá mesma ordem independente do quão perto ele seja o resultado final, ou seja, $O(\log_2{n})$, $\Omega(\log_2{n})$, $\Theta(\log_2{n})$.
+Analisado da perspectiva do pior caso, perceba que mesmo se tratando de uma lista já ordenada ainda sim será necessário quebrá-la e reconstruí-la tal qual uma desordenada. Sendo assim temos que a complexidade entre os cenários terá mesma ordem independente do quão perto ele seja o resultado final, ou seja, $O(n \cdot \log_2{n})$, $\Omega(n \cdot \log_2{n})$, $\Theta(n \cdot \log_2{n})$.
 
 \subsubsection{Análise da versão recursiva}
 
@@ -198,6 +196,7 @@ Analisando o corpo da função, teremos dois casos: caso o tamanho da lista ($n$
 
 No primeiro caso, é facil de ver que a complexidade da função para uma lista de qualquer tamanho é constante, ou seja, $O(1)$, $\Theta(1)$ e $\Omega(1)$. Caso contrário, observa-se que a função chama a si mesmo duas vezes, uma para cada metade da lista. Ademais, a função \textit{Merge}, com complexidade linear para qualquer entrada, é chamada em cada etapa recursiva. Portanto, estabelecemos a relação de recorrência da \textit{Merge sort} recursiva como:
 
+
 \begin{align*}
 	T(n) =
 	\begin{cases}
@@ -206,7 +205,63 @@ No primeiro caso, é facil de ver que a complexidade da função para uma lista 
 	\end{cases}
 \end{align*}
 
-Uma vez estabelecida a relação de recorrência, vamos usar primeiro o método da \textbf{Árvore de recorrência}. Comecemos estabelecendo seu diagrama:
+Uma vez estabelecida a relação de recorrência, podemos analisar a complexidade da função pelos 4 métodos vistos no curso. Entretanto, antes de começar, note que a Merge sort se comporta da mesma maneira para todos os casos, o que facilita o nosso cálculo de complexidade a seguir pelo método da \textbf{Substituição}.
+
+Primeiramente, queremos demonstrar $T(n) \geq n \cdot \log_2 n$, para encontrar a complexidade na notação $\Omega$, que será equivalente as outras. Por indução no $n$, teremos:
+
+% TODO: Colocar num enumerate
+\begin{itemize}
+  \item Caso $n = 1$:
+    \begin{adjustwidth}{1em}{}
+      Temos que:
+      \begin{align*}
+        T(1) = 1 \text{ \& } n \cdot \log_2 1 = 0
+      \end{align*}
+      Logo $T(1) \geq n \cdot \log_2 1$.
+    \end{adjustwidth}
+  \item Caso $n = k + 1$, para algum $k \in \mathbb{N}$:
+    \begin{adjustwidth}{1em}{}
+      Suponha que $T(n) \geq n \cdot \log_2 n$ (hipótese de indução). Calculemos:
+      \begin{align*}
+        T(n + 1) &= 2T\left(\frac{n + 1}{2}\right) + O(n) \\
+                 &\geq 2 \cdot \frac{n + 1}{2} \cdot \log_2 \left(\frac{n + 1}{2}\right) + O(n) && \text{(hipótese de indução e função crescente)}\\
+                 &= (n + 1)(\log_2 (n + 1) - 1) + O(n) \\
+                 &= (n + 1)\log_2 (n + 1)) - n + 1 + O(n) \\
+                 &\geq (n + 1)\log_2 (n + 1)
+      \end{align*}
+      Dessa forma $T(n + 1) \geq (n + 1)\log_2 (n + 1)$.
+    \end{adjustwidth}
+\end{itemize}
+
+
+Pelo método da \textbf{Iteração}, expandimos a recorrência até um padrão ser identificado:
+
+\begin{align*}
+  T(n) &=  2T\left(\frac{n}{2}\right) + n \\
+       &= 4T\left(\frac{n}{2}\right) + 2n \\
+       &= 8T\left(\frac{n}{2}\right) + 4n \\
+       &\vdots \\
+       &= 2^iT\left(\frac{n}{2^i}\right) + in \\
+\end{align*}
+
+Dessa forma, agora identificamos o caso base da relação a partir de:
+
+\begin{align*}
+  \frac{n}{2^i} = 1 &\Longrightarrow n = 2^i \\
+                    &\Longrightarrow \log_2 n = i
+\end{align*}
+
+Substituímos, temos que:
+
+\begin{align*}
+                                                              &= n \cdot T(1) + n \cdot \log_2 n \\
+                                                              &= n + n \cdot \log_2 n 
+\end{align*}
+
+Portanto, a complexidade do merge sort se mantém consistente com os outros métodos e é $n \cdot \log_2 n$ nas notações assintóticas.
+
+Ademais, também vamos usar o método da \textbf{Árvore de recorrência} para verificar o mesmo resultado. Comecemos estabelecendo a árvore de recursão:
+
 
 \[\begin{tikzcd}[sep=small]
 		&&&& {T(n)} \\

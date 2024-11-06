@@ -31,18 +31,18 @@ int buscaBinaria(vector<int> &lista, int tamanho, int x) {
 
 \subsection{Análise do buscaBinaria}
 
-Note que o loop tem a condição de parada (esq < dir), o que significa que ele só irá terminar quando sobrar somente um valor possível na lista. Portanto, independente do quão favorável seja o caso, ele não irá verificar se lista[m] é o valor que está tentando encontrar, assim executado o loop aproximadamente log₂(tamanho) vezes em todos os casos. Perceba que o algoritmo necessita de melhorias para funcionar de forma que a posição do número buscado seja influente na complexidade do código. Portanto, o loop se comportará da seguinte maneira:
+Note que o loop tem a condição de parada (esq < dir), o que significa que ele só irá terminar quando sobrar somente um valor possível na lista. Portanto, independente do quão favorável seja o caso, ele não irá verificar se lista[m] é o valor que está tentando encontrar, assim executado o loop aproximadamente $\log_ 2(\text{tamanho})$ vezes em todos os casos. Perceba que o algoritmo necessita de melhorias para funcionar de forma que a posição do número buscado seja influente na complexidade do código. Portanto, o loop se comportará da seguinte maneira:
 
 \begin{align*}
         n/2^k = 1 
        => n = 2^k
-       => k = log₂ n
+       => k = \log_2 n
 \end{align*}
 
 Em suma teremos o seguinte
 
 \begin{itemize}
-	\item \textbf{Casos:} Dado que o loop inevitávelmente rodará log₂(tamanho) vezes independente do cenário da lista, todos os casos terão a mesma complexidade.
+  \item \textbf{Casos:} Dado que o loop inevitávelmente rodará $\log_2 ({tamanho})$ vezes independente do cenário da lista, todos os casos terão a mesma complexidade.
  
 \end{itemize}
 
@@ -99,8 +99,8 @@ Em suma teremos o seguinte:
 
 \begin{itemize}
 	\item \textbf{Melhor Caso:} $O(1)$ — o elemento está no meio na primeira chamada.
-	\item \textbf{Caso Médio:} $O(log n)$ — o elemento está em uma posição aleatória e requer, em média, log⁡2(n)log2​(n) divisões.
-	\item \textbf{Pior Caso:} $O(logn)$ — o elemento não está presente ou está no final da lista, e o algoritmo precisa dividir o intervalo até se esgotar.
+	\item \textbf{Caso Médio:} $O(\log_2 n)$ — o elemento está em uma posição aleatória e requer, em média, $\log_2 n$ divisões.
+	\item \textbf{Pior Caso:} $O(\log_2 n)$ — o elemento não está presente ou está no final da lista, e o algoritmo precisa dividir o intervalo até se esgotar.
 \end{itemize}
 
 \subsection{Resultados do bBinRec}

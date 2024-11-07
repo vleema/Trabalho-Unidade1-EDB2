@@ -35,8 +35,8 @@ Note que o loop tem a condição de parada (esq < dir), o que significa que ele 
 
 \begin{align*}
         n/2^k = 1 
-       => n = 2^k
-       => k = \log_2 n
+       \Longrightarrow n = 2^k
+       \Longrightarrow k = \log_2 n
 \end{align*}
 
 Em suma teremos o seguinte
@@ -94,7 +94,7 @@ int bBinRec(vector<int> &lista,int esq, int dir, int x ){
 
 \subsection{Análise do bBinRec}
 
-É possível reparar que a função é diferente da \textbf{buscaBinaria} pois chama a si mesma em cada passo. Cada chamada reduz o intervalo de busca, mas em vez de usar um loop, ela continua chamando a função com novos valores. Outra diferença é que a função \textbf{bBinRec} verifica lista[m] == x em cada chamada, permitindo que a função retorne imediatamente se o elemento for encontrado. Portanto, isso mudará a complexidade, tendo casos destintos, diferente do algoritmo anterior.
+É possível reparar que a função é diferente da \textbf{buscaBinaria} pois chama a si mesma em cada passo. Cada chamada reduz o intervalo de busca, mas em vez de usar um loop, ela continua chamando a função com novos valores. Outra diferença é que a função \textbf{bBinRec} verifica \texttt{lista[m] == x} em cada chamada, permitindo que a função retorne imediatamente se o elemento for encontrado. Portanto, isso mudará a complexidade, tendo casos destintos, diferente do algoritmo anterior.
 Em suma teremos o seguinte:
 
 \begin{itemize}

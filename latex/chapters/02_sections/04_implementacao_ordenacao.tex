@@ -55,7 +55,7 @@ fn bubble_sort_pass<T: PartialOrd>(arr: &mut [T], iterator: usize, last_element_
 
 \subsubsection{Iterativo}
 
-Como o \textit{quick sort} naturalmente é um algoritmo recursivo, precisamos de algo que simulasse a pilha de execução do computador, esta simulação se deu a partir do uso da variável \texttt{stack} que armazena as posições das sub-listas que precisam ser ordenadas, permitindo a progressão iterativa da divisão da lógica de divisão e conquista.
+Como o Quick Sort é um algoritmo naturalmente recursivo, precisávamos de algo que simulasse a pilha de execução do computador, esta simulação se deu a partir do uso da variável \texttt{stack} que armazena as posições das sub-listas que precisam ser ordenadas, permitindo a progressão iterativa da divisão da lógica de divisão e conquista.
 
 \begin{lstlisting}[language=Rust]
 pub fn iterative_quick_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
@@ -112,7 +112,7 @@ fn _recursive_quick_sort<T: PartialOrd + Copy>(
 
 \subsubsection{Função auxiliar}
 
-Note que ambas as versões do \textit{quick sort} utilizam a função auxiliar \texttt{partition}. Essa função seleciona o último elemento como pivô e rearranja a lista, de modo que todos os elementos menores que o pivó estejam na esquerda e os maiores ou iguais ao pivô na direita. Ao final, ela retorna o índice do pivô após a partição.
+Note que ambas as versões do Quick Sort utilizam a função auxiliar \texttt{partition}. Essa função seleciona o último elemento como pivô e rearranja a lista, de modo que todos os elementos menores que o pivó estejam na esquerda e os maiores ou iguais ao pivô na direita. Ao final, ela retorna o índice do pivô após a partição.
 Os parâmetros \texttt{lower\_bound}, \texttt{upper\_bound} são os índices do elemento inicial e final do slice a ser particionado.
 
 \begin{lstlisting}[language=Rust]
@@ -136,7 +136,7 @@ fn partition<T: PartialOrd + Copy>(arr: &mut [T], lower_bound: usize, upper_boun
 
 \subsubsection{Iterativo}
 
-Novamente, como o \textit{merge sort} naturalmente é um algoritmo recursivo, foi necessário simular a pilha de execução do computador. Primeiro, começamos com pequenos segmentos da lista (de tamanho 1) e iterativamente dobramos o tamanho dos segmentos a cada passo, mesclando-os.
+Novamente, como o Merge Sort naturalmente é um algoritmo recursivo, foi necessário simular a pilha de execução do computador. Primeiro, começamos com pequenos segmentos da lista (de tamanho 1) e iterativamente dobramos o tamanho dos segmentos a cada passo, mesclando-os.
 
 \begin{lstlisting}[language=Rust]
 pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
@@ -162,7 +162,7 @@ pub fn iterative_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
 
 \subsubsection{Recursivo}
 
-A principal diferença em relação \href{algo:merge_sort_pseudo}{pseudo código}, é que a agora a função edita diretamente a lista, em vez de retorna-la como resultado.
+A principal diferença em relação ao pseudo código, é que a agora a função edita diretamente a lista, em vez de retorna-la como resultado.
 
 \begin{lstlisting}[language=Rust]
 pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
@@ -181,7 +181,7 @@ pub fn recursive_merge_sort<T: PartialOrd + Copy>(arr: &mut [T]) {
 
 \subsubsection{Função auxiliar}
 
-E a \textit{merge} também foi alterada de forma parecida, de forma que receba como argumento a lista resultado (\texttt{arr}).
+E a Merge também foi alterada de forma parecida, de forma que receba como argumento a lista resultado (\texttt{arr}).
 
 \begin{lstlisting}[language=Rust]
 fn merge<T: PartialOrd + Copy>(arr: &mut [T], left_arr: &[T], right_arr: &[T]) {

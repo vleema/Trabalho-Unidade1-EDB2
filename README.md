@@ -1,3 +1,9 @@
+# Vídeo Solicitado
+
+[Assista ao vídeo](https://youtu.be/X89q_bglkBM?si=6n23mbHYoRGcA9je) para entender o funcionamento do projeto.
+
+> **Observação:** No momento do vídeo onde se fala sobre as implementações em rust, foi omitida uma etapa importante que está descrita no tópico 2.4 do nosso trabalho. Basicamente, em rust tem duas formas de rodar. No "cargo run" ele testa a performance e gera as listas com diversas entradas. Já o "cargo test" ele vê com as funções de test se estão funcionando própriamente.
+
 # Sobre o repositório
 
 ## $\LaTeX$
@@ -43,6 +49,8 @@ clang++ -O3 binSearch/main.cpp
 ```
 
 Um arquivo chamado `output.txt` vai ser criado na pasta atual.
+
+> **Observação:** A flag "-03" é colocada para compilar em maximum performance. Se ela estiver ocasionando erros na sua máquina é possivel compilar sem a flag.
 
 # Lista de atividades dos colaboradores
 

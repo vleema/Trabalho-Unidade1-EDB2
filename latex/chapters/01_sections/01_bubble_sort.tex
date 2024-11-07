@@ -42,7 +42,7 @@ Dessa forma, estabelecemos o pseudocódigo de sua versão iterativa como:
 		\Function{BubbleSort}{$A$}
 		\For{$j \gets 1$ to $n - 1$}
 		\For{$i \gets 0$ to $n - 2$}
-		\If{$A[i] > A[i + 1]$}
+		\If {$A[i] > A[j + 1]$}
 		\State \textbf{troque} $i$ por $j$ em $A$
 		\EndIf
 		\EndFor
@@ -54,7 +54,7 @@ Dessa forma, estabelecemos o pseudocódigo de sua versão iterativa como:
 
 \subsection{Bubble Sort Recursivo}
 
-Quando uma lista tem no máximo $1$ elemento, ela com certeza está ordenada, então esse será o caso base. Para a etapa recursiva, pelo teorema da recursão podemos assumir que a função já "borbulhou" todos os $n - 1$ maiores elementos da lista para o final. Então, basta colocar o primeiro elemento em sua posição:
+Para sua versão recursiva, vamos analisar o algoritmo em dois casos. Quando uma lista tem no máximo $1$ elemento, ela está ordenada, então esse será o caso base. Para o caso recursivo, pelo teorema da recursão podemos assumir que a função já "borbulhou" todos os $n - 1$ maiores elementos da lista para o final. Então, basta colocar o primeiro elemento em sua posição:
 
 \begin{algorithm}
 	\caption{Bubble Sort Recursivo}
@@ -96,7 +96,7 @@ O segundo laço possui \( n-1 \) iterações, mas como ele está interno ao prim
 
 
 \subsubsection{Análise da versão recursiva}
-Note que assim como na versão iterativa do \textit{bubble sort}, a função percorre a lista a ser ordenada $n$ vezes e logo é chamada novamente para o tamanho $n - 1$. Como haverá $n - 1$ chamadas até que chegue no caso base, em que $n \leq 1$, estabelecemos a relação de recorrência do \textit{bubble sort} como:
+Note que assim como na versão iterativa do Bubble Sort, a função percorre a lista a ser ordenada $n$ vezes e logo é chamada novamente para o tamanho $n - 1$. Como haverá $n - 1$ chamadas até que chegue no caso base, em que $n \leq 1$, estabelecemos a relação de recorrência do Bubble Sort como:
 $$
 	T(n) = T(n - 1) + n
 $$

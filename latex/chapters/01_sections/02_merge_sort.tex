@@ -1,7 +1,7 @@
 \section{Merge Sort}
 \label{sec:merge-sort-teo}
 
-Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o \textit{Merge Sort} é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sublistas ordenadas até que exista apenas uma sublista, esta sublista é a lista original ordenada. Imagine o seguinte caso:
+Desenvolvido por \href{https://en.wikipedia.org/wiki/John_von_Neumann}{Jon Von Neumann} em 1945, o Merge Sort é um algoritmo de \href{https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm}{dividir para conquistar}, que subdivide uma lista em singletons e os mescla em sub-listas ordenadas até que exista apenas uma sub-lista, esta sub-lista é a lista original ordenada. Imagine o seguinte caso:
 
 Você tem um baralho de cartas e gostaria de organizá-lo, seguindo o conceito do \textit{Merge Sort} você trabalha da seguinte forma:
 \begin{itemize}
@@ -51,12 +51,12 @@ E em contraste com a abordagem anterior, a forma iterativa do Merge Sort se apro
 		\State {índiceEsq $\gets$ {$1$}}
 		\Comment index inicial da sub-lista à esquerda
 
-		\For {tamanhoListas <= tamanho \textbf{lista} ; tamanhoListas $= 2$ $\cdot$ tamanhoListas}
+		\For {tamanhoListas $\leq$ tamanho(\textbf{lista}) ; tamanhoListas $= 2$ $\cdot$ tamanhoListas}
 
-		\For {índiceEsq $<$ tamanho \textbf{lista} $-$ $1$ ; índiceEsq $\cdot= 2$ $\cdot$ tamanhoListas}
+		\For {índiceEsq $<$ tamanho(\textbf{lista}) $-$ $1$ ; índiceEsq $\cdot= 2$ $\cdot$ tamanhoListas}
 		\State {meio $\gets$ índiceEsquerda $+$ tamanhoListas $-$ $1$}
 		\State {fimDireita $\gets$ mínimo(índiceEsq $+$ $2$ $\cdot$ tamanhoListas, tamanho \textbf{lista} $-$ $1$)}
-		\State {$merge$(lista, índiceEsq, meio, fimDireita)}
+		\State {$Merge$(lista, índiceEsq, meio, fimDireita)}
 		\EndFor
 		\EndFor
 		\EndFunction
@@ -142,7 +142,7 @@ Dito isso, construímos o pseudocódigo dessa função da seguinte forma:
 \subsection{Análise de complexidade}
 \label{anal:merge_sort}
 
-Para analisar qual é a complexidade de tempo da \textbf{Merge sort}, nas suas duas versões, vamos estabelecer primeiro qual é a complexidade da função \textbf{Merge}. A partir do \href{algo:merge_aux_pseudo}{pseudocódigo} da função, é facil de ver que durante sua execução ela sempre vai percorrer o tamanho máximo entre a \textbf{listaEsquerda} e \textbf{listaDireita}, portanto, sua complexidade na notação de complexidade assintótica é $O(n)$, $\Theta(n)$ e $\Omega(n)$ para um tamanho de lista $n$.
+Para analisar qual é a complexidade de tempo da Merge sort, nas suas duas versões, vamos estabelecer primeiro qual é a complexidade da função \textbf{Merge}. A partir do \href{algo:merge_aux_pseudo}{pseudocódigo} da função, é facil de ver que durante sua execução ela sempre vai percorrer o tamanho máximo entre a \textbf{listaEsquerda} e \textbf{listaDireita}, portanto, sua complexidade na notação de complexidade assintótica é $O(n)$, $\Theta(n)$ e $\Omega(n)$ para um tamanho de lista $n$.
 
 \subsubsection{Análise da versão iterativa}
 
@@ -158,28 +158,38 @@ Observando a estrutura do \href{algo:merge_sort_it_pseudo}{pseudocódigo} dessa 
 		\EndFor
 	\end{algorithmic}
 \end{algorithm}
+\FloatBarrier
 
-Além disso, a versão iterativa usa uma abordagem inversa em relação à recursiva, isso pois a manipulação de índices faz com que a lista já comece "quebrada", faltando apenas ordenar as pequenas sub-listas entre si e mesclá-las. Sendo assim, apesar dos processos ocorrerem simultaneamente, podemos separar análise de complexidade da versão iterativa em duas partes: Reconstrução em sub-listas maiores e mesclagem ordenada das sub-listas.\\
-Uma vez a lista começando completamente "quebrada", ou seja, com \textbf{n} sub-listas unitárias, o primeiro passo é transformá-las em \textbf{$\frac{n}{2}$} pares, e em seguida em \textbf{$\frac{n}{4}$} quartetos, até virarem uma única lista de tamanho \textbf{n}.
+Além disso, a versão iterativa já começa com as sub-listas divididas em singletons a partir, restando apenas mesclar cada segmento e incrementar o seu tamanho.
+
+\begin{algorithm}
+	\begin{algorithmic}[0]
+		\State $\text{tamanhoListas} \gets 1$
+		\While{tamanhoListas $\leq$ tamanho(\textbf{lista}) ; tamanhoListas $= 2 \cdot$ tamanhoListas}
+		\State ...
+		\EndWhile
+	\end{algorithmic}
+\end{algorithm}
+
+Sendo assim, apesar dos processos ocorrerem simultaneamente, podemos separar análise de complexidade da versão iterativa em duas partes: Reconstrução em sub-listas maiores e mesclagem ordenada das sub-listas.
+
+Com a lista começando com \textbf{n} sub-listas unitárias, o primeiro passo é transformá-las em \textbf{$\frac{n}{2}$} pares, e em seguida em \textbf{$\frac{n}{4}$} quartetos, e depois em \textbf{$\frac{n}{8}$} oitavos, até obtermos uma única lista de tamanho \textbf{n}. 
+
+Em cada iteração, o número de sublistas é dividido por 2, ou seja, o número de sublistas na iteração $i$ é dado por $\frac{n}{2^i}$. O processo continua até que haja apenas uma sublista restante, o que ocorre quando:
 
 \begin{align*}
-  T(n) = O(\log_2{n})
+  \frac{n}{2^i} = 1 &\Longrightarrow n = 2^i \\
+                    &\Longrightarrow \log_2 n = i
 \end{align*}
 
-Quebradas as sub-listas, como no primeiro loop as listas são unitárias, a ordenação acontece apenas em relação ao seu vizinho, formando pares. No segundo loop, a formação de quartetos implica na função merge ter que percorrer dois pares vizinhos a fim de achar o menor elemento, depois o par e a lista unitária a fim de achar o segundo menor, e é repetindo esse processo que a lista é mesclada em uma ordenada.
+Assim, o número total de iterações necessárias é $i = \log_2 n$. Como cada iteração envolve percorrer todas as sublistas para realizar as fusões, ou seja, a complexidade da função Merge, o custo de cada iteração é proporcional a \textbf{n}. Portanto, o tempo total de execução do algoritmo é:
 
 \begin{align*}
-  T(n) = O(n)
+	T(n) & = O(n) \cdot O(\log_2{n}) \\
+	     & = O(n \cdot \log_2{n})
 \end{align*}
 
-Analisadas as complexidades dos dois processos, como a mescla vai acontecer de acordo com quantas reconstruções da lista forem necessárias. Batas multiplicar as complexidades individuais para obter a complexidade total do algoritmo.
-
-\begin{align*}
-  T(n) & = O(n) \cdot O(\log_2{n})\\ 
-       & = O(n \cdot \log_2{n})
-\end{align*}
-
-Analisado da perspectiva do pior caso, perceba que mesmo se tratando de uma lista já ordenada ainda sim será necessário quebrá-la e reconstruí-la tal qual uma desordenada. Sendo assim temos que a complexidade entre os cenários terá mesma ordem independente do quão perto ele seja o resultado final, ou seja, $O(n \cdot \log_2{n})$, $\Omega(n \cdot \log_2{n})$, $\Theta(n \cdot \log_2{n})$.
+Analisando da perspectiva do pior caso, perceba que mesmo se tratando de uma lista já ordenada ainda sim será necessário sub-dividí-la e reconstruí-la tal qual uma desordenada. Sendo assim temos que a complexidade entre os cenários terá a mesma ordem independentemente do quão perto o algoritmos esteja do resultado desejado. Portanto, na notação assintótica a complexidade da Merge Sort iterativo é $O(n \cdot \log_2{n})$, $\Omega(n \cdot \log_2{n})$, $\Theta(n \cdot \log_2{n})$.
 
 \subsubsection{Análise da versão recursiva}
 
@@ -194,7 +204,7 @@ Analisando o corpo da função, teremos dois casos: caso o tamanho da lista ($n$
 \end{algorithm}
 \FloatBarrier
 
-No primeiro caso, é facil de ver que a complexidade da função para uma lista de qualquer tamanho é constante, ou seja, $O(1)$, $\Theta(1)$ e $\Omega(1)$. Caso contrário, observa-se que a função chama a si mesmo duas vezes, uma para cada metade da lista. Ademais, a função \textit{Merge}, com complexidade linear para qualquer entrada, é chamada em cada etapa recursiva. Portanto, estabelecemos a relação de recorrência da \textit{Merge sort} recursiva como:
+No primeiro caso, é fácil de ver que a complexidade da função para uma lista de qualquer tamanho é constante, ou seja, $O(1)$, $\Theta(1)$ e $\Omega(1)$. Caso contrário, observa-se que a função chama a si mesmo duas vezes, uma para cada metade da lista. Ademais, a função Merge, com complexidade linear para qualquer entrada, é chamada em cada etapa recursiva. Portanto, estabelecemos a relação de recorrência da Merge Sort recursiva como:
 
 
 \begin{align*}
@@ -212,51 +222,51 @@ Primeiramente, queremos demonstrar $T(n) \geq n \cdot \log_2 n$, para encontrar 
 % TODO: Colocar num enumerate
 
 \begin{itemize}
-  \item Caso $n = 1$:
-    \begin{adjustwidth}{1em}{}
-      Temos que:
-      \begin{align*}
-        T(1) = 1 \text{ \& } n \cdot \log_2 1 = 0
-      \end{align*}
-      Logo $T(1) \geq n \cdot \log_2 1$.
-    \end{adjustwidth}
-  \item Caso $n = k + 1$, para algum $k \in \mathbb{N}$:
-    \begin{adjustwidth}{1em}{}
-      Suponha que $T(n) \geq n \cdot \log_2 n$ (hipótese de indução). Calculemos:
-      \begin{align*}
-        T(n + 1) &= 2T\left(\frac{n + 1}{2}\right) + O(n) \\
-                 &\geq 2 \cdot \frac{n + 1}{2} \cdot \log_2 \left(\frac{n + 1}{2}\right) + O(n) && \text{(hipótese de indução e função crescente)}\\
-                 &= (n + 1)(\log_2 (n + 1) - 1) + O(n) \\
-                 &= (n + 1)\log_2 (n + 1)) - n + 1 + O(n) \\
-                 &\geq (n + 1)\log_2 (n + 1)
-      \end{align*}
-      Dessa forma $T(n + 1) \geq (n + 1)\log_2 (n + 1)$.
-    \end{adjustwidth}
+	\item Caso $n = 1$:
+	      \begin{adjustwidth}{1em}{}
+		      Temos que:
+		      \begin{align*}
+			      T(1) = 1 \text{ \& } n \cdot \log_2 1 = 0
+		      \end{align*}
+		      Logo $T(1) \geq n \cdot \log_2 1$.
+	      \end{adjustwidth}
+	\item Caso $n = k + 1$, para algum $k \in \mathbb{N}$:
+	      \begin{adjustwidth}{1em}{}
+		      Suponha que $T(n) \geq n \cdot \log_2 n$ (hipótese de indução). Calculemos:
+		      \begin{align*}
+			      T(n + 1) & = 2T\left(\frac{n + 1}{2}\right) + O(n)                                                                                            \\
+			               & \geq 2 \cdot \frac{n + 1}{2} \cdot \log_2 \left(\frac{n + 1}{2}\right) + O(n) &  & \text{(hipótese de indução e função crescente)} \\
+			               & = (n + 1)(\log_2 (n + 1) - 1) + O(n)                                                                                               \\
+			               & = (n + 1)\log_2 (n + 1)) - n + 1 + O(n)                                                                                            \\
+			               & \geq (n + 1)\log_2 (n + 1)
+		      \end{align*}
+		      Dessa forma $T(n + 1) \geq (n + 1)\log_2 (n + 1)$.
+	      \end{adjustwidth}
 \end{itemize}
 
 
 Pelo método da \textbf{Iteração}, expandimos a recorrência até um padrão ser identificado:
 
 \begin{align*}
-  T(n) &=  2T\left(\frac{n}{2}\right) + n \\
-       &= 4T\left(\frac{n}{2}\right) + 2n \\
-       &= 8T\left(\frac{n}{2}\right) + 4n \\
-       &\vdots \\
-       &= 2^iT\left(\frac{n}{2^i}\right) + in \\
+	T(n) & =  2T\left(\frac{n}{2}\right) + n     \\
+	     & = 4T\left(\frac{n}{2}\right) + 2n     \\
+	     & = 8T\left(\frac{n}{2}\right) + 4n     \\
+	     & \vdots                                \\
+	     & = 2^iT\left(\frac{n}{2^i}\right) + in \\
 \end{align*}
 
 Dessa forma, agora identificamos o caso base da relação a partir de:
 
 \begin{align*}
-  \frac{n}{2^i} = 1 &\Longrightarrow n = 2^i \\
-                    &\Longrightarrow \log_2 n = i
+	\frac{n}{2^i} = 1 & \Longrightarrow n = 2^i      \\
+	                  & \Longrightarrow \log_2 n = i
 \end{align*}
 
 Substituímos, temos que:
 
 \begin{align*}
-                                                              &= n \cdot T(1) + n \cdot \log_2 n \\
-                                                              &= n + n \cdot \log_2 n 
+	 & = n \cdot T(1) + n \cdot \log_2 n \\
+	 & = n + n \cdot \log_2 n
 \end{align*}
 
 Portanto, a complexidade do merge sort se mantém consistente com os outros métodos e é $n \cdot \log_2 n$ nas notações assintóticas.

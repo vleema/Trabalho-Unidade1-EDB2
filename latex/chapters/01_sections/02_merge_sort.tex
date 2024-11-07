@@ -215,9 +215,9 @@ No primeiro caso, é fácil de ver que a complexidade da função para uma lista
 	\end{cases}
 \end{align*}
 
-Uma vez estabelecida a relação de recorrência, podemos analisar a complexidade da função pelos 4 métodos vistos no curso. Entretanto, antes de começar, note que a Merge sort se comporta da mesma maneira para todos os casos, o que facilita o nosso cálculo de complexidade a seguir pelo método da \textbf{Substituição}.
+Uma vez estabelecida a relação de recorrência, podemos analisar a complexidade da função utilizando os quatro métodos estudados no curso. Como o Merge Sort se comporta de maneira consistente em todos os casos—melhor, pior e médio—isso simplifica nossa análise. Optaremos por começar utilizando o método da \textbf{Substituição} para determinar a complexidade.
 
-Primeiramente, queremos demonstrar $T(n) \geq n \cdot \log_2 n$, para encontrar a complexidade na notação $\Omega$, que será equivalente as outras. Por indução no $n$, teremos:
+Primeiramente, queremos demonstrar que $T(n) \geq n \cdot \log_2 n$, a fim de encontrar a complexidade na notação $\Omega$, que será equivalente às outras notações assintóticas. Por indução no $n$, teremos:
 
 % TODO: Colocar num enumerate
 
@@ -244,8 +244,13 @@ Primeiramente, queremos demonstrar $T(n) \geq n \cdot \log_2 n$, para encontrar 
 	      \end{adjustwidth}
 \end{itemize}
 
+Como também sabemos que o Merge Sort não excede $O(n \cdot \log_2 n)$ em termos de complexidade, podemos concluir que:
 
-Pelo método da \textbf{Iteração}, expandimos a recorrência até um padrão ser identificado:
+\begin{align*}
+  T(n) = \Theta(n \cdot \log_2 n)
+\end{align*}
+
+Após analisar o Merge Sort pelo método da substituição, vamos dar continuidade ao nosso exercício ao analisá-lo pelo método da \textbf{Iteração}. Para tal, começaremos expandimos a recorrência até um padrão ser identificado:
 
 \begin{align*}
 	T(n) & =  2T\left(\frac{n}{2}\right) + n     \\
@@ -255,23 +260,23 @@ Pelo método da \textbf{Iteração}, expandimos a recorrência até um padrão s
 	     & = 2^iT\left(\frac{n}{2^i}\right) + in \\
 \end{align*}
 
-Dessa forma, agora identificamos o caso base da relação a partir de:
+Dessa forma, é identificado o caso base da relação a partir de:
 
 \begin{align*}
 	\frac{n}{2^i} = 1 & \Longrightarrow n = 2^i      \\
 	                  & \Longrightarrow \log_2 n = i
 \end{align*}
 
-Substituímos, temos que:
+Substituindo, temos que:
 
 \begin{align*}
 	 & = n \cdot T(1) + n \cdot \log_2 n \\
 	 & = n + n \cdot \log_2 n
 \end{align*}
 
-Portanto, a complexidade do merge sort se mantém consistente com os outros métodos e é $n \cdot \log_2 n$ nas notações assintóticas.
+Portanto, a complexidade do Merge Sort se mantém consistente com o método da substituição e tem complexidade $n \cdot \log_2 n$ nas notações assintóticas.
 
-Ademais, também vamos usar o método da \textbf{Árvore de recorrência} para verificar o mesmo resultado. Comecemos estabelecendo a árvore de recursão:
+Agora, vamos usar o método da \textbf{Árvore de recorrência} para verificar o mesmo resultado. Comecemos estabelecendo a árvore de recursão:
 
 
 \[\begin{tikzcd}[sep=small]
@@ -348,5 +353,5 @@ Para algum $a \geq 1$, $b \geq 1$, e $k \geq 0$. Vale que:
 	\item Se $a < b^k$, então $T(n)$ é $\Theta(n^k)$.
 \end{enumerate}
 
-A partir da \href{recc:rec_merge_sort}{relação de recorrência estabelecida}, tome $a = 2$, $b = 2$ e $k = 1$. Como $b^k = 2 = a$, logo, $T(n) = \Theta(n \cdot \log_2 n)$. Como foi estabelecido que o pior caso, o melhor e caso médio iam ter a mesma complexidade, logo, a \textit{Merge sort} também tem as complexidades $O(n \cdot \log_2 n)$ e $\Omega(n \cdot \log_2 n)$.
+A partir da \href{recc:rec_merge_sort}{relação de recorrência estabelecida}, tome $a = 2$, $b = 2$ e $k = 1$. Como $b^k = 2 = a$, logo, $T(n) = \Theta(n \cdot \log_2 n)$. Como foi estabelecido que o pior caso, o melhor e caso médio iam ter a mesma complexidade, logo, a \textit{Merge sort} também tem as complexidades $O(n \cdot \log_2 n)$ e $\Omega(n \cdot \log_2 n)$. E aqui terminamos essa análise.
 
